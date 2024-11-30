@@ -281,3 +281,98 @@ header {
 .register-prompt a:hover {
     color: #4CAF50; /* Green on hover */
 }
+/* ==================================================== */
+footer {
+    background-color: #111; /* Dark background */
+    color: #fff; /* White text */
+    font-family: Arial, sans-serif;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Center the footer */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* Logo Section */
+.footer-logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 0 200px; /* Fixed width for the logo section */
+}
+
+.footer-logo {
+    width: 120px; /* Adjust logo size */
+    margin-bottom: 10px;
+}
+
+/* Links and Content Section */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Columns in Links Section */
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px; /* Adjust space between columns */
+}
+
+.link-column {
+    flex: 1;
+    padding: 10px;
+}
+
+.link-column p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 15px 0; /* Add space between paragraphs */
+}
+
+.link-column p a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.link-column p a:hover {
+    text-decoration: underline;
+}
+
+/* Policy Links Styling */
+.footer-policy-links {
+    display: flex;
+    gap: 15px; /* Add space between links */
+    margin-bottom: 10px;
+}
+
+.footer-policy-links a {
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-policy-links a:hover {
+    text-decoration: underline;
+}
+
+/* License Section */
+.footer-license {
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 20px; /* Add space above the license paragraph */
+}
+
+.footer-license a {
+    color: #fff;
+    text-decoration: underline;
+}

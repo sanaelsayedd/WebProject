@@ -553,47 +553,7 @@ header {
 
 /* ========================================= */
 
-/* footer{
-    width: 100%;
-    bottom: 0;
-    background: linear-gradient(to right, #01013d,#000000);
-    color: #fff;
-    padding: 50px;
-    font-size: 13px;
-    line-height: 20px;
-}
-.row{
-    width: 85%;
-    margin: auto;
-    display: flex;
-    flex-wrap: warp;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-.col{
-    flex-basis: 25%;
-    padding: 10px;
 
-}
-.Logo-footer{
-    width: 150px;
-    margin-bottom:10px;
-    padding-right: 20px;
-}
-.col h3{
-    width: fit-content;
-    margin-bottom: 40px;
-    position: relative;
-}
-.email-id{
-    width: fit-content;
-    border-bottom: 1px solid #ccc;
-    margin:20px 0;
-} */
-
-/* General footer styling */
-/* General footer styling */
-/* General footer styling */
 footer {
     background-color: #111; /* Dark background */
     color: #fff; /* White text */
