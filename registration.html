@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knowledge Nest - Register</title>
-    <link rel="stylesheet" href="registrationStyle.css">
+    <link rel="stylesheet" href="css/registrationStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -36,15 +36,15 @@
         <div class="login-container">
             <div class="login-box">
                 <h2>Register</h2>
-                <form>
+                <form action="index.php" method="post">
                     <div class="textbox">
-                        <input type="email" placeholder="Email" required>
+                        <input type="email" placeholder="Email" name="email" required>
                     </div>
                     <div class="textbox">
-                        <input type="text" placeholder="Username" required>
+                        <input type="text" placeholder="Username" name="username" required>
                     </div>
                     <div class="textbox">
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     
                     <div class="textbox">
@@ -108,6 +108,6 @@
         </div>
     </footer>
 
-    <script src="LOL.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

@@ -194,7 +194,7 @@ header {
 /* ======================================================= */
 .section1 {
     text-align: center;
-    background-image: url("Image/Knowledge Nest.webp");
+    background-image: url("Image/Knowledge\ Nest.webp");
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -433,6 +433,7 @@ header {
     opacity: 80%;
     
 }
+
 
 
 @media (max-width: 768px) {
