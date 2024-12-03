@@ -39,12 +39,18 @@
                 <h2>Login</h2>
                 <form>
                     <div class="textbox">
-                        <input type="text" placeholder="Username" required>
+                        <input 
+                            type="text" 
+                            name="username" 
+                            placeholder="Username" 
+                            pattern="^[a-zA-Z0-9_]+$" 
+                            title="Username can only contain letters, numbers, and underscores, and should not include '@'." 
+                            required>
                     </div>
                     <div class="textbox">
                         <input type="password" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="login-btn">Login</button>
+                    <input type="submit" value="Login" class="login-btn">
                 </form>
     
                 <div class="register-prompt">
@@ -52,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>    
     </main>
     <footer>
         <div class="footer-container">
