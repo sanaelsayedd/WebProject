@@ -6,9 +6,9 @@ if(isset($_POST["login"])){
     $userType = 'user';
 
    
-// $connection = mysqli_connect(hostname: 'sana', username: 'sana', password: 'sana', database: 'sana');
-// mysqli_query($connection, "INSERT INTO USER(`USERNAME`, `EMAIL`, `PASSWORD`, `USERTYPE`) VALUES('$username', '$email', '$password',`$userType`)");
-// mysqli_close($connection);
+$connection = mysqli_connect(hostname: 'sana', username: 'sana', password: 'sana', database: 'sana');
+mysqli_query($connection, "INSERT INTO USER(`USERNAME`, `EMAIL`, `PASSWORD`, `USERTYPE`) VALUES('$username', '$email', '$password',`$userType`)");
+mysqli_close($connection);
 
 }
 
