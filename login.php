@@ -3,6 +3,7 @@ session_start();
 
 $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
 $password = $_POST['password'];
+// Handle login process
 
 $connection = mysqli_connect('sana', 'sana', 'sana', 'sana');
 
