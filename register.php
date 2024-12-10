@@ -10,7 +10,7 @@ $connection = mysqli_connect(hostname: 'sana', username: 'sana', password: 'sana
 mysqli_query($connection, "INSERT INTO USER(`USERNAME`, `EMAIL`, `PASSWORD`, `USERTYPE`) VALUES('$username', '$email', '$password',`$userType`)");
 mysqli_close($connection);
 
+//reg check 
 }
-
 
 ?>
