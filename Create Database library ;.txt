@@ -1,0 +1,81 @@
+Create Database library ;
+
+CREATE TABLE `library`.`book` (
+  `BookID` INT NOT NULL,
+  `Title` VARCHAR(45) NOT NULL,
+  `Author` VARCHAR(45) NULL,
+  `Status` VARCHAR(45) NULL,
+  `Edition` VARCHAR(45) NULL,
+  `Price` DOUBLE NULL,
+  `Quantity` INT NULL,
+  PRIMARY KEY (`BookID`));
+
+CREATE TABLE `library`.`user` (
+  `UserID` INT NOT NULL,
+  `UserName` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  `Type` VARCHAR(45) NULL,
+  `Usercol` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`UserID`));
+
+CREATE TABLE `library`.`borrow` (
+  `BorrowID` INT NOT NULL,
+  `UserID` INT NOT NULL,
+  `BookID` INT NOT NULL,
+  `IssueDate` DATE NOT NULL,
+  `StartDate` DATE NULL,
+  `ReturnDate` DATE NOT NULL,
+  PRIMARY KEY (`BorrowID`),
+  INDEX `User_ID_FK_idx` (`UserID` ASC) VISIBLE,
+  INDEX `Book_ID_FK_idx` (`BookID` ASC) VISIBLE,
+  CONSTRAINT `User_ID_FK`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `library`.`user` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Book_ID_FK`
+    FOREIGN KEY (`BookID`)
+    REFERENCES `library`.`book` (`BookID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `library`.`reversation` (
+  `ReversationID` INT NOT NULL,
+  `UserID` INT NOT NULL,
+  `BookID` INT NOT NULL,
+  `ReturnDate` DATE NOT NULL,
+  PRIMARY KEY (`ReversationID`),
+  INDEX `Reversation_UserID_FK_idx` (`UserID` ASC) VISIBLE,
+  INDEX `Reversation_BookID_FK_idx` (`BookID` ASC) VISIBLE,
+  CONSTRAINT `Reversation_UserID_FK`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `library`.`user` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `Reversation_BookID_FK`
+    FOREIGN KEY (`BookID`)
+    REFERENCES `library`.`book` (`BookID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `library`.`purchase_transaction` (
+  `PurchaseTransactionID` INT NOT NULL,
+  `UserID` INT NULL,
+  `BookID` INT NOT NULL,
+  `Quantity` INT NULL,
+  `TotalPrice` DOUBLE NULL,
+  PRIMARY KEY (`PurchaseTransactionID`),
+  INDEX `PurchaseTransaction_UserID_FK_idx` (`UserID` ASC) VISIBLE,
+  INDEX `PurchaseTransaction_BookID_FK_idx` (`BookID` ASC) VISIBLE,
+  CONSTRAINT `PurchaseTransaction_UserID_FK`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `library`.`user` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `PurchaseTransaction_BookID_FK`
+    FOREIGN KEY (`BookID`)
+    REFERENCES `library`.`book` (`BookID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
