@@ -81,15 +81,20 @@ header {
 }
 
 .login {
-    margin-left: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .login-icon i {
     color: #fff;
     margin-right: 12px;
 }
+.logout-text {
+    color: #fff;
+    margin-left: 12px;
+}
 
-.login button {
+.login button, .logout button {
     padding: 9px 25px;
     background-color: #ff6952; /* Bright Coral */
     border: none;
@@ -100,7 +105,7 @@ header {
     font-weight: 600;
 }
 
-.login button:hover {
+.login button:hover, .logout button:hover {
     background-color: #3caec3;
     transform: scale(1.1);
 }
@@ -112,6 +117,7 @@ header {
     color: white;
 }
 
+/* Dropdown Menu Styling */
 .dropdown-menu {
     display: none; 
     position: absolute;
@@ -127,9 +133,11 @@ header {
     max-height: 0; 
 }
 
+
 .dropdown-menu.open {
-    max-height: 300px; /* Height when opened */
+    max-height: 320px; 
 }
+
 
 .dropdown-menu li {
     padding: 15px;
@@ -137,20 +145,22 @@ header {
     list-style: none;
 }
 
+
 .dropdown-menu a {
     text-decoration: none;
-    color: #583a83; /* Deep Purple */
+    color: #583a83; 
     font-size: 1rem;
     transition: color 0.3s ease;
 }
 
 .dropdown-menu a:hover {
-    color: #3caec3; /* Aqua Blue */
+    color: #3caec3; 
 }
+
 
 .dropdown-menu button {
     padding: 10px 70px;
-    background-color: #ff6952; /* Bright Coral */
+    background-color: #ff6952;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -160,11 +170,21 @@ header {
 }
 
 .dropdown-menu button:hover {
-    background-color: #3caec3; /* Aqua Blue */
+    background-color: #3caec3; 
     transform: scale(1.1);
 }
 
+.dropdown-menu form button[name="logout"] {
+    margin-bottom: 50px;
+}
+
+
+
 @media (max-width: 992px) {
+    header {
+        border-bottom-right-radius: 0; 
+        border-bottom-left-radius: 0; 
+    }
     .nav__links,
     .login button {
         display: none;

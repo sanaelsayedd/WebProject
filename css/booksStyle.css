@@ -1,54 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
 
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-
 body {
-    font-family: 'Montserrat', sans-serif; 
+    font-family: 'Montserrat', sans-serif;
     background-color: #f7f7f7;
 }
 
-
 .ribeye-regular {
-    font-family: 'Montserrat', serif; 
+    font-family: 'Montserrat', serif;
     font-optical-sizing: auto;
     font-weight: 500px;
     font-style: normal;
 }
 
-
 header {
-    background-color: #ff6952; 
+    background-color: #ff6952;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: space-between;
     align-items: center;
-    padding: 20px 10%; 
-    position: fixed;
+    padding: 20px 5%; /* Adjusted padding for better layout */
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-bottom-right-radius: 150px;
-    
-   
 }
 
-.logo{
+.logo {
     margin-right: auto;
 }
-.logo img{
+
+.logo img {
     width: 50px;
     height: auto;
 }
 
 .logo a {
-    color: #E7E7E7; 
+    color: #E7E7E7;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: 500;
@@ -59,8 +54,8 @@ header {
     font-weight: 500;
     font-size: 16px;
     list-style: none;
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: flex-end; /* Adjusted for better alignment */
     padding-left: 0;
     margin: 0;
 }
@@ -71,12 +66,12 @@ header {
 
 .nav__links li a {
     text-decoration: none;
-    color: #583a83; 
+    color: #583a83;
     transition: color 0.3s ease;
 }
 
 .nav__links li a:hover {
-    color: #3caec3; 
+    color: #3caec3;
     transform: scale(1.1);
 }
 
@@ -108,27 +103,28 @@ header {
 .toggle-btn {
     font-size: 1.5rem;
     cursor: pointer;
-    display: none; 
+    display: none;
     color: white;
 }
 
 .dropdown-menu {
-    display: none; 
+    display: none;
     position: absolute;
-    right: 10%;
-    top: 60px;
+    right: 5%;
+    top:60px;
     background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(40px);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     width: 250px;
     overflow: hidden;
     transition: max-height 0.5s ease;
-    max-height: 0; 
+    max-height: 0;
+    
 }
 
 .dropdown-menu.open {
-    max-height: 300px; 
+    max-height: 320px; 
 }
 
 .dropdown-menu li {
@@ -139,18 +135,18 @@ header {
 
 .dropdown-menu a {
     text-decoration: none;
-    color: #583a83; 
+    color: #583a83;
     font-size: 1rem;
     transition: color 0.3s ease;
 }
 
 .dropdown-menu a:hover {
-    color: #3caec3; 
+    color: #3caec3;
 }
 
 .dropdown-menu button {
     padding: 10px 70px;
-    background-color: #ff6952; /* Bright Coral */
+    background-color: #ff6952; 
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -160,11 +156,25 @@ header {
 }
 
 .dropdown-menu button:hover {
-    background-color: #3caec3; /* Aqua Blue */
+    background-color: #3caec3;
     transform: scale(1.1);
 }
 
 @media (max-width: 992px) {
+    header {
+        background-color: #ff6952;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 5%; 
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        
+    }
     .nav__links,
     .login button {
         display: none;
@@ -176,7 +186,6 @@ header {
 
     .dropdown-menu {
         display: block;
-        
     }
 
     .nav__links li {
@@ -185,60 +194,287 @@ header {
 }
 
 @media (max-width: 576px) {
-    .dropdown-menu{
+    .dropdown-menu {
         left: 2rem;
         width: unset;
     }
 }
+/* ================================================== */
+main {
+    margin: 55px;
+    min-height: 60vh;
+}
 
-/* ======================================================= */
+.sideMenu {
+    width: 250px;
+    height: 60vh;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    margin-left: 10px;
+    border-radius: 30px;
+    float: left;
+}
+
+.sideMenu h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #FF7043;
+    border-bottom: 2px solid #FF7043;
+    padding-bottom: 5px;
+}
+
+.sideMenu a {
+    display: block;
+    color: #FFF;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sideMenu a:hover {
+    background-color: #FF7043;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .sideMenu {
+        width: 200px;
+    }
+
+}
+/* ================================================== */
+
+.searchBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #FFF;
+    box-shadow: 0 6px 10px rgba(0, 2, 10, 0.5);
+    padding: 15px 30px;
+    width: 80%;
+    max-width: 800px;
+    transition: box-shadow 0.3s ease-in-out;
+    border: 2px solid #FF7043;
+    border-radius: 0px;
+}
+
+.input {
+    border: none;
+    outline: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 0px;
+    background-color: #F9F9F9;
+    color: #333;
+}
+
+.search-box i {
+    font-size: 25px;
+    color: #8E24AA;
+    cursor: pointer;
+}
+
+.search-box button {
+    background-color: #FF7043;
+    border: none;
+    border-radius: 0px;
+    padding: 12px 25px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-box button:hover {
+    background-color: #FFB74D;
+    transform: scale(1.05);
+}
+/* ================================================== */
+
+.list-books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 40px 20px;
+    gap: 30px;
+    padding: 40px;
+}
 
 
-/* ========================================= */
+.book-card {
+    background-color: #fff;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
 
+.book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.book-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 2px solid #FF7043; 
+}
+
+
+.book-details {
+    padding: 15px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
+
+/* Book title styling */
+.book-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #583a83;
+    margin-bottom: 10px;
+}
+
+
+.book-details p {
+    margin: 8px 0;
+    font-size: 1em;
+}
+
+
+.book-author, .book-type, .book-price, .book-status, .book-quantity,.book-edition  {
+    color: #555;
+}
+
+.book-author strong, .book-type strong, .book-price strong, .book-status strong, .book-quantity strong,.book-edition strong {
+    color: #FF7043; 
+}
+
+.book-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #FF7043;
+    margin-top: 10px;
+}
+
+
+.book-status, .book-quantity {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.book-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+
+.book-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+
+.action-link {
+    text-decoration: none; 
+}
+
+
+.book-actions i {
+    font-size: 20px;
+    cursor: pointer;
+    color: #FF7043;
+    transition: transform 0.3s ease;
+}
+
+
+.book-actions i:hover {
+    transform: scale(1.2);
+    color: #583a83; 
+}
+
+.book-actions i + i {
+    margin-left: 20px;
+}
+
+
+
+@media (max-width: 768px) {
+    .list-books {
+       padding: 40px;
+        
+       
+    }
+    .book-card {
+        width: 100%;
+        margin-bottom: 20px;
+      
+    }
+}
+
+/* ================================================== */
 
 footer {
-    background-color: #111; /* Dark background */
-    color: #fff; /* White text */
+    background-color: #111;
+    color: #fff;
     font-family: Arial, sans-serif;
     padding: 40px 20px;
+    position:relative;
 }
 
 .footer-container {
     max-width: 1200px;
-    margin: 0 auto; /* Center the footer */
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
 }
 
-/* Logo Section */
 .footer-logo-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex: 0 0 200px; /* Fixed width for the logo section */
+    flex: 0 0 200px;
 }
 
 .footer-logo {
-    width: 120px; /* Adjust logo size */
+    width: 120px;
     margin-bottom: 10px;
 }
 
-/* Links and Content Section */
 .footer-content {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-/* Columns in Links Section */
 .footer-links {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
-    gap: 20px; /* Adjust space between columns */
+    gap: 20px;
 }
 
 .link-column {
@@ -249,7 +485,7 @@ footer {
 .link-column p {
     font-size: 14px;
     line-height: 1.8;
-    margin: 0 0 15px 0; /* Add space between paragraphs */
+    margin: 0 0 15px 0;
 }
 
 .link-column p a {
@@ -261,10 +497,9 @@ footer {
     text-decoration: underline;
 }
 
-/* Policy Links Styling */
 .footer-policy-links {
     display: flex;
-    gap: 15px; /* Add space between links */
+    gap: 15px;
     margin-bottom: 10px;
 }
 
@@ -279,16 +514,14 @@ footer {
     text-decoration: underline;
 }
 
-/* License Section */
 .footer-license {
     font-size: 12px;
     line-height: 1.6;
     text-align: justify;
-    margin-top: 20px; /* Add space above the license paragraph */
+    margin-top: 20px;
 }
 
 .footer-license a {
     color: #fff;
     text-decoration: underline;
 }
-
