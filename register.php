@@ -13,7 +13,9 @@ if (isset($_POST['login'])) {
  
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $userType = 'user';
+    $passworddb = "WEBDBwebdb123456789";
 
+<<<<<<< Updated upstream
     
     $connection = mysqli_connect("localhost", "root", "", "library");
     if (!$connection) {
@@ -37,6 +39,12 @@ if (isset($_POST['login'])) {
         
         $insertQuery = $connection->prepare("INSERT INTO user (UserName, Password, Email, Type) VALUES (?, ?, ?, ?)");
         $insertQuery->bind_param("ssss", $username, $hashedPassword, $email, $userType);
+=======
+   
+$connection = mysqli_connect(hostname: 'localhost', username: 'root', password: $passworddb, database: 'library');
+mysqli_query($connection, "INSERT INTO USER(`UserName`, `Password`, `Email`, `Type`) VALUES('$username', '$email', '$password',`$Type`)");
+mysqli_close($connection);
+>>>>>>> Stashed changes
 
         if ($insertQuery->execute()) {
             
