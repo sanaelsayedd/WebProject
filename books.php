@@ -15,13 +15,27 @@ if (isset($_GET['logout'])) {
     header("Location: index.php"); 
     exit();
 }
+
+$servername = "localhost";
+$username = "root";
+$password = "WEBDBwebdb123456789"; 
+$dbname = "library"; 
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT `BookID`, `Title`, `Author`, `Status`, `Edition`, `Price`, `Quantity`, `Category` FROM `book`";
+$result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Nest</title>
+    <title>Knowledge Nest - Books</title>
     <link rel="stylesheet" href="css/booksStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -97,7 +111,7 @@ if (isset($_GET['logout'])) {
         <?php if ($userType === 'admin'): ?>
             <div class="admin">
                 <h1>Admin</h1>
-                <a href="">Add Book</a>
+                <a href="AddBook.php">Add Book</a>
             </div>
         <?php endif; ?>
         <div class="categories">
@@ -118,32 +132,47 @@ if (isset($_GET['logout'])) {
     </section>
 
     <section class="list-books">
-        <div class="book-card">
-            <img src="Image/Book1.jpg" alt="Book Cover" class="book-image">
-            <div class="book-details">
-                <h2 class="book-title">Learn Programming</h2>
-                <p class="book-author"><strong>Author:</strong> John Doe</p>
-                <p class="book-type"><strong>Type:</strong> Programming</p>
-                <p class="book-edition"><strong>Edition:</strong> v1</p>
-                <p class="book-price"><strong>Price:</strong> $29.99</p>
-                <p class="book-status"><strong>Status:</strong> In Stock</p>
-                <p class="book-quantity"><strong>Quantity:</strong> 15</p>
-            </div>
-            <div class="book-actions">
-                <a href="#" class="action-link">
+    <?php
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="book-card">';
+            echo '<img src="Image/Book1.jpg" alt="Book Cover" class="book-image">'; 
+            echo '<div class="book-details">';
+            echo '<h2 class="book-title">' . htmlspecialchars($row['Title']) . '</h2>';
+            echo '<p class="book-author"><strong>Author:</strong> ' . htmlspecialchars($row['Author']) . '</p>';
+            echo '<p class="book-type"><strong>Status:</strong> ' . htmlspecialchars($row['Status']) . '</p>';
+            echo '<p class="book-type"><strong>Edition:</strong> ' . htmlspecialchars($row['Edition']) . '</p>';
+            echo '<p class="book-price"><strong>Price:</strong> $' . htmlspecialchars($row['Price']) . '</p>';
+            echo '<p class="book-quantity"><strong>Quantity:</strong> ' . htmlspecialchars($row['Quantity']) . '</p>';
+            echo '<p class="book-Category"><strong>Category:</strong> ' . htmlspecialchars($row['Category']) . '</p>';
+            echo '</div>'; // Close book-details div
+            echo '<div class="book-actions">';
+            echo '<a href="#" class="action-link">
                     <i class="fas fa-info-circle detail-icon" title="Details"></i>
-                </a>
-                <?php if ($userType === 'admin'): ?>
-                    <a href="#" class="action-link">
-                        <i class="fas fa-trash-alt remove-icon" title="Remove"></i>
-                    </a>
-                    <a href="#" class="action-link">
-                        <i class="fas fa-edit edit-icon" title="Edit"></i>
-                    </a>
-                <?php endif; ?>
-            </div>
-        </div>
+                  </a>';
+                  
+                if (isset($row['BookID'])) {
+                    echo '<a href="DeleteBook.php?BookID=' . $row['BookID'] . '" class="action-link">
+                                <i class="fas fa-trash-alt remove-icon" title="Remove"></i>
+                            </a>';
+
+                    echo '<a href="EditBook.php?BookID=' . $row['BookID'] . '" class="action-link">
+                            <i class="fas fa-edit edit-icon" title="Edit"></i>
+                          </a>';
+                } else {
+                    echo "خطأ: لم يتم العثور على BookID";
+                }
+                
+            echo '</div>'; // Close book-actions div
+            echo '</div>'; // Close book-card div
+        }
+    } else {
+        echo "<p>No books found!</p>";
+    }
+    ?>
+
     </section>
+    
 </main>
 
 <footer>
@@ -191,3 +220,7 @@ if (isset($_GET['logout'])) {
 <script src="js/script.js"></script>
 </body>
 </html>
+<?php
+
+$conn->close();
+?>
