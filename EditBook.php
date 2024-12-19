@@ -6,7 +6,7 @@ if (isset($_GET['BookID'])) {
     $BookID = $_GET['BookID'];
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "", "library");
+    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());

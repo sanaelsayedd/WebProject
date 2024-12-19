@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = trim($_POST['password']); // Trim any spaces
     $passworddb = "WEBDBwebdb123456789";
     // Establish database connection
-    $connection = mysqli_connect("localhost", "root", "", "library");
+    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
