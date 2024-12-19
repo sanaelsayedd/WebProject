@@ -1,92 +1,64 @@
 <?php
+
 session_start();
 
-
 $is_logged_in = isset($_SESSION['username']);
-$userType = $is_logged_in ? $_SESSION['userType']: null;
+$userType = $is_logged_in ? $_SESSION['userType'] : null; 
 
 if (!$is_logged_in) {
     header("Location: login.php");
     exit();
 }
 
-
 if (isset($_GET['logout'])) {
     session_unset();
-    session_destroy();
-    header("Location: index.php");
+    session_destroy(); 
+    header("Location: index.php"); 
     exit();
 }
 
-// Database credentials
-$passworddb = "WEBDBwebdb123456789";
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$database = "library"; 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $Title = $_POST["Title"];
-    $Author = $_POST["Author"];
-    $Status = $_POST["Status"];
-    $Edition = $_POST["Edition"];
-    $Price = $_POST["Price"];
-    $Quantity = $_POST["Quantity"];
-    $Category = $_POST["Category"];
 
-    // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "", "library");
+$conn = new mysqli($servername, $username, $password, $database);
 
-    if (!$connection) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
 
-    // Check if the book already exists
-    $checkQuery = "SELECT * FROM `book` WHERE `Title` = ? AND `Author` = ?";
-    $checkStmt = mysqli_prepare($connection, $checkQuery);
-
-    if ($checkStmt) {
-        mysqli_stmt_bind_param($checkStmt, "ss", $Title, $Author);
-        mysqli_stmt_execute($checkStmt);
-        mysqli_stmt_store_result($checkStmt);
-
-        if (mysqli_stmt_num_rows($checkStmt) > 0) {
-            echo "This book already exists in the database.";
-        } else {
-            // Insert new book record
-            $query = "INSERT INTO `book` (`Title`, `Author`, `Status`, `Edition`, `Price`, `Quantity`, `Category`) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            $stmt = mysqli_prepare($connection, $query);
-
-            if ($stmt) {
-                mysqli_stmt_bind_param($stmt, "ssssdis", $Title, $Author, $Status, $Edition, $Price, $Quantity, $Category);
-
-                if (mysqli_stmt_execute($stmt)) {
-                    header("Location: books.php");
-                    exit();
-                } else {
-                    echo "Error: " . mysqli_error($connection);
-                }
-
-                mysqli_stmt_close($stmt);
-            } else {
-                echo "Error preparing statement: " . mysqli_error($connection);
-            }
-        }
-
-        mysqli_stmt_close($checkStmt);
-    } else {
-        echo "Error preparing check statement: " . mysqli_error($connection);
-    }
-
-    mysqli_close($connection);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-?>
 
+if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
+    $bookID = $_GET['BookID'];
+
+    
+    $query = "SELECT * FROM book WHERE BookID = ?";
+    $stmt = $conn->prepare($query);
+
+    if ($stmt === false) {
+        die('MySQL prepare error: ' . $conn->error);
+    }
+
+    $stmt->bind_param("i", $bookID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+      
+        $is_available = $row['Quantity'] > 0;
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/addBookStyle.css">
-    <title>Add Book</title>
+    <title>Book Details</title>
+    <link rel="stylesheet" href="css/BookDetailsStyle.css">
 </head>
 <body>
 <header class="header">
@@ -133,7 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li><a href="#">Contact</a></li>
             <li><a href="books.php">Books</a></li>
             <?php if ($is_logged_in): ?>
-                <?php if ($userType === 'admin'): ?>
+                <?php if ($userType === 'user'): ?>
+                    <li><a href="account.php">My Account</a></li>
+                <?php elseif ($userType === 'admin'): ?>
                     <li><a href="dashboard.php">Admin Dashboard</a></li>
                 <?php endif; ?>
                 <li>
@@ -153,43 +127,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
     </div>
 </header>
+    <div class="book-details-card">
+        <div class="book-image">
+            <img src="<?= htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg') ?>" alt="Book Cover">
+        </div>
+        <div class="book-info">
+            <h1 class="book-title"><?= htmlspecialchars($row['Title']) ?></h1>
+            <p><strong>Author:</strong> <?= htmlspecialchars($row['Author']) ?></p>
+            <p><strong>Edition:</strong> <?= htmlspecialchars($row['Edition']) ?></p>
+            <p><strong>Category:</strong> <?= htmlspecialchars($row['Category']) ?></p>
+            <p><strong>Price:</strong> $<?= htmlspecialchars($row['Price']) ?></p>
+            <p><strong>Description:</strong> <?= htmlspecialchars($row['Description']) ?></p> 
+            <p><strong>Quantity Available:</strong> <?= htmlspecialchars($row['Quantity']) ?></p>
 
-<main>
-        <h2>Add a New Book</h2>
-        <form action="AddBook.php" method="POST" class="add-book-form">
-            <label for="Title">Title:</label>
-            <input type="text" id="Title" name="Title" required>
-
-            <label for="Author">Author:</label>
-            <input type="text" id="Author" name="Author" required>
-
-            <label for="Status">Status:</label>
-            <select id="Status" name="Status" required>
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-            </select>
-
-            <label for="Edition">Edition:</label>
-            <input type="text" id="Edition" name="Edition" required>
-
-            <label for="Price">Price:</label>
-            <input type="number" id="Price" name="Price" step="0.01" required>
-
-            <label for="Quantity">Quantity:</label>
-            <input type="number" id="Quantity" name="Quantity" required>
-
-            <label for="Category">Category:</label>
-            <input type="text" id="Category" name="Category" required>
-
-            <button type="submit">Submit</button>
-        </form>
-</main>
-
-<footer>
+            <div class="action-buttons">
+                <?php if ($is_available): ?>
+                    <button class="purchase-btn" onclick="window.location.href='purchaseBook.php?BookID=<?= $row['BookID'] ?>'">Purchase</button>
+                    <button class="borrow-btn" onclick="window.location.href='borrowBook.php?BookID=<?= $row['BookID'] ?>'">Borrow</button>
+                <?php else: ?>
+                    <button class="purchase-btn" style="background-color: red;" disabled>Out of Stock</button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <footer>
     <div class="footer-container">
         <div class="footer-logo-section">
-            <img src="Image/KnowledgeNest-noBK.png" alt="Library Logo" class="footer-logo">
+            <img src="Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
         </div>
+
         <div class="footer-content">
             <div class="footer-links">
                 <div class="link-column">
@@ -199,12 +165,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
                     <p>DATABASES</p>
                 </div>
+
                 <div class="link-column">
                     <p>NEWSLETTERS/SOCIAL</p>
                     <p>STAFF PORTAL</p>
                     <p>LIBRARY ACCESSIBILITY</p>
                     <p>REPORT A PROBLEM</p>
                 </div>
+
                 <div class="link-column">
                     <div class="footer-policy-links">
                         <a href="#">Accessibility</a>
@@ -212,16 +180,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
+
             <p class="footer-license">
                 Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
                 this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
                 which allows anyone to share and adapt our material as long as proper attribution is given. 
-                For details and exceptions, see the <a href="#">Library Copyright Policy</a>. &copy;2024 Library System.
+                For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
+                &copy;2024 Presidents and Fellows of Harvard College.
             </p>
         </div>
     </div>
 </footer>
-
-<script src="js/script.js"></script>
 </body>
 </html>
+<?php
+    } else {
+        echo "<p>Book not found!</p>";
+    }
+} else {
+    echo "<p>Invalid Book ID!</p>";
+}
+
+$conn->close(); 
+?>

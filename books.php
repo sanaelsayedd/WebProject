@@ -21,7 +21,7 @@ $username = "root";
 $password = "WEBDBwebdb123456789"; 
 $dbname = "library"; 
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, "", $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -106,7 +106,6 @@ $result = $conn->query($sql);
         </ul>
     </div>
 </header>
-<main>
     <aside class="sideMenu">
         <?php if ($userType === 'admin'): ?>
             <div class="admin">
@@ -133,43 +132,49 @@ $result = $conn->query($sql);
 
     <section class="list-books">
     <?php
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="book-card">';
-            echo '<img src="Image/Book1.jpg" alt="Book Cover" class="book-image">'; 
-            echo '<div class="book-details">';
-            echo '<h2 class="book-title">' . htmlspecialchars($row['Title']) . '</h2>';
-            echo '<p class="book-author"><strong>Author:</strong> ' . htmlspecialchars($row['Author']) . '</p>';
-            echo '<p class="book-type"><strong>Status:</strong> ' . htmlspecialchars($row['Status']) . '</p>';
-            echo '<p class="book-type"><strong>Edition:</strong> ' . htmlspecialchars($row['Edition']) . '</p>';
-            echo '<p class="book-price"><strong>Price:</strong> $' . htmlspecialchars($row['Price']) . '</p>';
-            echo '<p class="book-quantity"><strong>Quantity:</strong> ' . htmlspecialchars($row['Quantity']) . '</p>';
-            echo '<p class="book-Category"><strong>Category:</strong> ' . htmlspecialchars($row['Category']) . '</p>';
-            echo '</div>'; // Close book-details div
-            echo '<div class="book-actions">';
-            echo '<a href="#" class="action-link">
-                    <i class="fas fa-info-circle detail-icon" title="Details"></i>
-                  </a>';
-                  
-                if (isset($row['BookID'])) {
-                    echo '<a href="DeleteBook.php?BookID=' . $row['BookID'] . '" class="action-link">
-                                <i class="fas fa-trash-alt remove-icon" title="Remove"></i>
-                            </a>';
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="book-card">';
+                echo '<img src="' . htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg') . '" alt="Book Cover" class="book-image">';
+                echo '<div class="book-details">';
+                echo '<h2 class="book-title">' . htmlspecialchars($row['Title']) . '</h2>';
+                echo '<p class="book-author"><strong>Author:</strong> ' . htmlspecialchars($row['Author']) . '</p>';
+                echo '<p class="book-type"><strong>Status:</strong> ' . htmlspecialchars($row['Status']) . '</p>';
+                echo '<p class="book-type"><strong>Edition:</strong> ' . htmlspecialchars($row['Edition']) . '</p>';
+                echo '<p class="book-price"><strong>Price:</strong> $' . htmlspecialchars($row['Price']) . '</p>';
+                echo '<p class="book-quantity"><strong>Quantity:</strong> ' . htmlspecialchars($row['Quantity']) . '</p>';
+                echo '<p class="book-category"><strong>Category:</strong> ' . htmlspecialchars($row['Category']) . '</p>';
+                echo '</div>'; 
+                echo '<div class="book-actions">';
 
+                // Always show the "Details" button
+                echo '<a href="BookDetails.php?BookID=' . $row['BookID'] . '" class="action-link">
+                        <i class="fas fa-info-circle detail-icon" title="Details"></i>
+                    </a>';
+
+                // Show "Edit" and "Remove" only for admins
+                if ($userType === 'admin') {
+                    echo '<a href="DeleteBook.php?BookID=' . $row['BookID'] . '" class="action-link">
+                            <i class="fas fa-trash-alt remove-icon" title="Remove"></i>
+                        </a>';
                     echo '<a href="EditBook.php?BookID=' . $row['BookID'] . '" class="action-link">
                             <i class="fas fa-edit edit-icon" title="Edit"></i>
-                          </a>';
-                } else {
-                    echo "خطأ: لم يتم العثور على BookID";
+                        </a>';
                 }
-                
-            echo '</div>'; // Close book-actions div
-            echo '</div>'; // Close book-card div
+
+                echo '</div>'; 
+                echo '</div>'; 
+            }
+        } else {
+            echo '<div class="no-books">';
+            echo '<p>No books found!</p>';
+            if ($userType === 'admin') {
+                echo '<p>Add new books to the library.</p>';
+                echo '<a href="AddBook.php" class="add-book-button">Add Book</a>';
+            }
+            echo '</div>';
         }
-    } else {
-        echo "<p>No books found!</p>";
-    }
-    ?>
+        ?>
 
     </section>
     

@@ -17,7 +17,7 @@ if (isset($_POST['login'])) {
     $passworddb = "WEBDBwebdb123456789";
 
     
-    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }

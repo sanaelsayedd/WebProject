@@ -11,7 +11,7 @@ if (isset($_GET['BookID'])) {
     }
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
@@ -32,7 +32,7 @@ if (isset($_GET['BookID'])) {
             header("Location: books.php");
             exit();
         } else {
-            echo "Error deleting book: " . mysqli_error($connection);
+            echo "Error deleting book: " . mysqli_stmt_error($stmt);
         }
         
         // Close the prepared statement
