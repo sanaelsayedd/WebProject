@@ -199,243 +199,167 @@ header {
         width: unset;
     }
 }
-/* ================================================== */
-main {
-    margin: 55px;
-    min-height: 60vh;
-}
+/* ========================================================================= */
 
-.sideMenu {
-    width: 250px;
-    height: 60vh;
-    background-color: #333;
-    color: white;
+.account-main {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    position: relative;
-    top: 0;
-    left: 0;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-    margin-left: 10px;
-    border-radius: 30px;
-    float: left;
 }
 
-.sideMenu h1 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #FF7043;
-    border-bottom: 2px solid #FF7043;
-    padding-bottom: 5px;
+/* Account Header */
+.account-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
-.sideMenu a {
-    display: block;
-    color: #FFF;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px 15px;
+/* Edit Account Section */
+.edit-account {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Elements */
+.account-form {
+    margin-bottom: 20px;
+}
+
+.form-title {
+    font-size: 1.2rem;
     margin-bottom: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
 }
 
-.sideMenu a:hover {
-    background-color: #FF7043;
-    color: white;
-}
-
-@media (max-width: 768px) {
-    .sideMenu {
-        width: 200px;
-    }
-
-}
-/* ================================================== */
-
-.searchBar {
-   
-    align-items: center;
-    padding: 50px 0;
-   
-    z-index: 1;
-    gap: 50px;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    background-color: #FFF;
-    box-shadow: 0 6px 10px rgba(0, 2, 10, 0.5);
-    padding: 15px 30px;
-    width: 80%; 
-    max-width: 800px;
-    transition: box-shadow 0.3s ease-in-out;
-    border: 2px solid #FF7043; /* Warm Coral */
-}
-
-.input {
-    border: none;
-    outline: none;
-    padding: 15px 25px; 
-    font-size: 18px;
+.form-input {
     width: 100%;
-    background-color: #F9F9F9;
-    color: #333;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-.search-box i {
-    font-size: 25px;
-    color: #8E24AA; /* Rich Purple */
-    cursor: pointer;
-}
-
-.search-box button {
-    background-color: #FF7043; /* Warm Coral */
+.form-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
     border: none;
-    padding: 12px 25px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-left: 15px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-.search-box button:hover {
-    background-color: #FFB74D; /* Lighter Coral */
-    transform: scale(1.05);
+.form-button:hover {
+    background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-    .search-box {
-        width: 90%; /* Adjust for smaller screens */
-    }
+/* Book Sections */
+.book-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
 }
-
-
-/* ================================================== */
-
-.list-books {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 40px 20px;
-    gap: 30px;
-    padding: 40px;
-}
-
 
 .book-card {
     background-color: #fff;
-    width: 250px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-    
 }
 
-.book-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+.book-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
 }
 
 .book-details {
-    padding: 15px;
-    font-family: 'Montserrat', sans-serif;
-    color: #333;
-    
+    padding: 10px;
+}
+
+.book-title {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.book-author, .book-edition {
+    font-size: 0.9rem;
+    margin: 5px 0;
 }
 
 .book-actions {
-    display: flex;
-    justify-content: space-around;
     padding: 10px;
-    border-top: 1px solid #f0f0f0;
-    background-color: #fff;
-    position: relative; 
-    margin-top: auto; 
+    text-align: center;
 }
 
-
-.book-actions i {
-    font-size: 20px;
-    cursor: pointer;
-    color: #FF7043;
-    transition: transform 0.3s ease;
+.action-link {
+    color: #007BFF;
+    text-decoration: none;
 }
 
-.book-actions i:hover {
-    transform: scale(1.2);
-    color: #583a83;
+.detail-icon {
+    font-size: 1.5rem;
 }
 
-.book-actions i + i {
-    margin-left: 20px;
+/* No Books Message */
+.no-books {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
 }
 
-/* Other existing styles remain unchanged */
-
-.book-title {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #583a83;
-    margin-bottom: 10px;
-}
-
-/* For smaller screens */
-@media (max-width: 768px) {
-    .book-card {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    .book-actions {
-        padding: 8px; /* Reduce padding if necessary */
-    }
-}
-
-
-/* ================================================== */
-
+/* ========================================================================= */
 footer {
-    background-color: #111;
-    color: #fff;
+    background-color: #111; /* Dark background */
+    color: #fff; /* White text */
     font-family: Arial, sans-serif;
     padding: 40px 20px;
-    position:relative;
 }
 
 .footer-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; /* Center the footer */
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
 }
 
+/* Logo Section */
 .footer-logo-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex: 0 0 200px;
+    flex: 0 0 200px; /* Fixed width for the logo section */
 }
 
 .footer-logo {
-    width: 120px;
+    width: 120px; /* Adjust logo size */
     margin-bottom: 10px;
 }
 
+/* Links and Content Section */
 .footer-content {
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
+/* Columns in Links Section */
 .footer-links {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
-    gap: 20px;
+    gap: 20px; /* Adjust space between columns */
 }
 
 .link-column {
@@ -446,7 +370,7 @@ footer {
 .link-column p {
     font-size: 14px;
     line-height: 1.8;
-    margin: 0 0 15px 0;
+    margin: 0 0 15px 0; /* Add space between paragraphs */
 }
 
 .link-column p a {
@@ -458,9 +382,10 @@ footer {
     text-decoration: underline;
 }
 
+/* Policy Links Styling */
 .footer-policy-links {
     display: flex;
-    gap: 15px;
+    gap: 15px; /* Add space between links */
     margin-bottom: 10px;
 }
 
@@ -475,14 +400,16 @@ footer {
     text-decoration: underline;
 }
 
+/* License Section */
 .footer-license {
     font-size: 12px;
     line-height: 1.6;
     text-align: justify;
-    margin-top: 20px;
+    margin-top: 20px; /* Add space above the license paragraph */
 }
 
 .footer-license a {
     color: #fff;
     text-decoration: underline;
 }
+

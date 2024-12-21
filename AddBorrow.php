@@ -5,7 +5,7 @@ $username = "root";
 $password = "WEBDBwebdb123456789";
 $dbname = "library";
 
-$connection = mysqli_connect($servername, $username, $password, $dbname);
+$connection = mysqli_connect($servername, $username, "", $dbname);
 
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
@@ -51,7 +51,7 @@ mysqli_close($connection);
     <title>Borrow Book Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS code as provided earlier */
+   
         * {
             margin: 0;
             padding: 0;

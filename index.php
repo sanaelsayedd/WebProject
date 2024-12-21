@@ -95,17 +95,19 @@ if (isset($_GET['logout'])) {
         </header>
 
         <main>
-            <section class="section1">
-                <div class="search-bar">
-                    <h1>Welcome to Knowledge Nest Library</h1>
-                    <div class="search-box">
-                        <input type="text" class="input" placeholder="Search">
-                        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                    <p>Knowledge Nest is your go-to library catalog, offering easy access to a vast collection of books for browsing and borrowing.</p>
-                </div>
-            </section>
-
+        <section class="section1">
+    <div class="search-bar">
+        <h1>Welcome to Knowledge Nest Library</h1>
+        <div class="search-box">
+            <!-- Search form -->
+            <form id="searchForm">
+                <input type="text" class="input" id="search-input" placeholder="Search">
+                <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <p>Knowledge Nest is your go-to library catalog, offering easy access to a vast collection of books for browsing and borrowing.</p>
+    </div>
+</section>
             <section class="library-guides">
                 <h1>Using the Library</h1>
                 <p>Get started using the library with these guides</p>

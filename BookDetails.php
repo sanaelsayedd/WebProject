@@ -25,7 +25,7 @@ $username = "root";
 $password = "WEBDBwebdb123456789"; 
 $database = "library"; 
 
-$conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, "", $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

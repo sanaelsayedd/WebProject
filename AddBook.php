@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Category = $_POST["Category"];
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
