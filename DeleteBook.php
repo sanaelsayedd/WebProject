@@ -11,7 +11,7 @@ if (isset($_GET['BookID'])) {
     }
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "", "library");
+    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());

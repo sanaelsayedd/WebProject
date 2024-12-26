@@ -1,5 +1,5 @@
 <?php
-// Database connection
+
 $servername = "localhost";
 $username = "root";
 $password = "WEBDBwebdb123456789";
@@ -11,7 +11,6 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Fetch users and books for dropdowns
 $userQuery = "SELECT UserID, UserName FROM user";
 $userResult = mysqli_query($connection, $userQuery);
 
@@ -22,18 +21,16 @@ $bookResult = mysqli_query($connection, $bookQuery);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $UserID = $_POST["UserID"];
     $BookID = $_POST["BookID"];
-    $IssueDate = $_POST["IssueDate"];
-    $StartDate = $_POST["StartDate"];
     $ReturnDate = $_POST["ReturnDate"];
 
     // Insert record into borrow table
-    $query = "INSERT INTO `borrow`(`UserID`, `BookID`, `IssueDate`, `StartDate`, `ReturnDate`) 
-              VALUES ('$UserID', '$BookID', '$IssueDate', '$StartDate', '$ReturnDate')";
+    $query = "INSERT INTO `reversation`(`UserID`, `BookID`,`ReturnDate`) 
+              VALUES ('$UserID', '$BookID', '$ReturnDate')";
 
     if (mysqli_query($connection, $query)) {
         echo "<script>
                 alert('Record inserted successfully!');
-                window.location.href = 'borrowBook.php';
+                window.location.href = 'reservation.php';
               </script>";
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($connection);
@@ -150,14 +147,6 @@ mysqli_close($connection);
                         </option>
                     <?php endwhile; ?>
                 </select>
-            </div>
-            <div class="form-group">
-                <label for="IssueDate">Issue Date:</label>
-                <input type="date" id="IssueDate" name="IssueDate" required>
-            </div>
-            <div class="form-group">
-                <label for="StartDate">Start Date:</label>
-                <input type="date" id="StartDate" name="StartDate" required>
             </div>
             <div class="form-group">
                 <label for="ReturnDate">Return Date:</label>

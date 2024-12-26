@@ -13,11 +13,11 @@ if (isset($_POST['login'])) {
     }
  
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $userType = 'admin';
+    $userType = 'user';
     $passworddb = "WEBDBwebdb123456789";
 
     
-    $connection = mysqli_connect("localhost", "root", "", "library");
+    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }

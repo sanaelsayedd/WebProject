@@ -1,92 +1,92 @@
 <?php
 $passworddb = "WEBDBwebdb123456789";
+$UserID = $BookID = $ReturnDate = ""; // Initialize variables
 
-// Check if BookID is provided in the URL
-if (isset($_GET['BookID'])) {
-    $BookID = $_GET['BookID'];
+// Check if `ReversationID` is provided in the URL
+if (isset($_GET['ReversationID'])) {
+    $ReversationID = $_GET['ReversationID'];
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
+    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Retrieve the book data based on BookID
-    $query = "SELECT * FROM `book` WHERE `BookID` = ?";
+    // Retrieve the reversation data
+    $query = "SELECT * FROM `reversation` WHERE `ReversationID` = ?";
     $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt, "i", $BookID);
+    mysqli_stmt_bind_param($stmt, "i", $ReversationID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        // Populate the form with the book data
-        $Title = $row['Title'];
-        $Author = $row['Author'];
-        $Status = $row['Status'];
-        $Edition = $row['Edition'];
-        $Price = $row['Price'];
-        $Quantity = $row['Quantity'];
-        $Category = $row['Category'];
+        $UserID = $row['UserID'];
+        $BookID = $row['BookID'];
+        $ReturnDate = $row['ReturnDate'];
     } else {
-        echo "Book not found.";
+        echo "Reversation not found.";
+        exit();
     }
 
-    // Close the connection
     mysqli_stmt_close($stmt);
+
+    // Fetch all users for the UserID dropdown
+    $users_query = "SELECT `UserID`, `UserName` FROM `user`";
+    $users_result = mysqli_query($connection, $users_query);
+
+    // Fetch all books for the BookID dropdown
+    $books_query = "SELECT `BookID`, `Title` FROM `book`";
+    $books_result = mysqli_query($connection, $books_query);
+
     mysqli_close($connection);
 } else {
-    echo "BookID is required.";
+    die("ReversationID is required.");
 }
 
-// Handle form submission to update book data
+// Handle form submission to update reversation data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $Title = $_POST["Title"];
-    $Author = $_POST["Author"];
-    $Status = $_POST["Status"];
-    $Edition = $_POST["Edition"];
-    $Price = $_POST["Price"];
-    $Quantity = $_POST["Quantity"];
-    $Category = $_POST["Category"];
+    $UserID = $_POST["UserID"];
+    $BookID = $_POST["BookID"];
+    $ReturnDate = $_POST["ReturnDate"];
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "", "library");
+    $connection = mysqli_connect("localhost", "root", $passworddb, "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Update book data
-    $update_query = "UPDATE `book` SET `Title` = ?, `Author` = ?, `Status` = ?, `Edition` = ?, `Price` = ?, `Quantity` = ?, `Category` = ? WHERE `BookID` = ?";
+    // Update reversation data
+    $update_query = "UPDATE `reversation` SET `UserID` = ?, `BookID` = ?, `ReturnDate` = ? WHERE `ReversationID` = ?";
     $stmt = mysqli_prepare($connection, $update_query);
 
     if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "ssssdiis", $Title, $Author, $Status, $Edition, $Price, $Quantity, $Category, $BookID);
-        $execute_result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_param($stmt, "sssi", $UserID, $BookID, $ReturnDate, $ReversationID);
 
-        if ($execute_result) {
-            // Redirect to the books page with success message
-            header("Location: books.php?status=success");
-            exit(); // Ensure the script stops executing after redirection
+        if (mysqli_stmt_execute($stmt)) {
+            // Redirect to the reservation page with a success message
+            header("Location: reservation.php?status=success");
+            exit();
         } else {
-            echo "Error updating book: " . mysqli_error($connection);
+            echo "Error updating reversation: " . mysqli_stmt_error($stmt);
         }
         mysqli_stmt_close($stmt);
     } else {
         echo "Error preparing statement: " . mysqli_error($connection);
     }
 
-    // Close the connection
     mysqli_close($connection);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Book</title>
+    <title>Edit ReversationID</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
 
@@ -213,45 +213,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="dashboard-container">
     <div class="dashboard-content">
-        <h2>Edit Book</h2>
-        <form action="EditBook.php?BookID=<?php echo htmlspecialchars($BookID); ?>" method="POST">
-            <table>
-                <tr>
-                    <td>Title:</td>
-                    <td><input type="text" name="Title" value="<?php echo htmlspecialchars($Title); ?>" required></td>
-                </tr>
-                <tr>
-                    <td>Author:</td>
-                    <td><input type="text" name="Author" value="<?php echo htmlspecialchars($Author); ?>" required></td>
-                </tr>
-                <tr>
-                    <td>Status:</td>
-                    <td>
-                        <select name="Status" required>
-                            <option value="Available" <?php echo ($Status == 'Available') ? 'selected' : ''; ?>>Available</option>
-                            <option value="Unavailable" <?php echo ($Status == 'Unavailable') ? 'selected' : ''; ?>>Unavailable</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Edition:</td>
-                    <td><input type="text" name="Edition" value="<?php echo htmlspecialchars($Edition); ?>" required></td>
-                </tr>
-                <tr>
-                    <td>Price:</td>
-                    <td><input type="number" name="Price" step="0.01" value="<?php echo htmlspecialchars($Price); ?>" required></td>
-                </tr>
-                <tr>
-                    <td>Quantity:</td>
-                    <td><input type="number" name="Quantity" value="<?php echo htmlspecialchars($Quantity); ?>" required></td>
-                </tr>
-                <tr>
-                    <td>Category:</td>
-                    <td><input type="text" name="Category" value="<?php echo htmlspecialchars($Category); ?>" required></td>
-                </tr>
-            </table>
-            <button type="submit">Update Book</button>
-        </form>
+        <h2>Edit Reversation</h2>
+        <form action="EditReversation.php?ReversationID=<?php echo htmlspecialchars($ReversationID); ?>" method="POST">
+    <table>
+        <tr>
+            <td>UserID:</td>
+            <td>
+                <select name="UserID" required>
+                    <?php
+                    if (isset($users_result) && mysqli_num_rows($users_result) > 0) {
+                        while ($user = mysqli_fetch_assoc($users_result)) {
+                            $selected = ($user['UserID'] == $UserID) ? 'selected' : '';
+                            echo "<option value='" . htmlspecialchars($user['UserID']) . "' $selected>" . htmlspecialchars($user['UserName']) . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No users available</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>BookID:</td>
+            <td>
+                <select name="BookID" required>
+                    <?php
+                    if (isset($books_result) && mysqli_num_rows($books_result) > 0) {
+                        while ($book = mysqli_fetch_assoc($books_result)) {
+                            $selected = ($book['BookID'] == $BookID) ? 'selected' : '';
+                            echo "<option value='" . htmlspecialchars($book['BookID']) . "' $selected>" . htmlspecialchars($book['Title']) . "</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No books available</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>ReturnDate:</td>
+            <td><input type="date" name="ReturnDate" value="<?php echo htmlspecialchars($ReturnDate); ?>" required></td>
+        </tr>
+    </table>
+    <button type="submit">Update Reversation</button>
+</form>
+
     </div>
 </div>
 

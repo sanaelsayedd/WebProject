@@ -21,24 +21,23 @@ $username = "root";
 $password = "WEBDBwebdb123456789"; 
 $dbname = "library"; 
 
-$conn = new mysqli($servername, $username, "WEBDBwebdb123456789", $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT `BorrowID`, `UserID`, `BookID`, `IssueDate`, `StartDate`, `ReturnDate` FROM `borrow`";
+$sql = "SELECT `ReversationID`, `UserID`, `BookID`, `ReturnDate` FROM `reversation`";
 $result = $conn->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrow Books</title>
+    <title>Reversation Books</title>
     <style>
-        body {
+                body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
@@ -109,16 +108,14 @@ $result = $conn->query($sql);
 <body>
     <?php if ($userType === 'admin') { ?>
     <div class="container">
-        <h1>Borrowed Books</h1>
-        <a href="AddBorrow.php">Add New Borrow</a>
+        <h1>Reservation Books</h1>
+        <a href="Addreversation.php">Add New reversation</a>
         <table>
             <thead>
                 <tr>
-                    <th>Borrow ID</th>
+                    <th>Reversation ID</th>
                     <th>User ID</th>
                     <th>Book ID</th>
-                    <th>Issue Date</th>
-                    <th>Start Date</th>
                     <th>Return Date</th>
                     <th>Actions</th>
                 </tr>
@@ -127,22 +124,20 @@ $result = $conn->query($sql);
                 <?php if ($result && $result->num_rows > 0): ?>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <tr>
-                            <td><?= htmlspecialchars($row['BorrowID']); ?></td>
+                            <td><?= htmlspecialchars($row['ReversationID']); ?></td>
                             <td><?= htmlspecialchars($row['UserID']); ?></td>
                             <td><?= htmlspecialchars($row['BookID']); ?></td>
-                            <td><?= htmlspecialchars($row['IssueDate']); ?></td>
-                            <td><?= htmlspecialchars($row['StartDate']); ?></td>
                             <td><?= htmlspecialchars($row['ReturnDate']); ?></td>
                             <td>
-                                <a href="EditBorrow.php?BorrowID=<?= urlencode($row['BorrowID']); ?>">Edit</a> |
-                                <a href="RemoveBorrow.php?BorrowID=<?= urlencode($row['BorrowID']); ?>" 
-                                   onclick="return confirm('Are you sure you want to delete this Borrow?')">Delete</a>
+                                <a href="EditReversation.php?ReversationID=<?= urlencode($row['ReversationID']); ?>">Edit</a> |
+                                <a href="RemoveReversation.php?ReversationID=<?= urlencode($row['ReversationID']); ?>" 
+                                   onclick="return confirm('Are you sure you want to delete this Reversation?')">Delete</a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6" style="text-align: center;">No data found</td>
+                        <td colspan="5" style="text-align: center;">No data found</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

@@ -21,7 +21,7 @@ $username = "root";
 $password = "WEBDBwebdb123456789"; 
 $dbname = "library"; 
 
-$conn = new mysqli($servername, $username, "", $dbname);
+$conn = new mysqli($servername, $username, "WEBDBwebdb123456789", $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -157,32 +157,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             </section>
 
-            <!-- Borrowed Books Section -->
-                    <section class="borrowed-books">
-            <h2 class="section-title">Borrowed Books</h2>
-            <?php 
-            if ($borrowResult && $borrowResult->num_rows > 0): ?>
-                <div class="book-cards">
-                    <?php while ($row = $borrowResult->fetch_assoc()): ?>
-                        <div class="book-card">
-                            <img src="<?php echo htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg'); ?>" alt="Book Cover" class="book-image">
-                            <div class="book-details">
-                                <h2 class="book-title"><?php echo htmlspecialchars($row['Title']); ?></h2>
-                                <p class="book-author"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
-                                <p class="book-edition"><strong>Edition:</strong> <?php echo htmlspecialchars($row['Edition']); ?></p>
-                            </div>
-                            <div class="book-actions">
-                                <a href="BookDetails.php?BookID=<?php echo $row['BookID']; ?>" class="action-link">
-                                    <i class="fas fa-info-circle detail-icon" title="Details"></i>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
+<!-- Borrowed Books Section -->
+<section class="borrowed-books">
+    <h2 class="section-title">Borrowed Books</h2>
+    <?php 
+    if ($borrowResult && $borrowResult->num_rows > 0): ?>
+        <div class="book-cards">
+            <?php while ($row = $borrowResult->fetch_assoc()): ?>
+                <div class="book-card" id="book-card-<?php echo $row['BorrowID']; ?>">
+                    <img src="<?php echo htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg'); ?>" alt="Book Cover" class="book-image">
+                    <div class="book-details">
+                        <h2 class="book-title"><?php echo htmlspecialchars($row['Title']); ?></h2>
+                        <p class="book-author"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
+                        <p class="book-edition"><strong>Edition:</strong> <?php echo htmlspecialchars($row['Edition']); ?></p>
+                    </div>
+                    <div class="book-actions">
+                        <a href="BookDetails.php?BookID=<?php echo $row['BookID']; ?>" class="action-link">
+                            <i class="fas fa-info-circle detail-icon" title="Details"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <form action="RemoveBorrow.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                            <input type="hidden" name="BorrowID" value="<?php echo htmlspecialchars($row['BorrowID']); ?>">
+                            <button type="submit" class="reversation-button">
+                                <i class="fas fa-bookmark" title="Reversation"></i> Reversation
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            <?php else: ?>
-                <p class="no-books">You have no borrowed books.</p>
-            <?php endif; ?>
-        </section>
+            <?php endwhile; ?>
+        </div>
+    <?php else: ?>
+        <p class="no-books">You have no borrowed books.</p>
+    <?php endif; ?>
+</section>
+
+<script>
+    window.onload = function() {
+        <?php 
+
+        if (isset($_SESSION['deleted']) && $_SESSION['deleted']) {
+            echo "alert('The book has been successfully deleted.');";
+            unset($_SESSION['deleted']); 
+        }
+        ?>
+    };
+</script>
+
 
         <!-- Purchased Books Section -->
         <section class="purchased-books">
