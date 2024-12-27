@@ -220,14 +220,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </script>
 
 
-    
+ <!-- help -->
 <section class="purchased-books">
     <h2 class="section-title">Purchased Books</h2>
     <?php 
     if ($purchaseResult && $purchaseResult->num_rows > 0): ?>
         <div class="book-cards">
             <?php while ($row = $purchaseResult->fetch_assoc()): ?>
-                <div class="book-card">
+                <div class="book-card" id="book-card-<?php echo $row['PurchaseTransactionID']; ?>">
                     <img src="<?php echo htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg'); ?>" alt="Book Cover" class="book-image">
                     <div class="book-details">
                         <h2 class="book-title"><?php echo htmlspecialchars($row['Title']); ?></h2>
@@ -262,7 +262,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="no-books">You have no purchased books.</p>
     <?php endif; ?>
 </section>
-
 
         </main>
 
