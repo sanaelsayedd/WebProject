@@ -49,10 +49,25 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Users</a></li>
-                    <li><a href="add_user.php">Add User</a></li>
-                    <li><a href="manage_users.php">Manage Users</a></li>
+                    <li><a href="manageUser.php">Manage Users</a></li>
                 </ul>
             </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book'></i>
+                        <span class="link_name">Books</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Books</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <li><a href="borrowBook.php">Borrowed Books</a></li>
+                    <li><a href="reservation.php">Reversation Books</a></li>
+                </ul>
+            </li>
+    
             <li>
                 <a href="settings.php">
                     <i class='bx bx-cog'></i>

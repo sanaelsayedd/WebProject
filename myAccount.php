@@ -42,7 +42,7 @@ if (!$borrowResult) {
 
 
 $purchaseQuery = "
-    SELECT b.Title, b.Author, b.Edition, pt.PurchaseTransactionID, pt.Quantity, pt.TotalPrice
+    SELECT b.Title, b.Author, b.Edition, b.PDFFile, pt.PurchaseTransactionID, pt.Quantity, pt.TotalPrice
     FROM purchase_transaction pt
     INNER JOIN book b ON pt.BookID = b.BookID
     WHERE pt.UserID = (SELECT UserID FROM user WHERE Username = '$_SESSION[username]')
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                         <div class="book-actions">
                         <?php if (!empty($row['PDFFile']) && file_exists('pdf/' . $row['PDFFile'])): ?>
-                            <!-- If the PDF file exists, link to the PDF viewer -->
+                            
                             <form action="pdfViewer.php" method="get">
                                 <input type="hidden" name="pdf_filename" value="<?php echo htmlspecialchars($row['PDFFile']); ?>">
                                 <button type="submit" class="pdf-button">
@@ -220,36 +220,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </script>
 
 
-        <!-- Purchased Books Section -->
-        <section class="purchased-books">
-            <h2 class="section-title">Purchased Books</h2>
-            <?php 
-            if ($purchaseResult && $purchaseResult->num_rows > 0): ?>
-                <div class="book-cards">
-                    <?php while ($row = $purchaseResult->fetch_assoc()): ?>
-                        <div class="book-card">
-                            <img src="<?php echo htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg'); ?>" alt="Book Cover" class="book-image">
-                            <div class="book-details">
-                                <h2 class="book-title"><?php echo htmlspecialchars($row['Title']); ?></h2>
-                                <p class="book-author"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
-                                <p class="book-edition"><strong>Edition:</strong> <?php echo htmlspecialchars($row['Edition']); ?></p>
-                            </div>
-                            <div class="book-actions">
-                                <a href="BookDetails.php?BookID=<?php echo $row['BookID']; ?>" class="action-link">
-                                    <i class="fas fa-info-circle detail-icon" title="Details"></i>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
+    
+<section class="purchased-books">
+    <h2 class="section-title">Purchased Books</h2>
+    <?php 
+    if ($purchaseResult && $purchaseResult->num_rows > 0): ?>
+        <div class="book-cards">
+            <?php while ($row = $purchaseResult->fetch_assoc()): ?>
+                <div class="book-card">
+                    <img src="<?php echo htmlspecialchars($row['ImagePath'] ?? 'css/Image/Book2.jpg'); ?>" alt="Book Cover" class="book-image">
+                    <div class="book-details">
+                        <h2 class="book-title"><?php echo htmlspecialchars($row['Title']); ?></h2>
+                        <p class="book-author"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
+                        <p class="book-edition"><strong>Edition:</strong> <?php echo htmlspecialchars($row['Edition']); ?></p>
+                    </div>
+                    <div class="book-actions">
+                        <?php if (!empty($row['PDFFile']) && file_exists('pdf/' . $row['PDFFile'])): ?>
+                            <!-- Read PDF -->
+                            <form action="pdfViewer.php" method="get" class="pdf-form">
+                                <input type="hidden" name="pdf_filename" value="<?php echo htmlspecialchars($row['PDFFile']); ?>">
+                                <button type="submit" class="pdf-button">
+                                    <i class="fas fa-file-pdf" title="Read PDF"></i> Read PDF
+                                </button>
+                            </form>
+                            <!-- Download PDF -->
+                            <a href="pdf/<?php echo htmlspecialchars($row['PDFFile']); ?>" download class="pdf-download-link">
+                                <button class="pdf-button">
+                                    <i class="fas fa-download" title="Download PDF"></i> Download PDF
+                                </button>
+                            </a>
+                        <?php else: ?>
+                            <button class="pdf-button disabled" disabled>
+                                <i class="fas fa-file-pdf" title="PDF Not Available"></i> PDF Not Available
+                            </button>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            <?php else: ?>
-                <p class="no-books">You have no purchased books.</p>
-            <?php endif; ?>
-        </section>
-        <section class="History-books">
-            <h2 class="section-title">History Books</h2>
-            
-        </section>
+            <?php endwhile; ?>
+        </div>
+    <?php else: ?>
+        <p class="no-books">You have no purchased books.</p>
+    <?php endif; ?>
+</section>
 
 
         </main>
