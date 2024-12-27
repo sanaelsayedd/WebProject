@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
            
             if ($_SESSION['userType'] === 'admin') {
-                header("Location: dashboard.html"); 
+                header("Location: dashboard.php"); 
                 exit();
             } else {
                 header("Location: index.php"); 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="stylesheet" href="css/dashboard-styles.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,21 +27,6 @@
             <li>
                 <div class="iocn-link">
                     <a href="#">
-                        <i class='bx bx-book'></i>
-                        <span class="link_name">Books</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Books</a></li>
-                    <li><a href="add_book.php">Add Book</a></li>
-                    <li><a href="manage_books.php">Manage Books</a></li>
-                    <li><a href="borrowed_books.php">Borrowed Books</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
                         <i class='bx bx-user'></i>
                         <span class="link_name">Users</span>
                     </a>
@@ -49,10 +34,24 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="#">Users</a></li>
-                    <li><a href="add_user.php">Add User</a></li>
-                    <li><a href="manage_users.php">Manage Users</a></li>
+                    <li><a href="manageUser.php">Manage Users</a></li>
                 </ul>
             </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book'></i>
+                        <span class="link_name">Books</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Books</a></li>
+                    <li><a href="borrowBook.php">Borrowed Books</a></li>
+                    <li><a href="reservation.php">Reversation Books</a></li>
+                </ul>
+            </li>
+    
             <li>
                 <a href="settings.php">
                     <i class='bx bx-cog'></i>
@@ -148,6 +147,6 @@
         </div>
     </section>
 
-    <script src="dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
