@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="stylesheet" href="css/dashboard-styles.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +33,10 @@
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Books</a></li>
-                    <li><a href="add_book.php">Add Book</a></li>
-                    <li><a href="manage_books.php">Manage Books</a></li>
-                    <li><a href="borrowed_books.php">Borrowed Books</a></li>
+                    <li><a class="link_name" href="books.php">Books</a></li>
+                    <li><a href="AddBook.php">Add Book</a></li>
+                    <li><a href="Addreversation.php">Reversition Books</a></li>
+                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
                 </ul>
             </li>
             <li>
@@ -148,6 +148,6 @@
         </div>
     </section>
 
-    <script src="dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>

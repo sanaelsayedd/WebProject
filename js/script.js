@@ -80,3 +80,40 @@ document.getElementById('searchForm').addEventListener('submit', function(e) {
         fetchBooks(); // Fetch all books if search is empty
     }
 });
+// ===========================================================
+// Featured Books
+// Get scroll container and buttons
+const container = document.querySelector('.books-container');
+const leftBtn = document.querySelector('.scroll-btn.left');
+const rightBtn = document.querySelector('.scroll-btn.right');
+
+// Calculate scroll amount based on book card width + gap
+const scrollAmount = 320; // 300px card width + 20px gap
+
+// Add click handlers for scroll buttons
+leftBtn.addEventListener('click', () => {
+    container.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+    });
+});
+
+rightBtn.addEventListener('click', () => {
+    container.scrollBy({
+        left: scrollAmount, 
+        behavior: 'smooth'
+    });
+});
+
+// Show/hide scroll buttons based on scroll position
+const toggleScrollButtons = () => {
+    leftBtn.style.display = container.scrollLeft > 0 ? 'flex' : 'none';
+    rightBtn.style.display = 
+        container.scrollLeft < container.scrollWidth - container.clientWidth ? 'flex' : 'none';
+};
+
+container.addEventListener('scroll', toggleScrollButtons);
+window.addEventListener('resize', toggleScrollButtons);
+
+// Initial button visibility
+toggleScrollButtons();

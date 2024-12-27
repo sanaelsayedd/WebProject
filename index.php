@@ -24,7 +24,7 @@ if (isset($_GET['logout'])) {
 <body>
         <header class="header">
             <div class="logo">
-                <a href="index.php">Knowledge Nest</a>
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
             </div>
             <nav class="nav-bar">
                 <ul class="nav__links">
@@ -165,72 +165,212 @@ if (isset($_GET['logout'])) {
                 </div>
             </section>
 
-            <section class="list-books">
-                <div class="book-card">
-                    <img src="Image/Book1.jpg" alt="Book Cover" class="book-image">
-                    <div class="book-details">
-                        <h2 class="book-title">Learn Programming</h2>
-                        <p class="book-author"><strong>Author:</strong> John Doe</p>
-                        <p class="book-type"><strong>Type:</strong> Programming</p>
-                        <p class="book-price"><strong>Price:</strong> $29.99</p>
-                        <p class="book-status"><strong>Status:</strong> In Stock</p>
-                        <p class="book-quantity"><strong>Quantity:</strong> 15</p>
-                    </div>
-                </div>
-            </section>
+<section class="discount_section" id = "discount">
+<div class="disount__container container grid">
+    <div class="discount__data">
+        <h2 class="discount__section_title">Up to 50% off</h2>
+        <p class="discount__description">
+            Discover our latest discounted books, perfect for saving on your favorite reads.
+        </p>
 
-            <section class="featured_books" id="featured">
-                <h2 class="section_title">Featured Books</h2>
-                <div class="featured__container">
-                    <div class="featured__swiper">
-                        <div>
-                            <article class="featured__card">
-                                <img src="Image/Book1.jpg" alt="Book Cover" class="book-image">
-                                <h2 class="book-title">Learn Programming</h2>
-                                <div class="book-details">
-                                    <p class="book-author"><strong>Author:</strong> John Doe</p>
-                                    <p class="book-type"><strong>Type:</strong> Programming</p>
-                                </div>
-                            </article>
+        <a href="books.php" class="button-s">Shop Now</a>
+    </div>
+    <div class="discount__images">
+        <a href="books.php"><img src="css/Image/Books-cover/book-2.png" alt="" class="discount__img-1"></a>
+       <a href="books.php"><img src="css/Image/Books-cover/book-4.png" alt="" class="discount__img-2"></a>
+        </div>
+</div>
+</section>
+
+
+            <section class="list-books">
+                <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="books-container">
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book1.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">Learn Programming</h2>
+                            <p class="book-author"><strong>Author:</strong> John Doe</p>
+                            <p class="book-type"><strong>Type:</strong> Programming</p>
+                            <p class="book-price"><strong>Price:</strong> $29.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 15</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book2.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">Romeo and Juliet</h2>
+                            <p class="book-author"><strong>Author:</strong> William Shakespeare</p>
+                            <p class="book-type"><strong>Type:</strong> Drama</p>
+                            <p class="book-price"><strong>Price:</strong> $19.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 10</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book3.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">Pride and Prejudice</h2>
+                            <p class="book-author"><strong>Author:</strong> Jane Austen</p>
+                            <p class="book-type"><strong>Type:</strong> Love Story</p>
+                            <p class="book-price"><strong>Price:</strong> $24.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 8</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book4.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">Hamlet</h2>
+                            <p class="book-author"><strong>Author:</strong> William Shakespeare</p>
+                            <p class="book-type"><strong>Type:</strong> Drama</p>
+                            <p class="book-price"><strong>Price:</strong> $21.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 12</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book5.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">The Notebook</h2>
+                            <p class="book-author"><strong>Author:</strong> Nicholas Sparks</p>
+                            <p class="book-type"><strong>Type:</strong> Love Story</p>
+                            <p class="book-price"><strong>Price:</strong> $23.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 7</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book6.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">Macbeth</h2>
+                            <p class="book-author"><strong>Author:</strong> William Shakespeare</p>
+                            <p class="book-type"><strong>Type:</strong> Drama</p>
+                            <p class="book-price"><strong>Price:</strong> $20.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 9</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book7.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">Me Before You</h2>
+                            <p class="book-author"><strong>Author:</strong> Jojo Moyes</p>
+                            <p class="book-type"><strong>Type:</strong> Love Story</p>
+                            <p class="book-price"><strong>Price:</strong> $22.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 11</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book8.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">The Glass Menagerie</h2>
+                            <p class="book-author"><strong>Author:</strong> Tennessee Williams</p>
+                            <p class="book-type"><strong>Type:</strong> Drama</p>
+                            <p class="book-price"><strong>Price:</strong> $18.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 6</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book9.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">The Fault in Our Stars</h2>
+                            <p class="book-author"><strong>Author:</strong> John Green</p>
+                            <p class="book-type"><strong>Type:</strong> Love Story</p>
+                            <p class="book-price"><strong>Price:</strong> $25.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 13</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <i class="fa-solid fa-book-open-reader"></i>
+                        <img src="Image/Book10.jpg" alt="Book Cover" class="book-image">
+                        <div class="book-details">
+                            <h2 class="book-title">A Streetcar Named Desire</h2>
+                            <p class="book-author"><strong>Author:</strong> Tennessee Williams</p>
+                            <p class="book-type"><strong>Type:</strong> Drama</p>
+                            <p class="book-price"><strong>Price:</strong> $19.99</p>
+                            <p class="book-status"><strong>Status:</strong> In Stock</p>
+                            <p class="book-quantity"><strong>Quantity:</strong> 5</p>
                         </div>
                     </div>
                 </div>
+                <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
+
             </section>
+
+            
         </main>
 
         <footer>
-            <div class="footer-container">
-                <div class="footer-logo-section">
-                    <img src="Image/KnowledgeNest-noBK.png" alt="Knowledge Nest Logo" class="footer-logo">
+    <div class="footer-container">
+        <!-- Logo Section -->
+        <div class="footer-logo-section">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
+        </div>
+
+        <!-- Links and License Section -->
+        <div class="footer-content">
+            <div class="footer-links">
+                <!-- First Column -->
+                <div class="link-column">
+                    <p>GIVING TO THE LIBRARY</p>
+                    <p>OFFICE OF THE PROVOST</p>
+                    <p>HOLLIS</p>
+                    <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
+                    <p>DATABASES</p>
                 </div>
-                <div class="footer-content">
-                    <div class="footer-links">
-                        <div class="link-column">
-                            <p>GIVING TO THE LIBRARY</p>
-                            <p>OFFICE OF THE PROVOST</p>
-                            <p>HOLLIS</p>
-                            <p>DATABASES</p>
-                        </div>
-                        <div class="link-column">
-                            <p>NEWSLETTERS/SOCIAL</p>
-                            <p>STAFF PORTAL</p>
-                            <p>LIBRARY ACCESSIBILITY</p>
-                        </div>
-                        <div class="link-column">
-                            <div class="footer-policy-links">
-                                <a href="#">Accessibility</a>
-                                <a href="#">Privacy</a>
-                            </div>
-                        </div>
+
+                <!-- Second Column -->
+                <div class="link-column">
+                    <p>NEWSLETTERS/SOCIAL</p>
+                    <p>STAFF PORTAL</p>
+                    <p>LIBRARY ACCESSIBILITY</p>
+                    <p>REPORT A PROBLEM</p>
+                </div>
+
+                <!-- Third Column -->
+                <div class="link-column">
+                    <div class="footer-policy-links">
+                        <a href="#">Accessibility</a>
+                        <a href="#">Privacy</a>
                     </div>
-                    <p class="footer-license">
-                        Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
-                        this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
-                        which allows anyone to share and adapt our material as long as proper attribution is given.
-                    </p>
                 </div>
             </div>
-        </footer>
+
+            <!-- License Section -->
+            <p class="footer-license">
+                Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
+                this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
+                which allows anyone to share and adapt our material as long as proper attribution is given. 
+                For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
+                &copy;2024 Presidents and Fellows of Harvard College.
+            </p>
+        </div>
+    </div>
+</footer>
+
         <script src="js/script.js"></script>
     </body>
 </html>
