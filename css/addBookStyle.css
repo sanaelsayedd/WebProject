@@ -299,6 +299,26 @@ main{
         font-size: 24px;
     }
 }
+#Description {
+    width: 100%;             /* Full width */
+    height: 150px;           /* Set the height */
+    padding: 10px;           /* Add padding inside the textarea */
+    font-size: 16px;         /* Set the font size */
+    border: 1px solid #ccc;  /* Border with light gray color */
+    border-radius: 8px;      /* Rounded corners */
+    resize: vertical;       /* Allow vertical resize only */
+    box-sizing: border-box; /* Include padding and border in the total width/height */
+    background-color: #f9f9f9; /* Light background color */
+    font-family: Arial, sans-serif; /* Set the font family */
+    transition: border-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+#Description:focus {
+    border-color: #007BFF;  /* Change border color on focus */
+    outline: none;           /* Remove outline when focused */
+    background-color: #e9f4ff; /* Slight blue background on focus */
+}
 
 /* =============================================================== */
 footer {

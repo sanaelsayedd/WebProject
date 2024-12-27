@@ -2,7 +2,7 @@
 // Database connection
 $servername = "localhost";
 $username = "root";
-$password = "WEBDBwebdb123456789";
+$password = "";
 $dbname = "library";
 
 $connection = mysqli_connect($servername, $username, $password , $dbname);

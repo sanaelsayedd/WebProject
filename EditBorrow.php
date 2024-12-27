@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 $BorrowID = $UserID = $BookID = $IssueDate = $StartDate = $ReturnDate = ""; // Initialize variables
 
 // Check if `BorrowID` is provided in the URL

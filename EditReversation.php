@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 $UserID = $BookID = $ReturnDate = ""; // Initialize variables
 
 // Check if `ReversationID` is provided in the URL

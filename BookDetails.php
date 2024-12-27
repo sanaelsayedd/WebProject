@@ -22,10 +22,10 @@ if (isset($_GET['logout'])) {
 // Database connection
 $servername = "localhost"; 
 $username = "root"; 
-$password = "WEBDBwebdb123456789"; 
+$password = ""; 
 $database = "library"; 
 
-$conn = new mysqli($servername, $username, "WEBDBwebdb123456789", $database);
+$conn = new mysqli($servername, $username, "", $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 
 session_start(); 
 

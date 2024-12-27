@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 
 if (isset($_GET['ReversationID'])) {
     $ReversationID = $_GET['ReversationID'];

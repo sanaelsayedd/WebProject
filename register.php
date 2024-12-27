@@ -4,7 +4,7 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'];
-    $passworddb = "WEBDBwebdb123456789";
+    $passworddb = "";
 
     
     if ($password !== $confirmPassword) {

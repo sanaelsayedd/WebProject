@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "WEBDBwebdb123456789"; 
+$password = ""; 
 $dbname = "library";
 
 

@@ -1,5 +1,5 @@
 <?php
-    $password = "WEBDBwebdb123456789";
+    $password = "";
 
     $conn = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
 

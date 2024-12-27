@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 
 // Check if BookID is passed in the URL
 if (isset($_GET['BookID'])) {
@@ -11,7 +11,7 @@ if (isset($_GET['BookID'])) {
     }
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());

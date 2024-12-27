@@ -1,15 +1,13 @@
 <?php
 session_start();
 
-
 $is_logged_in = isset($_SESSION['username']);
-$userType = $is_logged_in ? $_SESSION['userType']: null;
+$userType = $is_logged_in ? $_SESSION['userType'] : null;
 
 if (!$is_logged_in) {
     header("Location: login.php");
     exit();
 }
-
 
 if (isset($_GET['logout'])) {
     session_unset();
@@ -19,7 +17,7 @@ if (isset($_GET['logout'])) {
 }
 
 // Database credentials
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -30,56 +28,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Price = $_POST["Price"];
     $Quantity = $_POST["Quantity"];
     $Category = $_POST["Category"];
+    $Description = $_POST["Description"];  // New Description field
+
+    // Handle the file upload
+    $fileUploadError = "";
+    $PDFFile = "";
+
+    if (isset($_FILES["PDFFile"]) && $_FILES["PDFFile"]["error"] == 0) {
+        $fileName = $_FILES["PDFFile"]["name"];
+        $fileTmpPath = $_FILES["PDFFile"]["tmp_name"];
+        $fileSize = $_FILES["PDFFile"]["size"];
+        $fileType = $_FILES["PDFFile"]["type"];
+
+        // Check if the file is a PDF
+        $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        if ($fileExtension != "pdf") {
+            $fileUploadError = "Only PDF files are allowed.";
+        } else {
+            // Define the upload directory (pdf folder)
+            $uploadDir = 'pdf/';
+            $filePath = $uploadDir . basename($fileName);
+
+          
+            if (file_exists($filePath)) {
+                $fileUploadError = "Sorry, file already exists.";
+            } else {
+                
+                if (move_uploaded_file($fileTmpPath, $filePath)) {
+                    $PDFFile = basename($fileName); 
+                } else {
+                    $fileUploadError = "There was an error uploading the file.";
+                }
+            }
+        }
+    } else {
+        $fileUploadError = "No file uploaded or there was an error with the upload.";
+    }
+
+    if ($fileUploadError) {
+        echo $fileUploadError;
+        exit();
+    }
 
     // Connect to the database
-    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
     // Check if the book already exists
-    $checkQuery = "SELECT * FROM `book` WHERE `Title` = ? AND `Author` = ?";
-    $checkStmt = mysqli_prepare($connection, $checkQuery);
+    $checkQuery = "SELECT * FROM `book` WHERE `Title` = '$Title' AND `Author` = '$Author'";
+    $checkResult = mysqli_query($connection, $checkQuery);
 
-    if ($checkStmt) {
-        mysqli_stmt_bind_param($checkStmt, "ss", $Title, $Author);
-        mysqli_stmt_execute($checkStmt);
-        mysqli_stmt_store_result($checkStmt);
-
-        if (mysqli_stmt_num_rows($checkStmt) > 0) {
-            echo "This book already exists in the database.";
-        } else {
-            // Insert new book record
-            $query = "INSERT INTO `book` (`Title`, `Author`, `Status`, `Edition`, `Price`, `Quantity`, `Category`) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            $stmt = mysqli_prepare($connection, $query);
-
-            if ($stmt) {
-                mysqli_stmt_bind_param($stmt, "ssssdis", $Title, $Author, $Status, $Edition, $Price, $Quantity, $Category);
-
-                if (mysqli_stmt_execute($stmt)) {
-                    header("Location: books.php");
-                    exit();
-                } else {
-                    echo "Error: " . mysqli_error($connection);
-                }
-
-                mysqli_stmt_close($stmt);
-            } else {
-                echo "Error preparing statement: " . mysqli_error($connection);
-            }
-        }
-
-        mysqli_stmt_close($checkStmt);
+    if (mysqli_num_rows($checkResult) > 0) {
+        echo "This book already exists in the database.";
     } else {
-        echo "Error preparing check statement: " . mysqli_error($connection);
+        // Insert new book record
+        $query = "INSERT INTO `book` (`Title`, `Author`, `Status`, `Edition`, `Price`, `Quantity`, `Category`, `PDFFile`, `Description`) 
+                  VALUES ('$Title', '$Author', '$Status', '$Edition', '$Price', '$Quantity', '$Category', '$PDFFile', '$Description')";
+
+        if (mysqli_query($connection, $query)) {
+            echo "Book added successfully!";
+            header("Location: books.php");
+            exit();
+        } else {
+            echo "Error: " . mysqli_error($connection);
+        }
     }
 
     mysqli_close($connection);
 }
 ?>
+
+
 
 <html lang="en">
 <head>
@@ -155,34 +177,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </header>
 
 <main>
-        <h2>Add a New Book</h2>
-        <form action="AddBook.php" method="POST" class="add-book-form">
-            <label for="Title">Title:</label>
-            <input type="text" id="Title" name="Title" required>
+    <h2>Add a New Book</h2>
+    <form action="AddBook.php" method="POST" class="add-book-form" enctype="multipart/form-data">
+        <label for="Title">Title:</label>
+        <input type="text" id="Title" name="Title" required>
 
-            <label for="Author">Author:</label>
-            <input type="text" id="Author" name="Author" required>
+        <label for="Author">Author:</label>
+        <input type="text" id="Author" name="Author" required>
 
-            <label for="Status">Status:</label>
-            <select id="Status" name="Status" required>
-                <option value="Available">Available</option>
-                <option value="Unavailable">Unavailable</option>
-            </select>
+        <label for="Status">Status:</label>
+        <select id="Status" name="Status" required>
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
 
-            <label for="Edition">Edition:</label>
-            <input type="text" id="Edition" name="Edition" required>
+        <label for="Edition">Edition:</label>
+        <input type="text" id="Edition" name="Edition" required>
 
-            <label for="Price">Price:</label>
-            <input type="number" id="Price" name="Price" step="0.01" required>
+        <label for="Price">Price:</label>
+        <input type="number" id="Price" name="Price" step="0.01" required>
 
-            <label for="Quantity">Quantity:</label>
-            <input type="number" id="Quantity" name="Quantity" required>
+        <label for="Quantity">Quantity:</label>
+        <input type="number" id="Quantity" name="Quantity" required>
 
-            <label for="Category">Category:</label>
-            <input type="text" id="Category" name="Category" required>
+        <label for="Category">Category:</label>
+        <input type="text" id="Category" name="Category" required>
 
-            <button type="submit">Submit</button>
-        </form>
+        <label for="Description">Description:</label>
+        <textarea id="Description" name="Description" required></textarea>
+
+        <label for="PDFFile">Upload PDF:</label>
+        <input type="file" id="PDFFile" name="PDFFile" accept=".pdf">
+
+        <button type="submit">Submit</button>
+    </form>
 </main>
 
 <footer>
@@ -195,33 +223,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="link-column">
                     <p>GIVING TO THE LIBRARY</p>
                     <p>OFFICE OF THE PROVOST</p>
-                    <p>HOLLIS</p>
-                    <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
-                    <p>DATABASES</p>
+                    <p>UNIVERSITY POLICIES</p>
                 </div>
                 <div class="link-column">
-                    <p>NEWSLETTERS/SOCIAL</p>
-                    <p>STAFF PORTAL</p>
-                    <p>LIBRARY ACCESSIBILITY</p>
-                    <p>REPORT A PROBLEM</p>
-                </div>
-                <div class="link-column">
-                    <div class="footer-policy-links">
-                        <a href="#">Accessibility</a>
-                        <a href="#">Privacy</a>
-                    </div>
+                    <p>ABOUT US</p>
+                    <p>CONTACT</p>
+                    <p>PRIVACY POLICY</p>
                 </div>
             </div>
-            <p class="footer-license">
-                Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
-                this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
-                which allows anyone to share and adapt our material as long as proper attribution is given. 
-                For details and exceptions, see the <a href="#">Library Copyright Policy</a>. &copy;2024 Library System.
-            </p>
         </div>
     </div>
 </footer>
 
-<script src="js/script.js"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ if (isset($_GET['BookID'], $_GET['Title'], $_GET['UserName'], $_GET['StartDate']
     // Database connection
     $servername = "localhost";
     $username = "root";
-    $password = "WEBDBwebdb123456789"; 
+    $password = ""; 
     $dbname = "library"; 
 
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -140,10 +140,10 @@ if (isset($_GET['BookID'], $_GET['Title'], $_GET['UserName'], $_GET['StartDate']
         <a href="books.php">Back to Books</a>
     </div>
 
-    <script>
+    <!-- <script>
         function() {
             window.location.href = 'books.php';
         } 
-    </script>
+    </script> -->
 </body>
 </html>

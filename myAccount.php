@@ -18,21 +18,22 @@ if (isset($_GET['logout'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "WEBDBwebdb123456789"; 
+$password = ""; 
 $dbname = "library"; 
 
-$conn = new mysqli($servername, $username, "WEBDBwebdb123456789", $dbname);
+$conn = new mysqli($servername, $username, "", $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $borrowQuery = "
-    SELECT b.Title, b.Author, b.Edition, br.BorrowID, br.StartDate, br.ReturnDate
+    SELECT b.Title, b.Author, b.Edition, br.BorrowID, br.StartDate, br.ReturnDate, b.PDFFile
     FROM borrow br
     INNER JOIN book b ON br.BookID = b.BookID
     WHERE br.UserID = (SELECT UserID FROM user WHERE Username = '$_SESSION[username]')
 ";
+
 $borrowResult = $conn->query($borrowQuery);
 if (!$borrowResult) {
     echo "Error with the query: " . $conn->error;
@@ -53,7 +54,6 @@ if (!$purchaseResult) {
 
 
 
-// Update functions for username, password, and email
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['update_username'])) {
         $new_username = $_POST['new_username'];
@@ -101,6 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Account</title>
     <link rel="stylesheet" href="css/myAccountStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <header class="header">
@@ -171,13 +173,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p class="book-author"><strong>Author:</strong> <?php echo htmlspecialchars($row['Author']); ?></p>
                         <p class="book-edition"><strong>Edition:</strong> <?php echo htmlspecialchars($row['Edition']); ?></p>
                     </div>
-                    <div class="book-actions">
-                        <a href="BookDetails.php?BookID=<?php echo $row['BookID']; ?>" class="action-link">
-                            <i class="fas fa-info-circle detail-icon" title="Details"></i>
-                        </a>
+
+                                        <div class="book-actions">
+                        <?php if (!empty($row['PDFFile']) && file_exists('pdf/' . $row['PDFFile'])): ?>
+                            <!-- If the PDF file exists, link to the PDF viewer -->
+                            <form action="pdfViewer.php" method="get">
+                                <input type="hidden" name="pdf_filename" value="<?php echo htmlspecialchars($row['PDFFile']); ?>">
+                                <button type="submit" class="pdf-button">
+                                    <i class="fas fa-file-pdf" title="Read PDF"></i> Read PDF
+                                </button>
+                            </form>
+                        <?php else: ?>
+                            <button class="pdf-button disabled" disabled>
+                                <i class="fas fa-file-pdf" title="PDF Not Available"></i> PDF Not Available
+                            </button>
+                        <?php endif; ?>
                     </div>
+
                     <div>
-                        <form action="RemoveBorrow.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                        <form action="RemoveBorrow.php" method="POST" onsubmit="return confirm('Are you sure you want to return the book?');">
                             <input type="hidden" name="BorrowID" value="<?php echo htmlspecialchars($row['BorrowID']); ?>">
                             <button type="submit" class="reversation-button">
                                 <i class="fas fa-bookmark" title="Reversation"></i> Reversation
@@ -191,6 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="no-books">You have no borrowed books.</p>
     <?php endif; ?>
 </section>
+
 
 <script>
     window.onload = function() {
