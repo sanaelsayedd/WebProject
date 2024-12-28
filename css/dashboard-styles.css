@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .sidebar{
   position: fixed;
   top: 0;
@@ -62,10 +63,10 @@
   transition: all 0.4s ease;
 }
 .sidebar .link_name{
-  color: rgb(255, 0, 0);
+  color: #fff;
 }
 .sidebar .link_name:hover{
-  color: white;
+  color: #e8a669;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;
@@ -74,6 +75,7 @@
 }
 .sidebar.close .nav-links li .iocn-link{
   display: block
+  
 }
 .sidebar .nav-links li i{
   height: 50px;
@@ -127,7 +129,7 @@
   opacity: 1;
 }
 .sidebar .nav-links li a{
-  color: #ffffff;
+  color: #fff;
   font-size: 15px;
   padding: 5px 0;
   white-space: nowrap;
@@ -136,7 +138,6 @@
 }
 .sidebar .nav-links li a:hover{
   opacity: 1;
-  box-shadow: #e8a669;
 }
 .sidebar.close .nav-links li .sub-menu{
   position: absolute;
@@ -165,8 +166,6 @@
   display: block;
 }
 .sidebar .nav-links li .sub-menu.blank{
-  opacity: 1;
-  pointer-events: auto;
   padding: 3px 20px 6px 16px;
   opacity: 0;
   pointer-events: none;
@@ -174,12 +173,6 @@
 .sidebar .nav-links li:hover .sub-menu.blank{
   top: 50%;
   transform: translateY(-50%);
-}
-.one{
-  width: 80%;
-  margin-left: 10%;
-  background-color: black;
-  height: 400px;
 }
 .sidebar .profile-details{
   position: fixed;
@@ -234,6 +227,7 @@
   left: 260px;
   width: calc(100% - 260px);
   transition: all 0.5s ease;
+  overflow-x: hidden;
 }
 .sidebar.close ~ .home-section{
   left: 78px;
@@ -260,19 +254,17 @@
 @media (max-width: 420px){
   .sidebar.close .nav-links li .sub-menu{
     display: none;
+    overflow: hidden;
   }
 }
 /* Dashboard Content */
-main{
-  height: auto;
-}
 .dash-content{
   padding: 30px;
 }
 .dash-content .title{
   display: flex;
   align-items: center;
-  margin: 30px 0 30px 0;
+  margin: 30px 0;
 }
 .dash-content .title i{
   position: relative;
@@ -299,6 +291,12 @@ main{
   margin-top: 20px;
 }
 .dash-content .boxes .box{
+  min-width: 200px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 25px;
   border-radius: 12px;
   background-color: #fff;
@@ -341,57 +339,21 @@ main{
 /* Additional Box Colors */
 .boxes .box5{
   border-left: 4px solid #e74a3b;
-  grid-row: 2;
 }
 .boxes .box6{
   border-left: 4px solid #858796;
-  grid-row: 2;
 }
 .boxes .box7{
   border-left: 4px solid #2ecc71;
-  grid-row: 2;
 }
 .boxes .box8{
   border-left: 4px solid #8e44ad;
-  grid-row: 2;
-}
-/* Responsive Design */
-@media (max-width: 1000px){
-  .dash-content .boxes{
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
-@media (max-width: 580px){
-  .dash-content{
-    padding: 15px;
-  }
-  .boxes .box{
-    padding: 15px;
-  }
-  .boxes .box .number{
-    font-size: 24px;
-  }
-  .boxes .box .text{
-    font-size: 16px;
-  }
-}
-/* Responsive adjustments */
-@media (max-width: 1200px){
-  .dash-content .boxes{
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .boxes .box5,
-  .boxes .box6,
-  .boxes .box7,
-  .boxes .box8{
-    grid-row: auto;
-  }
 }
 /* Activity and Popular Books Sections */
 .activity-section,
 .popular-books-section{
   background: #fff;
-  padding: 0px 20px 1px 20px;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -403,12 +365,12 @@ main{
 .title i{
   font-size: 24px;
   margin-right: 10px;
-  color: #0A2558;
+  color: #2c1810;
 }
 .title .text{
   font-size: 18px;
   font-weight: 600;
-  color: #0A2558;
+  color: #2c1810;
 }
 /* Tables Styling */
 .activity-table,
@@ -416,11 +378,12 @@ main{
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  min-width: 600px;
 }
 .activity-table th,
 .popular-books-table th{
   background-color: #f6f6f6;
-  color: #0A2558;
+  color: #2c1810;
   font-weight: 600;
   padding: 12px;
   text-align: left;
@@ -441,47 +404,57 @@ main{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  padding: 20px 20px 25px 0px;
+  padding: 20px;
   margin-top: 20px;
+  overflow-x: auto;
 }
 /* Responsive Design */
-@media screen and (max-width: 768px){
-  .activity-section,
-  .popular-books-section{
-    padding: 15px;
-    margin: 15px 0;
+@media (max-width: 1200px){
+  .dash-content .boxes{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .low-dash-content{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px){
+  .sidebar{
+    width: 78px;
+  }
+  .home-section{
+    left: 78px;
+    width: calc(100% - 78px);
+    overflow-x: hidden;
+  }
+  .dash-content .boxes{
+    grid-template-columns: 1fr;
   }
   .activity-table,
   .popular-books-table{
-    display: block;
+    font-size: 14px;
+    width: 100%;
     overflow-x: auto;
-    white-space: nowrap;
   }
-  .title i{
+  .boxes .box{
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px){
+  .dash-content{
+    padding: 15px;
+  }
+  .home-section .home-content .text{
     font-size: 20px;
   }
-  .title .text{
-    font-size: 16px;
+  .boxes .box .number{
+    font-size: 20px;
   }
-  .activity-table th,
-  .activity-table td,
-  .popular-books-table th,
-  .popular-books-table td{
+  .boxes .box .text{
+    font-size: 14px;
+  }
+  .low-dash-content{
     padding: 10px;
   }
-}
-/* Optional: Animation for new entries */
-@keyframes fadeIn{
-  from{
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.activity-table tr,
-.popular-books-table tr{
-  animation: fadeIn 0.3s ease-in-out;
 }

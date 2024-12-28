@@ -133,9 +133,6 @@ $result = $conn->query($sql);
                 </div>
 
                 <?php if ($userType === 'admin') { ?>
-                    <div class="add-button-container">
-                        <a href="Addreversation.php" class="btnbtn-primary">Add New Reservation</a>
-                    </div>
 
 
                             <table class = "reservation-table">

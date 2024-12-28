@@ -43,6 +43,18 @@ $result = $conn->query($sql);
 $books = [];
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
+        // Update status based on quantity
+        if ($row['Quantity'] == 0) {
+            // Update status in database
+            $updateSql = "UPDATE `book` SET `Status` = 'Not Available' WHERE `BookID` = " . $row['BookID'];
+            $conn->query($updateSql);
+            $row['Status'] = 'Not Available';
+        } else {
+            // Update status in database
+            $updateSql = "UPDATE `book` SET `Status` = 'Available' WHERE `BookID` = " . $row['BookID'];
+            $conn->query($updateSql);
+            $row['Status'] = 'Available';
+        }
         $books[] = $row;
     }
 }
@@ -131,7 +143,7 @@ $conn->close();
                     <p class="book-category">Category: <?php echo $book['Category']; ?></p>
                     <p class="book-edition">Edition: <?php echo $book['Edition']; ?></p>
                     <p class="book-quantity">Price: <?php echo $book['Price']; ?>$</p>
-                    <p class="book-status">Status: <?php echo $book['Status']; ?></p>
+                    <p class="book-status">Status: <span style="color: <?php echo ($book['Status'] == 'Available' ? '#2ecc71' : '#e74c3c'); ?>"><?php echo $book['Status']; ?></span></p>
                     
                     <?php if ($userType === 'admin'): ?>
                         <div class="book-actions">

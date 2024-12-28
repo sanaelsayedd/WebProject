@@ -12,6 +12,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #faf6f1;
     color: #2c1810;
+    background-image:  url("css/Image/Knowledge Nest.webp");
+
 }
 
 .ribeye-regular {
@@ -204,161 +206,6 @@ header {
     box-shadow: 0 6px 20px rgba(230, 177, 126, 0.4);
 }
 
-.book-details-card {
-    top: auto;
-    display: flex;
-    max-width: 1000px;
-    margin: 100px auto;
-    padding: 30px;
-    background: rgba(250, 246, 241, 0.95);
-    box-shadow: 0 8px 25px rgba(44, 24, 16, 0.15);
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-}
-
-.book-image img {
-    max-width: 300px;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-right: 30px;
-    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
-}
-
-.book-info {
-    flex-grow: 1;
-}
-
-.book-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    margin-bottom: 15px;
-    color: #2c1810;
-    font-weight: 700;
-}
-
-.book-info p {
-    font-size: 1.1rem;
-    margin: 12px 0;
-    color: #5c3324;
-    line-height: 1.6;
-}
-
-.book-info strong {
-    color: #2c1810;
-    font-weight: 600;
-}
-
-.action-buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 15px;
-}
-
-.borrow-btn, .purchase-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
-}
-
-.borrow-btn {
-    background: linear-gradient(135deg, #e6b17e 0%, #c98850 100%);
-    color: #2c1810;
-}
-
-.borrow-btn:hover {
-    background: linear-gradient(135deg, #c98850 0%, #a66d3b 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(230, 177, 126, 0.4);
-}
-
-.purchase-btn {
-    background: linear-gradient(135deg, #2c1810 0%, #5c3324 100%);
-    color: #faf6f1;
-}
-
-.purchase-btn:hover {
-    background: linear-gradient(135deg, #5c3324 0%, #2c1810 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(44, 24, 16, 0.3);
-}
-
-.form-container {
-    max-width: 600px;
-    margin: 100px auto 50px;
-    padding: 30px;
-    background: rgba(250, 246, 241, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(44, 24, 16, 0.15);
-    backdrop-filter: blur(10px);
-}
-
-.form-container h1 {
-    text-align: center;
-    color: #2c1810;
-    margin-bottom: 30px;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #5c3324;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-}
-
-.form-group select,
-.form-group input[type="date"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #e6b17e;
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: 'Montserrat', sans-serif;
-    color: #2c1810;
-    transition: all 0.3s ease;
-    background-color: rgba(250, 246, 241, 0.9);
-}
-
-.form-group select:focus,
-.form-group input[type="date"]:focus {
-    outline: none;
-    border-color: #c98850;
-    box-shadow: 0 0 10px rgba(230, 177, 126, 0.3);
-}
-
-.submit-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #e6b17e 0%, #c98850 100%);
-    color: #2c1810;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
-}
-
-.submit-btn:hover {
-    background: linear-gradient(135deg, #c98850 0%, #a66d3b 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(230, 177, 126, 0.4);
-}
-
 @media (max-width: 992px) {
     header {
         border-bottom-right-radius: 0;
@@ -382,40 +229,6 @@ header {
         padding: 15px 0;
     }
 }
-
-@media (max-width: 768px) {
-    .book-details-card {
-        flex-direction: column;
-        align-items: center;
-        margin: 80px 20px 20px;
-        padding: 20px;
-    }
-
-    .book-image {
-        margin-right: 0;
-        margin-bottom: 25px;
-    }
-
-    .book-info {
-        text-align: center;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .borrow-btn, .purchase-btn {
-        margin: 8px 0;
-        width: 100%;
-    }
-
-    .form-container {
-        margin: 80px 20px 20px;
-        padding: 20px;
-    }
-}
-
 @media (max-width: 576px) {
     .dropdown-menu {
         left: 2rem;
@@ -432,8 +245,7 @@ header {
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
-    position: absolute;
-    left: 660px;
+    margin-bottom: 20px;
 }
 
 .back-button:hover {
@@ -444,4 +256,109 @@ header {
 
 .back-button i {
     margin-right: 8px;
+}
+.dashboard-container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 30px;
+}
+
+.dashboard-content {
+    background: rgba(250, 246, 241, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(44, 24, 16, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.dashboard-content h2 {
+    color: #2c1810;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Form styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+table td {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+table td:first-child {
+    width: 120px;
+    font-weight: 500;
+    color: #5c3324;
+}
+
+/* Select and input styling */
+select, input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e6b17e;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    color: #2c1810;
+    background-color: rgba(250, 246, 241, 0.9);
+    transition: all 0.3s ease;
+}
+
+select:focus, input[type="date"]:focus {
+    outline: none;
+    border-color: #c98850;
+    box-shadow: 0 0 10px rgba(230, 177, 126, 0.3);
+}
+
+/* Submit button */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #e6b17e 0%, #c98850 100%);
+    color: #2c1810;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #c98850 0%, #a66d3b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 177, 126, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        margin: 80px 20px;
+        padding: 15px;
+    }
+
+    .dashboard-content {
+        padding: 20px;
+    }
+
+    table td {
+        display: block;
+        width: 100%;
+    }
+
+    table td:first-child {
+        padding-bottom: 5px;
+    }
+
+    table td:last-child {
+        padding-top: 5px;
+    }
 }

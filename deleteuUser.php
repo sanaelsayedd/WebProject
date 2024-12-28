@@ -1,6 +1,11 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+session_start();
 
+// Check if user is logged in and is admin
+if (!isset($_SESSION['username']) || $_SESSION['userType'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+}
 
 if (isset($_GET['UserID'])) {
     $UserID = $_GET['UserID'];
@@ -9,35 +14,70 @@ if (isset($_GET['UserID'])) {
         die("UserID is required.");
     }
 
-
-    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $query = "DELETE FROM `user` WHERE `UserID` = ?";
-    $stmt = mysqli_prepare($connection, $query);
+    // Start transaction
+    mysqli_begin_transaction($connection);
 
-    if ($stmt) {
-
+    try {
+        // Delete from reservation table first
+        $query = "DELETE FROM `reversation` WHERE `UserID` = ?";
+        $stmt = mysqli_prepare($connection, $query);
+        if ($stmt === false) {
+            throw new Exception("Prepare failed: " . mysqli_error($connection));
+        }
         mysqli_stmt_bind_param($stmt, "i", $UserID);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
 
+        // Delete from purchase_transaction table
+        $query = "DELETE FROM `purchase_transaction` WHERE `UserID` = ?";
+        $stmt = mysqli_prepare($connection, $query);
+        if ($stmt === false) {
+            throw new Exception("Prepare failed: " . mysqli_error($connection));
+        }
+        mysqli_stmt_bind_param($stmt, "i", $UserID);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        // Delete from borrow table
+        $query = "DELETE FROM `borrow` WHERE `UserID` = ?";
+        $stmt = mysqli_prepare($connection, $query);
+        if ($stmt === false) {
+            throw new Exception("Prepare failed: " . mysqli_error($connection));
+        }
+        mysqli_stmt_bind_param($stmt, "i", $UserID);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        // Finally delete from user table
+        $query = "DELETE FROM `user` WHERE `UserID` = ?";
+        $stmt = mysqli_prepare($connection, $query);
+        if ($stmt === false) {
+            throw new Exception("Prepare failed: " . mysqli_error($connection));
+        }
+        mysqli_stmt_bind_param($stmt, "i", $UserID);
+        
         if (mysqli_stmt_execute($stmt)) {
-            echo "User with ID $UserID has been deleted successfully.";
-
+            mysqli_stmt_close($stmt);
+            mysqli_commit($connection);
             header("Location: manageUser.php");
             exit();
         } else {
-            echo "Error deleting User: " . mysqli_stmt_error($stmt);
+            mysqli_stmt_close($stmt);
+            throw new Exception("Error deleting user: " . mysqli_error($connection));
         }
-        
-        mysqli_stmt_close($stmt);
-    } else {
-        echo "Error preparing statement: " . mysqli_error($connection);
-    }
 
-    mysqli_close($connection);
+    } catch (Exception $e) {
+        mysqli_rollback($connection);
+        echo "An error occurred: " . $e->getMessage();
+    } finally {
+        mysqli_close($connection);
+    }
 } else {
     echo "UserID is missing.";
 }

@@ -1,4 +1,23 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['username']);
+$userType = $is_logged_in ? $_SESSION['userType'] : null; 
+$userName = $is_logged_in ? $_SESSION['username'] : null;
+
+if (!$is_logged_in) {
+    header("Location: login.php");
+    exit();
+}
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy(); 
+    header("Location: index.php"); 
+    exit();
+}
 $passworddb = "";
 $BorrowID = $UserID = $BookID = $IssueDate = $StartDate = $ReturnDate = ""; // Initialize variables
 
@@ -90,102 +109,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Borrow</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
+    <link rel="stylesheet" href="css/editBorrowStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to right, #FF6952, #3CAEC3);
-            color: #333333;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .dashboard-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .dashboard-content {
-            width: 100%;
-            max-width: 700px;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            opacity: 0.9;
-        }
-
-        .dashboard-content h2 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            color: #583A83;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        form {
-            width: 100%;
-        }
-
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        table td {
-            padding: 12px;
-            font-size: 16px;
-        }
-
-        input[type="date"], select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #ff6952;
-            box-shadow: 0 0 10px rgba(255, 105, 82, 0.5);
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            background-color: #ff6952;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #e95d46;
-        }
-    </style>
 </head>
 <body>
+<header class="header">
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="#CSection">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
 
+                    <?php if ($userType === 'admin') { ?>
+                        <li><a href="borrowBook.php">Borrow</a></li>
+                        <li><a href="reservation.php">Reservation</a></li>
+                    <?php } ?>
+                    
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+
+            <div class="login">
+                <?php if ($is_logged_in): ?>
+                    <form method="GET" action="index.php">
+                        <button type="submit" name="logout">
+                            <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                        </button>
+                    </form>
+                <?php else: ?>
+                    <a href="login.php" class="login-icon">
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </header>
 <div class="dashboard-container">
+<a href="javascript:history.back()" class="back-button" >
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </a>
     <div class="dashboard-content">
         <h2>Edit Borrow</h2>
         <form action="EditBorrow.php?BorrowID=<?php echo htmlspecialchars($BorrowID); ?>" method="POST">

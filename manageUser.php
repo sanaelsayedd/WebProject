@@ -19,7 +19,7 @@ if (isset($_GET['logout'])) {
 // Database credentials
 $host = "localhost"; 
 $username = "root"; 
-$password = "WEBDBwebdb123456789"; 
+$password = ""; 
 $dbname = "library"; 
 
 // Connect to the database

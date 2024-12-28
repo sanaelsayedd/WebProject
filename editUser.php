@@ -3,7 +3,7 @@
 if (isset($_GET['UserID'])) {
     $UserID = intval($_GET['UserID']); 
 
-    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
