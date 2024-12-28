@@ -77,8 +77,8 @@ $result = $conn->query($sql);
                 <ul class="sub-menu">
                     <li><a class="link_name" href="books.php">Books</a></li>
                     <li><a href="books.php">Books</a></li>
-                    <li><a href="reservation.php">Reversition Books</a></li>
-                    <li><a href="borrowBook.php">Borrowed Books</a></li>
+                    <li><a href="Addreversation.php">Reversition Books</a></li>
+                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
                     <li><a href="Purchase.php">Purchaes</a></li>
                 </ul>
             </li>
@@ -137,16 +137,16 @@ $result = $conn->query($sql);
                 </div>
             
             <div class="add-button-container">
-                <a href="AddUser.php" class="btnbtn-primary">Add New User</a>
+                <a href="AddBorrow.php" class="btnbtn-primary">Add new borrow book</a>
             </div>
 
 
 
 
     <?php if ($userType === 'admin') { ?>
-    <div class="container">
-        <h1>Borrowed Books</h1>
-        <a href="AddBorrow.php">Add New Borrow</a>
+    
+      
+        
         <table>
             <thead>
                 <tr>
@@ -183,7 +183,7 @@ $result = $conn->query($sql);
                 <?php endif; ?>
             </tbody>
         </table>
-    </div>
+   
     <?php } ?>
     <script src="js/dashboard.js"></script>
 </body>

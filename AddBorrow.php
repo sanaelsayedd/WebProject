@@ -1,5 +1,23 @@
 <?php
-// Database connection
+session_start();
+
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['username']);
+$userType = $is_logged_in ? $_SESSION['userType'] : null; 
+$userName = $is_logged_in ? $_SESSION['username'] : null;
+
+if (!$is_logged_in) {
+    header("Location: login.php");
+    exit();
+}
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy(); 
+    header("Location: index.php"); 
+    exit();
+}
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -49,93 +67,52 @@ mysqli_close($connection);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow Book Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/addborrow.css">
 </head>
 <body>
-<div class="sidebar close">
-        <div class="logo-details">
-            <i class='bx bx-book-open'></i>
-            <span class="logo_name">KnowledgeNest</span>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="index.php">
-                    <i class='bx bx-home'></i>
-                    <span class="link_name">Home</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="index.php">Home</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="dashboard.php">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
-                        <i class='bx bx-book'></i>
-                        <span class="link_name">Books</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="books.php">Books</a></li>
+<header class="header">
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="#CSection">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
-                    <li><a href="Addreversation.php">Reversition Books</a></li>
-                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
-                    <li><a href="Purchase.php">Purchaes</a></li>
+
+                    <?php if ($userType === 'admin') { ?>
+                        <li><a href="borrowBook.php">Borrow</a></li>
+                        <li><a href="reservation.php">Reservation</a></li>
+                    <?php } ?>
+                    
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </ul>
-            </li>
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
-                        <i class='bx bx-user'></i>
-                        <span class="link_name">Users</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Users</a></li>
-                    <li><a href="manageUser.php">Manage Users</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="settings.php">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Settings</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="settings.php">Settings</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <i class='bx bx-user-circle'></i>
-                    </div>
-                    <div class="name-job">
-                        <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
-                        <div class="job">Administrator</div>
-                    </div>
-                    <form method="GET" action="index.php" style="display: inline;">
-                        <button type="submit" name="logout" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                            <i class='bx bx-log-out'></i>
+            </nav>
+
+            <div class="login">
+                <?php if ($is_logged_in): ?>
+                    <form method="GET" action="index.php">
+                        <button type="submit" name="logout">
+                            <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
                         </button>
                     </form>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-
-
+                <?php else: ?>
+                    <a href="login.php" class="login-icon">
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </header>
+        <main>
     <div class="form-container">
         <h1>Borrow a Book</h1>
         <form method="POST">
@@ -176,5 +153,8 @@ mysqli_close($connection);
             <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
+        </main>
+
+    
 </body>
 </html>

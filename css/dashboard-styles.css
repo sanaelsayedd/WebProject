@@ -274,8 +274,12 @@
 }
 
 /* Dashboard Content */
+main{
+    height: auto;
+}
 .dash-content {
     padding: 30px;
+
 }
 
 .dash-content .title {
@@ -419,4 +423,111 @@
     .boxes .box8 {
         grid-row: auto;
     }
+}
+/* Activity and Popular Books Sections */
+.activity-section,
+.popular-books-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.activity-section .title,
+.popular-books-section .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #0A2558;
+}
+
+.title .text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0A2558;
+}
+
+/* Tables Styling */
+.activity-table,
+.popular-books-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.activity-table th,
+.popular-books-table th {
+    background-color: #f6f6f6;
+    color: #0A2558;
+    font-weight: 600;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+.activity-table td,
+.popular-books-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+}
+
+.activity-table tr:hover,
+.popular-books-table tr:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .activity-section,
+    .popular-books-section {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .activity-table,
+    .popular-books-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .title i {
+        font-size: 20px;
+    }
+
+    .title .text {
+        font-size: 16px;
+    }
+
+    .activity-table th,
+    .activity-table td,
+    .popular-books-table th,
+    .popular-books-table td {
+        padding: 10px;
+    }
+}
+
+/* Optional: Animation for new entries */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.activity-table tr,
+.popular-books-table tr {
+    animation: fadeIn 0.3s ease-in-out;
 }
