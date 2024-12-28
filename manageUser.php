@@ -150,7 +150,7 @@ if (!$result) {
             <table class="user-table">
                 <thead>
                     <tr>
-                        <th>UserID</th>
+                        <th>User ID</th>
                         <th>UserName</th>
                         <th>Email</th>
                         <th>Type</th>

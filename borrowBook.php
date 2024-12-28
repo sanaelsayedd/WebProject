@@ -77,8 +77,8 @@ $result = $conn->query($sql);
                 <ul class="sub-menu">
                     <li><a class="link_name" href="books.php">Books</a></li>
                     <li><a href="books.php">Books</a></li>
-                    <li><a href="Addreversation.php">Reversition Books</a></li>
-                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
+                    <li><a href="reservation.php">Reversition Books</a></li>
+                    <li><a href="borrowBook.php">Borrowed Books</a></li>
                     <li><a href="Purchase.php">Purchaes</a></li>
                 </ul>
             </li>
@@ -147,7 +147,7 @@ $result = $conn->query($sql);
     
       
         
-        <table>
+        <table class="borrow-table">
             <thead>
                 <tr>
                     <th>Borrow ID</th>
@@ -170,9 +170,9 @@ $result = $conn->query($sql);
                             <td><?= htmlspecialchars($row['StartDate']); ?></td>
                             <td><?= htmlspecialchars($row['ReturnDate']); ?></td>
                             <td>
-                                <a href="EditBorrow.php?BorrowID=<?= urlencode($row['BorrowID']); ?>">Edit</a> |
+                                <a href="EditBorrow.php?BorrowID=<?= urlencode($row['BorrowID']); ?>" class="btn btn-edit">Edit</a>
                                 <a href="RemoveBorrow.php?BorrowID=<?= urlencode($row['BorrowID']); ?>" 
-                                   onclick="return confirm('Are you sure you want to delete this Borrow?')">Delete</a>
+                                   onclick="return confirm('Are you sure you want to delete this Borrow?')" class="btn btn-delete">Delete</a>
                             </td>
                         </tr>
                     <?php endwhile; ?>

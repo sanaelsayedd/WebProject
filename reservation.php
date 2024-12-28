@@ -137,31 +137,30 @@ $result = $conn->query($sql);
                         <a href="Addreversation.php" class="btnbtn-primary">Add New Reservation</a>
                     </div>
 
-                    <div class="boxes">
-                        <div class="box">
-                            <table style="width: 100%; border-collapse: collapse;">
+
+                            <table class = "reservation-table">
                                 <thead>
                                     <tr>
-                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2c1810;">Reservation ID</th>
-                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2c1810;">User ID</th>
-                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2c1810;">Book ID</th>
-                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2c1810;">Return Date</th>
-                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2c1810;">Actions</th>
+                                        <th>User ID</th>
+                                        <th>Reservation ID</th>
+                                        <th>Book ID</th>
+                                        <th>Return Date</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if ($result && $result->num_rows > 0): ?>
                                         <?php while ($row = $result->fetch_assoc()): ?>
                                             <tr>
-                                                <td style="padding: 12px; border-bottom: 1px solid #ddd;"><?= htmlspecialchars($row['ReversationID']); ?></td>
-                                                <td style="padding: 12px; border-bottom: 1px solid #ddd;"><?= htmlspecialchars($row['UserID']); ?></td>
-                                                <td style="padding: 12px; border-bottom: 1px solid #ddd;"><?= htmlspecialchars($row['BookID']); ?></td>
-                                                <td style="padding: 12px; border-bottom: 1px solid #ddd;"><?= htmlspecialchars($row['ReturnDate']); ?></td>
-                                                <td style="padding: 12px; border-bottom: 1px solid #ddd;">
-                                                    <a href="EditReversation.php?ReversationID=<?= urlencode($row['ReversationID']); ?>" style="color: #2c1810; text-decoration: none; margin-right: 10px;">Edit</a>
+                                                <td><?= htmlspecialchars($row['UserID']); ?></td>
+                                                <td><?= htmlspecialchars($row['ReversationID']); ?></td>
+                                                <td><?= htmlspecialchars($row['BookID']); ?></td>
+                                                <td><?= htmlspecialchars($row['ReturnDate']); ?></td>
+                                                <td>
+                                                    <a href="EditReversation.php?ReversationID=<?= urlencode($row['ReversationID']); ?>" class="btn btn-edit">Edit</a>
                                                     <a href="RemoveReversation.php?ReversationID=<?= urlencode($row['ReversationID']); ?>" 
                                                        onclick="return confirm('Are you sure you want to delete this Reservation?')"
-                                                       style="color: #2c1810; text-decoration: none;">Delete</a>
+                                                       class="btn btn-delete">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
@@ -172,8 +171,7 @@ $result = $conn->query($sql);
                                     <?php endif; ?>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
+
                 <?php } ?>
             </div>
         </div>
