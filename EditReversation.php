@@ -1,4 +1,23 @@
 <?php
+session_start();
+
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['username']);
+$userType = $is_logged_in ? $_SESSION['userType'] : null; 
+$userName = $is_logged_in ? $_SESSION['username'] : null;
+
+if (!$is_logged_in) {
+    header("Location: login.php");
+    exit();
+}
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy(); 
+    header("Location: index.php"); 
+    exit();
+}
 $passworddb = "";
 $UserID = $BookID = $ReturnDate = ""; // Initialize variables
 
@@ -87,179 +106,105 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit ReversationID</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to right, #FF6952, #3CAEC3); /* Gradient background */
-            color: #333333;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .dashboard-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .dashboard-content {
-            width: 100%;
-            max-width: 700px;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            opacity: 0.9; /* Slight transparency for background blending */
-        }
-
-        .dashboard-content h2 {
-            font-size: 28px;
-            margin-bottom: 30px;
-            color: #583A83;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        form {
-            width: 100%;
-        }
-
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        table td {
-            padding: 12px;
-            font-size: 16px;
-        }
-
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            outline: none;
-            border-color: #ff6952;
-            box-shadow: 0 0 10px rgba(255, 105, 82, 0.5);
-        }
-
-        button {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            background-color: #ff6952;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #e95d46;
-        }
-
-        a {
-            color: #3CAEC3;
-        }
-
-        a:hover {
-            color: #FF6952;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-
-            .dashboard-container {
-                margin-left: 0;
-                padding: 20px;
-            }
-
-            .dashboard-content {
-                padding: 20px;
-            }
-
-            form {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/editReversationStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<header class="header">
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="#CSection">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
 
-<div class="dashboard-container">
-    <div class="dashboard-content">
-        <h2>Edit Reversation</h2>
-        <form action="EditReversation.php?ReversationID=<?php echo htmlspecialchars($ReversationID); ?>" method="POST">
-    <table>
-        <tr>
-            <td>UserID:</td>
-            <td>
-                <select name="UserID" required>
-                    <?php
-                    if (isset($users_result) && mysqli_num_rows($users_result) > 0) {
-                        while ($user = mysqli_fetch_assoc($users_result)) {
-                            $selected = ($user['UserID'] == $UserID) ? 'selected' : '';
-                            echo "<option value='" . htmlspecialchars($user['UserID']) . "' $selected>" . htmlspecialchars($user['UserName']) . "</option>";
-                        }
-                    } else {
-                        echo "<option value=''>No users available</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>BookID:</td>
-            <td>
-                <select name="BookID" required>
-                    <?php
-                    if (isset($books_result) && mysqli_num_rows($books_result) > 0) {
-                        while ($book = mysqli_fetch_assoc($books_result)) {
-                            $selected = ($book['BookID'] == $BookID) ? 'selected' : '';
-                            echo "<option value='" . htmlspecialchars($book['BookID']) . "' $selected>" . htmlspecialchars($book['Title']) . "</option>";
-                        }
-                    } else {
-                        echo "<option value=''>No books available</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>ReturnDate:</td>
-            <td><input type="date" name="ReturnDate" value="<?php echo htmlspecialchars($ReturnDate); ?>" required></td>
-        </tr>
-    </table>
-    <button type="submit">Update Reversation</button>
-</form>
+                    <?php if ($userType === 'admin') { ?>
+                        <li><a href="borrowBook.php">Borrow</a></li>
+                        <li><a href="reservation.php">Reservation</a></li>
+                    <?php } ?>
+                    
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </ul>
+            </nav>
 
-    </div>
-</div>
+            <div class="login">
+                <?php if ($is_logged_in): ?>
+                    <form method="GET" action="index.php">
+                        <button type="submit" name="logout">
+                            <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                        </button>
+                    </form>
+                <?php else: ?>
+                    <a href="login.php" class="login-icon">
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </header>
+        <main>
+            <div class="dashboard-container">
+            <a href="javascript:history.back()" class="back-button" >
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </a>
+                <div class="dashboard-content">
+            
+                    <h2>Edit Reversation</h2>
+                   
+                    <form action="EditReversation.php?ReversationID=<?php echo htmlspecialchars($ReversationID); ?>" method="POST">
+                <table>
+                    <tr>
+                        <td>UserID:</td>
+                        <td>
+                            <select name="UserID" required>
+                                <?php
+                                if (isset($users_result) && mysqli_num_rows($users_result) > 0) {
+                                    while ($user = mysqli_fetch_assoc($users_result)) {
+                                        $selected = ($user['UserID'] == $UserID) ? 'selected' : '';
+                                        echo "<option value='" . htmlspecialchars($user['UserID']) . "' $selected>" . htmlspecialchars($user['UserName']) . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No users available</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>BookID:</td>
+                        <td>
+                            <select name="BookID" required>
+                                <?php
+                                if (isset($books_result) && mysqli_num_rows($books_result) > 0) {
+                                    while ($book = mysqli_fetch_assoc($books_result)) {
+                                        $selected = ($book['BookID'] == $BookID) ? 'selected' : '';
+                                        echo "<option value='" . htmlspecialchars($book['BookID']) . "' $selected>" . htmlspecialchars($book['Title']) . "</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No books available</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ReturnDate:</td>
+                        <td><input type="date" name="ReturnDate" value="<?php echo htmlspecialchars($ReturnDate); ?>" required></td>
+                    </tr>
+                </table>
+                <button type="submit">Update Reversation</button>
+            </form>
+
+                </div>
+            </div>
+</main>
 
 </body>
 </html>

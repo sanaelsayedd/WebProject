@@ -113,7 +113,9 @@ mysqli_close($connection);
             </div>
         </header>
         <main>
+        
     <div class="form-container">
+    
         <h1>Borrow a Book</h1>
         <form method="POST">
             <div class="form-group">
@@ -153,6 +155,9 @@ mysqli_close($connection);
             <button type="submit" class="submit-btn">Submit</button>
         </form>
     </div>
+    <a href="javascript:history.back()" class="back-button" >
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </a>
         </main>
 
     

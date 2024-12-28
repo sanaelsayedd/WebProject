@@ -405,7 +405,37 @@ table td {
 .sidebar .profile-details .job{
   font-size: 12px;
 }
+.btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+}
 
+.btn-edit {
+ 
+  color: white;
+ 
+}
+
+.btn-edit:hover {
+  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-delete {
+ 
+  color: white;
+ 
+}
+
+.btn-delete:hover {
+  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 /* Responsive */
 @media (max-width: 768px) {

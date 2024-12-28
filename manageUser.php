@@ -84,8 +84,8 @@ if (!$result) {
                 <ul class="sub-menu">
                     <li><a class="link_name" href="books.php">Books</a></li>
                     <li><a href="books.php">Books</a></li>
-                    <li><a href="reservation.php">Reversition Books</a></li>
-                    <li><a href="borrowBook.php">Borrowed Books</a></li>
+                    <li><a href="Addreversation.php">Reversition Books</a></li>
+                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
                     <li><a href="Purchase.php">Purchaes</a></li>
                 </ul>
             </li>
@@ -167,8 +167,8 @@ if (!$result) {
                         echo "<td>" . $row['Email'] . "</td>";
                         echo "<td>" . $row['Type'] . "</td>";
                         echo "<td>
-                                <a href='editUser.php?id=" . $row['UserID'] . "' class='btn btn-edit'>Edit</a>
-                                <a href='delete_user.php?id=" . $row['UserID'] . "' class='btn btn-delete'>Delete</a>
+                                <a href='editUser.php?UserID=" . $row['UserID'] . "' class='btn btn-edit'>Edit</a>
+                                <a href='deleteuUser.php?UserID=" . $row['UserID'] . "' class='btn btn-delete'>Delete</a>
                               </td>";
                         echo "</tr>";
                     }

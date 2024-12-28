@@ -125,8 +125,6 @@ $result = $conn->query($sql);
             <span class="text">Dashboard</span>
         </div>
 
-    
-
         <?php if ($userType === 'admin') { ?>
         <div class="dash-content">
             <div class="overview">
@@ -134,10 +132,6 @@ $result = $conn->query($sql);
                     <i class='bx bx-user'></i>
                     <span class="text">Purchase</span>
                 </div>
-            
-            <div class="add-button-container">
-                <a href="AddPurchase.php" class="btnbtn-primary">Add New Purchase</a>
-            </div>
 
         <table class = "purchase-table">
             <thead>
@@ -147,7 +141,6 @@ $result = $conn->query($sql);
                     <th>Book ID</th>
                     <th>Quantity</th>
                     <th>TotalPrice</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -159,11 +152,6 @@ $result = $conn->query($sql);
                             <td><?= htmlspecialchars($row['BookID']); ?></td>
                             <td><?= htmlspecialchars($row['Quantity']); ?></td>
                             <td><?= htmlspecialchars($row['TotalPrice']); ?></td>
-                            <td>
-                                <a href="EditPurchase.php?PurchaseTransactionID=<?= urlencode($row['PurchaseTransactionID']); ?>" class="btn btn-edit">Edit</a>
-                                <a href="DeletePurchase.php?PurchaseTransactionID=<?= urlencode($row['PurchaseTransactionID']); ?>" 
-                                   onclick="return confirm('Are you sure you want to delete this Purchase?')" class="btn btn-delete">Delete</a>
-                            </td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
