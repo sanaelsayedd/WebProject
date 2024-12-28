@@ -11,16 +11,15 @@ CREATE TABLE `library`.`book` (
   PRIMARY KEY (`BookID`));
 
 CREATE TABLE `library`.`user` (
-  `UserID` INT NOT NULL,
+  `UserID` INT NOT NULL AUTO_INCREMENT,
   `UserName` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(255) NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
   `Type` VARCHAR(45) NULL,
-  `Usercol` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`UserID`));
 
 CREATE TABLE `library`.`borrow` (
-  `BorrowID` INT NOT NULL,
+  `BorrowID` INT NOT NULL AUTO_INCREMENT,
   `UserID` INT NOT NULL,
   `BookID` INT NOT NULL,
   `IssueDate` DATE NOT NULL,
@@ -41,7 +40,7 @@ CREATE TABLE `library`.`borrow` (
     ON UPDATE NO ACTION);
 
 CREATE TABLE `library`.`reversation` (
-  `ReversationID` INT NOT NULL,
+  `ReversationID` INT NOT NULL AUTO_INCREMENT,
   `UserID` INT NOT NULL,
   `BookID` INT NOT NULL,
   `ReturnDate` DATE NOT NULL,
@@ -60,7 +59,7 @@ CREATE TABLE `library`.`reversation` (
     ON UPDATE NO ACTION);
 
 CREATE TABLE `library`.`purchase_transaction` (
-  `PurchaseTransactionID` INT NOT NULL,
+  `PurchaseTransactionID` INT NOT NULL AUTO_INCREMENT,
   `UserID` INT NULL,
   `BookID` INT NOT NULL,
   `Quantity` INT NULL,
