@@ -51,16 +51,15 @@ mysqli_close($connection);
     <title>Borrow Book Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-   
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f7fc;
+            background: #e6b17e;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,16 +70,17 @@ mysqli_close($connection);
             width: 100%;
             max-width: 500px;
             background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 24px;
+            font-weight: 500;
             margin-bottom: 20px;
             text-align: center;
-            color: #333;
+            color: #2c1810;
         }
 
         .form-group {
@@ -88,39 +88,50 @@ mysqli_close($connection);
         }
 
         label {
-            font-size: 1rem;
-            color: #333;
+            font-size: 16px;
+            color: #2c1810;
             margin-bottom: 5px;
             display: block;
+            font-weight: 500;
         }
 
         select,
         input[type="date"] {
             width: 100%;
             padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            font-size: 16px;
+            border: 1px solid #e6b17e;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        select:focus,
+        input[type="date"]:focus {
+            border-color: #2c1810;
+            outline: none;
         }
 
         button[type="submit"] {
-            background-color: #007bff;
-            color: white;
+            background-color: #2c1810;
+            color: #fff;
             border: none;
             padding: 12px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
+            font-size: 16px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #5c3324;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 420px) {
             .form-container {
-                width: 90%;
+                width: 95%;
+                padding: 15px;
             }
         }
     </style>

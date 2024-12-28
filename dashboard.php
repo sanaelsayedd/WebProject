@@ -16,6 +16,15 @@
         </div>
         <ul class="nav-links">
             <li>
+                <a href="index.php">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Home</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.php">Home</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="dashboard.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Dashboard</span>
@@ -34,7 +43,7 @@
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name" href="books.php">Books</a></li>
-                    <li><a href="AddBook.php">Add Book</a></li>
+                    <li><a href="books.php">Books</a></li>
                     <li><a href="Addreversation.php">Reversition Books</a></li>
                     <li><a href="AddBorrow.php">Borrowed Books</a></li>
                 </ul>
@@ -52,22 +61,6 @@
                     <li><a href="manageUser.php">Manage Users</a></li>
                 </ul>
             </li>
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
-                        <i class='bx bx-book'></i>
-                        <span class="link_name">Books</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Books</a></li>
-                    <li><a href="books.php">Books</a></li>
-                    <li><a href="borrowBook.php">Borrowed Books</a></li>
-                    <li><a href="reservation.php">Reversation Books</a></li>
-                </ul>
-            </li>
-    
             <li>
                 <a href="settings.php">
                     <i class='bx bx-cog'></i>

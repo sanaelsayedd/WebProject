@@ -111,74 +111,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Add Book</title>
 </head>
 <body>
+    
 <header class="header">
-    <div class="logo">
-        <a href="index.php">Knowledge Nest</a>
-    </div>
-    <nav class="nav-bar">
-        <ul class="nav__links">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="books.php">Books</a></li>
-            <?php if ($is_logged_in): ?>
-                <?php if ($userType === 'user'): ?>
-                    <li><a href="myAccount.php">My Account</a></li>
-                <?php elseif ($userType === 'admin'): ?>
-                    <li><a href="dashboard.php">Admin Dashboard</a></li>
-                <?php endif; ?>
-            <?php endif; ?>
-        </ul>
-    </nav>
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <?php if ($userType === 'admin') {?>
+                    <li><a href="borrowBook.php">Borrow</a></li>
+                    <li><a href="reservation.php">Reservation</a></li>
+                    <?php }?>
+                    
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </ul>
+            </nav>
 
-    <div class="login">
-        <?php if ($is_logged_in): ?>
-            <form method="GET" action="index.php">
-            <button type="submit" name="logout">
-                <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
-            </button>
-            </form>
-        <?php else: ?>
-            <a href="login.php" class="login-icon">
-                <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
-            </a>
-        <?php endif; ?>
-    </div>
-
-    <div class="toggle-btn">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-    <div class="dropdown-menu">
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="books.php">Books</a></li>
-            <?php if ($is_logged_in): ?>
-                <?php if ($userType === 'admin'): ?>
-                    <li><a href="dashboard.php">Admin Dashboard</a></li>
-                <?php endif; ?>
-                <li>
+            <div class="login">
+                <?php if ($is_logged_in): ?>
                     <form method="GET" action="index.php">
-                        <button type="submit" name="logout">
-                            <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
-                        </button>
+                    <button type="submit" name="logout">
+                        <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                    </button>
                     </form>
-                </li>
-            <?php else: ?>
-                <li>
+                <?php else: ?>
                     <a href="login.php" class="login-icon">
-                        <button><i class="fa-solid fa-user"></i><b>Login</b></button>
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
                     </a>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </div>
-</header>
+                <?php endif; ?>
+            </div>
+
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="CSection">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="account.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                        <li>
+                            <form method="GET" action="index.php">
+                                <button type="submit" name="logout">
+                                    <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                                </button>
+                            </form>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="login.php" class="login-icon">
+                                <button><i class="fa-solid fa-user"></i><b>Login</b></button>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+
+        </header>
 
 <main>
-    <h2>Add a New Book</h2>
+    
     <form action="AddBook.php" method="POST" class="add-book-form" enctype="multipart/form-data">
+    <h2 class="h2add">Add a New Book</h2>
         <label for="Title">Title:</label>
         <input type="text" id="Title" name="Title" required>
 
@@ -215,22 +222,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <footer>
     <div class="footer-container">
+        <!-- Logo Section -->
         <div class="footer-logo-section">
-            <img src="Image/KnowledgeNest-noBK.png" alt="Library Logo" class="footer-logo">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
         </div>
+
+        <!-- Links and License Section -->
         <div class="footer-content">
             <div class="footer-links">
+                <!-- First Column -->
                 <div class="link-column">
                     <p>GIVING TO THE LIBRARY</p>
                     <p>OFFICE OF THE PROVOST</p>
-                    <p>UNIVERSITY POLICIES</p>
+                    <p>HOLLIS</p>
+                    <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
+                    <p>DATABASES</p>
                 </div>
+
+                <!-- Second Column -->
                 <div class="link-column">
-                    <p>ABOUT US</p>
-                    <p>CONTACT</p>
-                    <p>PRIVACY POLICY</p>
+                    <p>NEWSLETTERS/SOCIAL</p>
+                    <p>STAFF PORTAL</p>
+                    <p>LIBRARY ACCESSIBILITY</p>
+                    <p>REPORT A PROBLEM</p>
+                </div>
+
+                <!-- Third Column -->
+                <div class="link-column">
+                    <div class="footer-policy-links">
+                        <a href="#">Accessibility</a>
+                        <a href="#">Privacy</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- License Section -->
+            <p class="footer-license">
+                Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
+                this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
+                which allows anyone to share and adapt our material as long as proper attribution is given. 
+                For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
+                &copy;2024 Presidents and Fellows of Harvard College.
+            </p>
         </div>
     </div>
 </footer>

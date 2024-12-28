@@ -29,8 +29,8 @@ if (isset($_GET['logout'])) {
             <nav class="nav-bar">
                 <ul class="nav__links">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+
+                    <li><a href="#CSection">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
 
                     <?php if ($userType === 'admin') {?>
@@ -68,8 +68,7 @@ if (isset($_GET['logout'])) {
             <div class="dropdown-menu">
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="CSection">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
                     <?php if ($is_logged_in): ?>
                         <?php if ($userType === 'user'): ?>
@@ -93,7 +92,6 @@ if (isset($_GET['logout'])) {
                     <?php endif; ?>
                 </ul>
             </div>
-
         </header>
 
         <main>
@@ -165,30 +163,32 @@ if (isset($_GET['logout'])) {
                 </div>
             </section>
 
-<section class="discount_section" id = "discount">
-<div class="disount__container container grid">
-    <div class="discount__data">
-        <h2 class="discount__section_title">Up to 50% off</h2>
-        <p class="discount__description">
-            Discover our latest discounted books, perfect for saving on your favorite reads.
-        </p>
-
-        <a href="books.php" class="button-s">Shop Now</a>
-    </div>
-    <div class="discount__images">
-        <a href="books.php"><img src="css/Image/Books-cover/book-2.png" alt="" class="discount__img-1"></a>
-       <a href="books.php"><img src="css/Image/Books-cover/book-4.png" alt="" class="discount__img-2"></a>
+<section class="discount_section">
+    <div class="discount_container">
+        <div class="discount__data">
+            <h2 class="discount__section_title">Up to 50% off</h2>
+            <div class="discount__description">
+                Discover our latest collection of discounted books, 
+                offering you the perfect opportunity to indulge in your favorite reads without stretching your budget. Whether you're a fan of thrilling mysteries, 
+                heartwarming romances, or insightful non-fiction, our carefully curated selection has something for everyone.
+            </div>
+            <a href="books.php" class="button-s">Shop Now</a>
         </div>
-</div>
+        <div class="discount__images">
+            <a href="books.php"><img src="css/Image/Books-cover/book-2.png" alt="" class="discount__img-1"></a>
+            <a href="books.php"><img src="css/Image/Books-cover/book-4.png" alt="" class="discount__img-2"></a>
+        </div>
+    </div>
 </section>
 
-
+            
             <section class="list-books">
+                <h2 class="ttext-f">Featured Books</h2>
                 <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="books-container">
                     <div class="book-card">
                         <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book1.jpg" alt="Book Cover" class="book-image">
+                        <img src="css/Image/Learn Programming.png" alt="Book Cover" class="book-image">
                         <div class="book-details">
                             <h2 class="book-title">Learn Programming</h2>
                             <p class="book-author"><strong>Author:</strong> John Doe</p>
@@ -318,6 +318,64 @@ if (isset($_GET['logout'])) {
                 </div>
                 <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
 
+            </section>
+
+            <section class="contact-section" id = "CSection">
+                <div class="contact-container">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with us for any questions or concerns</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>123 Library Street, Reading Town, RT 12345</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>knowledgenest@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <h3>Hours</h3>
+                                <p>Mon-Fri: 9:00 AM - 8:00 PM</p>
+                                <p>Sat-Sun: 10:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
             </section>
 
             

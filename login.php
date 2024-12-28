@@ -61,16 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <a href="#">Knowledge Nest</a>
-        </div>
+<header class="header">
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
         <nav class="nav-bar">
             <ul class="nav__links">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Books</a></li>
+                <li><a href="#CSection">Contact</a></li>
+                <li><a href="books.php">Books</a></li>
             </ul>
         </nav>
         <div class="toggle-btn">
@@ -106,127 +105,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </section>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-logo-section">
-                <img src="Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
-            </div>
-            <div class="footer-content">
-                <div class="footer-links">
-                    <div class="link-column">
-                        <p>GIVING TO THE LIBRARY</p>
-                        <p>OFFICE OF THE PROVOST</p>
-                        <p>HOLLIS</p>
-                        <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
-                        <p>DATABASES</p>
-                    </div>
-                    <div class="link-column">
-                        <p>NEWSLETTERS/SOCIAL</p>
-                        <p>STAFF PORTAL</p>
-                        <p>LIBRARY ACCESSIBILITY</p>
-                        <p>REPORT A PROBLEM</p>
-                    </div>
-                    <div class="link-column">
-                        <div class="footer-policy-links">
-                            <a href="#">Accessibility</a>
-                            <a href="#">Privacy</a>
-                        </div>
+    <div class="footer-container">
+        <!-- Logo Section -->
+        <div class="footer-logo-section">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
+        </div>
+
+        <!-- Links and License Section -->
+        <div class="footer-content">
+            <div class="footer-links">
+                <!-- First Column -->
+                <div class="link-column">
+                    <p>GIVING TO THE LIBRARY</p>
+                    <p>OFFICE OF THE PROVOST</p>
+                    <p>HOLLIS</p>
+                    <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
+                    <p>DATABASES</p>
+                </div>
+
+                <!-- Second Column -->
+                <div class="link-column">
+                    <p>NEWSLETTERS/SOCIAL</p>
+                    <p>STAFF PORTAL</p>
+                    <p>LIBRARY ACCESSIBILITY</p>
+                    <p>REPORT A PROBLEM</p>
+                </div>
+
+                <!-- Third Column -->
+                <div class="link-column">
+                    <div class="footer-policy-links">
+                        <a href="#">Accessibility</a>
+                        <a href="#">Privacy</a>
                     </div>
                 </div>
-                <p class="footer-license">
+            </div>
+
+            <!-- License Section -->
+            <p class="footer-license">
+                Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
+                this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
+                which allows anyone to share and adapt our material as long as proper attribution is given. 
+                For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
+                &copy;2024 Presidents and Fellows of Harvard College.
+            </p>
+        </div>
+    </div>
+</footer>
    
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Nest - Login</title>
-    <link rel="stylesheet" href="css/loginStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    <header class="header">
-        <div class="logo">
-            <a href="#">Knowledge Nest</a>
-        </div>
-        <nav class="nav-bar">
-            <ul class="nav__links">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Books</a></li>
-            </ul>
-        </nav>
-        <div class="toggle-btn">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-    </header>
-
-    <section class="login-section">
-        <div class="login-container">
-            <div class="login-box">
-                <h2>Login</h2>
-                <form method="POST" action="login.php">
-                    <div class="textbox">
-                        <input 
-                            type="text" 
-                            name="username" 
-                            placeholder="Username" 
-                            pattern="^[a-zA-Z0-9_]+$" 
-                            title="Username can only contain letters, numbers, and underscores, and should not include '@'." 
-                            required>
-                    </div>
-                    <div class="textbox">
-                        <input type="password" name="password" placeholder="Password" required>
-                    </div>
-                    <input type="submit" value="Login" class="login-btn">
-                </form>
-    
-                <div class="register-prompt">
-                    <p>Don't have an account? <a href="register.php">Register here</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo-section">
-                <img src="Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
-            </div>
-            <div class="footer-content">
-                <div class="footer-links">
-                    <div class="link-column">
-                        <p>GIVING TO THE LIBRARY</p>
-                        <p>OFFICE OF THE PROVOST</p>
-                        <p>HOLLIS</p>
-                        <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
-                        <p>DATABASES</p>
-                    </div>
-                    <div class="link-column">
-                        <p>NEWSLETTERS/SOCIAL</p>
-                        <p>STAFF PORTAL</p>
-                        <p>LIBRARY ACCESSIBILITY</p>
-                        <p>REPORT A PROBLEM</p>
-                    </div>
-                    <div class="link-column">
-                        <div class="footer-policy-links">
-                            <a href="#">Accessibility</a>
-                            <a href="#">Privacy</a>
-                        </div>
-                    </div>
-                </div>
-                <p class="footer-license">
-                    Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
-                    this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
-                    which allows anyone to share and adapt our material as long as proper attribution is given. 
-                    For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
-                    &copy;2024 Presidents and Fellows of Harvard College.
-                </p>
-            </div>
-        </div>
-    </footer>
 
     <script src="js/script.js"></script>
 </body>

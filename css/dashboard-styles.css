@@ -12,7 +12,7 @@
   left: 0;
   height: 100%;
   width: 260px;
-  background: #11101d;
+  background: #2c1810;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -38,7 +38,7 @@
   color: #fff;
   font-weight: 600;
   transition: 0.3s ease;
-  transition-delay: 0.1s;
+  transition-delay: 0.3s;
 }
 .sidebar.close .logo-details .logo_name{
   transition-delay: 0s;
@@ -61,8 +61,12 @@
   list-style: none;
   transition: all 0.4s ease;
 }
-.sidebar .nav-links li:hover{
-  background: #1d1b31;
+
+.sidebar .link_name{
+  color: rgb(255, 0, 0);
+}
+.sidebar .link_name:hover{
+  color: white;
 }
 .sidebar .nav-links li .iocn-link{
   display: flex;
@@ -106,7 +110,7 @@
 .sidebar .nav-links li .sub-menu{
   padding: 6px 6px 14px 80px;
   margin-top: -10px;
-  background: #1d1b31;
+  background: #2c1810;
   display: none;
 }
 .sidebar .nav-links li.showMenu .sub-menu{
@@ -123,6 +127,23 @@
 .sidebar .nav-links li .sub-menu a:hover{
   opacity: 1;
 }
+
+.sidebar .nav-links li a{
+  color: #ffffff;
+  font-size: 15px;
+  padding: 5px 0;
+  white-space: nowrap;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+.sidebar .nav-links li a:hover{
+  opacity: 1;
+  box-shadow: #e8a669;
+}
+
+
+
+
 .sidebar.close .nav-links li .sub-menu{
   position: absolute;
   left: 100%;
@@ -175,7 +196,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1d1b31;
+  background: #2c1810;;
   padding: 12px 0;
   transition: all 0.5s ease;
 }
@@ -195,7 +216,7 @@
   object-fit: cover;
   border-radius: 16px;
   margin: 0 14px 0 12px;
-  background: #1d1b31;
+  background: #2c1810;
   transition: all 0.5s ease;
 }
 .sidebar.close .profile-details img{
@@ -218,7 +239,7 @@
 }
 .home-section{
   position: relative;
-  background: #E4E9F7;
+  background: #e6b17e;
   height: 100vh;
   left: 260px;
   width: calc(100% - 260px);
@@ -235,7 +256,7 @@
 }
 .home-section .home-content .bx-menu,
 .home-section .home-content .text{
-  color: #11101d;
+  color: #2c1810;
   font-size: 35px;
 }
 .home-section .home-content .bx-menu{
@@ -267,7 +288,7 @@
     position: relative;
     height: 35px;
     width: 35px;
-    background-color: #11101d;
+    background-color: #2c1810;
     border-radius: 6px;
     color: #fff;
     display: flex;
@@ -279,7 +300,7 @@
 .dash-content .title .text {
     font-size: 24px;
     font-weight: 500;
-    color: #11101d;
+    color: #2c1810;
     margin-left: 10px;
 }
 
@@ -304,7 +325,7 @@
 
 .boxes .box i {
     font-size: 35px;
-    color: #11101d;
+    color: #2c1810;
 }
 
 /* Box Colors */
@@ -336,7 +357,7 @@
 .boxes .box .number {
     font-size: 30px;
     font-weight: 600;
-    color: #11101d;
+    color: #2c1810;
 }
 
 /* Additional Box Colors */

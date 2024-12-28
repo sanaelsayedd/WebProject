@@ -61,14 +61,13 @@ $conn->close();
 </head>
 <body>
 <header class="header">
-    <div class="logo">
-        <a href="index.php">Knowledge Nest</a>
-    </div>
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
     <nav class="nav-bar">
         <ul class="nav__links">
             <li><a href="index.php">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="contact.php">Contact</a></li>
             <li><a href="books.php">Books</a></li>
             <?php if ($is_logged_in): ?>
                 <?php if ($userType === 'user'): ?>
@@ -157,11 +156,15 @@ $conn->close();
 
 <footer>
     <div class="footer-container">
+        <!-- Logo Section -->
         <div class="footer-logo-section">
-            <img src="Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
         </div>
+
+        <!-- Links and License Section -->
         <div class="footer-content">
             <div class="footer-links">
+                <!-- First Column -->
                 <div class="link-column">
                     <p>GIVING TO THE LIBRARY</p>
                     <p>OFFICE OF THE PROVOST</p>
@@ -169,12 +172,16 @@ $conn->close();
                     <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
                     <p>DATABASES</p>
                 </div>
+
+                <!-- Second Column -->
                 <div class="link-column">
                     <p>NEWSLETTERS/SOCIAL</p>
                     <p>STAFF PORTAL</p>
                     <p>LIBRARY ACCESSIBILITY</p>
                     <p>REPORT A PROBLEM</p>
                 </div>
+
+                <!-- Third Column -->
                 <div class="link-column">
                     <div class="footer-policy-links">
                         <a href="#">Accessibility</a>
@@ -182,8 +189,13 @@ $conn->close();
                     </div>
                 </div>
             </div>
+
+            <!-- License Section -->
             <p class="footer-license">
-                Creative Commons Attribution 4.0 International License.
+                Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
+                this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
+                which allows anyone to share and adapt our material as long as proper attribution is given. 
+                For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
                 &copy;2024 Presidents and Fellows of Harvard College.
             </p>
         </div>

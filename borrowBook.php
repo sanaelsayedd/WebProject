@@ -36,77 +36,80 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/borrowbook.css">
     <title>Borrow Books</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
 
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-        }
-
-        table th, table td {
-            padding: 12px 15px;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #55608f;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        table tr:hover {
-            background-color: #ddd;
-        }
-
-        table td {
-            border-bottom: 1px solid #dddddd;
-        }
-
-        .logout {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 10px 20px;
-            background-color: #55608f;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout:hover {
-            background-color: #37405c;
-        }
-    </style>
 </head>
 <body>
+<header class="header">
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="books.php">Books</a></li>
+
+                    <?php if ($userType === 'admin') {?>
+                    <li><a href="borrowBook.php">Borrow</a></li>
+                    <li><a href="reservation.php">Reservation</a></li>
+                    <?php }?>
+                    
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+
+            <div class="login">
+                <?php if ($is_logged_in): ?>
+                    <form method="GET" action="index.php">
+                    <button type="submit" name="logout">
+                        <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                    </button>
+                    </form>
+                <?php else: ?>
+                    <a href="login.php" class="login-icon">
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="CSection">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="account.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                        <li>
+                            <form method="GET" action="index.php">
+                                <button type="submit" name="logout">
+                                    <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                                </button>
+                            </form>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="login.php" class="login-icon">
+                                <button><i class="fa-solid fa-user"></i><b>Login</b></button>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </header>
     <?php if ($userType === 'admin') { ?>
     <div class="container">
         <h1>Borrowed Books</h1>

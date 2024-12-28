@@ -1,0 +1,293 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #e6b17e;
+    color: #2c1810;
+}
+
+
+
+header {
+    background: linear-gradient(135deg, #2c1810 0%, #5c3324 100%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 10%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+.logo a {
+    color: #faf6f1;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
+.logo i {
+    margin-right: 8px;
+    color: #e6b17e;
+}
+
+.nav__links {
+    font-weight: 500;
+    font-size: 16px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin: 0;
+}
+
+.nav__links li {
+    padding: 0 20px;
+}
+
+.nav__links li a {
+    text-decoration: none;
+    color: #faf6f1;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav__links li a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #e6b17e;
+    transition: width 0.3s ease;
+}
+
+.nav__links li a:hover {
+    color: #e6b17e;
+}
+
+.nav__links li a:hover:after {
+    width: 100%;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+}
+
+.login-icon i {
+    color: #e6b17e;
+    margin-right: 12px;
+}
+
+.logout-text {
+    color: #faf6f1;
+    margin-left: 12px;
+}
+
+.login button, .logout button {
+    padding: 9px 25px;
+    background: linear-gradient(135deg, #e6b17e 0%, #c98850 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #2c1810;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
+}
+
+.login button:hover, .logout button:hover {
+    background: linear-gradient(135deg, #c98850 0%, #a66d3b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 177, 126, 0.4);
+}
+
+.toggle-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    color: #e6b17e;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 10%;
+    top: 60px;
+    background: rgba(250, 246, 241, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(44, 24, 16, 0.15);
+    width: 250px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    max-height: 0;
+}
+
+.dropdown-menu.open {
+    max-height: 320px;
+}
+
+.dropdown-menu li {
+    padding: 15px;
+    text-align: center;
+    list-style: none;
+    border-bottom: 1px solid rgba(44, 24, 16, 0.1);
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #2c1810;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    color: #e6b17e;
+}
+
+.dropdown-menu button {
+    padding: 10px 70px;
+    background: linear-gradient(135deg, #e6b17e 0%, #c98850 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #2c1810;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
+}
+
+.dropdown-menu button:hover {
+    background: linear-gradient(135deg, #c98850 0%, #a66d3b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 177, 126, 0.4);
+}
+
+.dropdown-menu form button[name="logout"] {
+    margin-bottom: 50px;
+}
+
+@media (max-width: 992px) {
+    header {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .nav__links,
+    .login button {
+        display: none;
+    }
+
+    .toggle-btn {
+        display: block;
+    }
+
+    .dropdown-menu {
+        display: block;
+    }
+
+    .nav__links li {
+        padding: 15px 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .dropdown-menu {
+        left: 2rem;
+        width: unset;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 25px;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2c1810;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+table th {
+    background-color: #2c1810;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+table tr:nth-child(even) {
+    background-color: #faf6f1;
+}
+
+table tr:hover {
+    background-color: #e6b17e;
+    transition: all 0.3s ease;
+}
+
+table td {
+    border-bottom: 1px solid #e6b17e;
+}
+
+.logout {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 12px 20px;
+    background-color: #2c1810;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.logout:hover {
+    background-color: #5c3324;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container a {
+    text-decoration: none;
+    color: #5c3324;
+    font-weight:600;
+}
+.container a:hover{
+    text-decoration: none;
+    color:#904600;
+}
