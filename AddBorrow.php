@@ -50,93 +50,92 @@ mysqli_close($connection);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow Book Form</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: #e6b17e;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 500px;
-            background-color: #fff;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #2c1810;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-size: 16px;
-            color: #2c1810;
-            margin-bottom: 5px;
-            display: block;
-            font-weight: 500;
-        }
-
-        select,
-        input[type="date"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #e6b17e;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        select:focus,
-        input[type="date"]:focus {
-            border-color: #2c1810;
-            outline: none;
-        }
-
-        button[type="submit"] {
-            background-color: #2c1810;
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #5c3324;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 420px) {
-            .form-container {
-                width: 95%;
-                padding: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/addborrow.css">
 </head>
 <body>
+<div class="sidebar close">
+        <div class="logo-details">
+            <i class='bx bx-book-open'></i>
+            <span class="logo_name">KnowledgeNest</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.php">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Home</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.php">Home</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="dashboard.php">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book'></i>
+                        <span class="link_name">Books</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="books.php">Books</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <li><a href="Addreversation.php">Reversition Books</a></li>
+                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
+                    <li><a href="Purchase.php">Purchaes</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Users</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Users</a></li>
+                    <li><a href="manageUser.php">Manage Users</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="settings.php">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Settings</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="settings.php">Settings</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <i class='bx bx-user-circle'></i>
+                    </div>
+                    <div class="name-job">
+                        <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
+                        <div class="job">Administrator</div>
+                    </div>
+                    <form method="GET" action="index.php" style="display: inline;">
+                        <button type="submit" name="logout" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-log-out'></i>
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
     <div class="form-container">
         <h1>Borrow a Book</h1>
         <form method="POST">

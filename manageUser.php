@@ -56,12 +56,37 @@ if (!$result) {
         </div>
         <ul class="nav-links">
             <li>
+                <a href="index.php">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Home</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.php">Home</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="dashboard.php">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book'></i>
+                        <span class="link_name">Books</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="books.php">Books</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <li><a href="Addreversation.php">Reversition Books</a></li>
+                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
+                    <li><a href="Purchase.php">Purchaes</a></li>
                 </ul>
             </li>
             <li>
@@ -77,21 +102,6 @@ if (!$result) {
                     <li><a href="manageUser.php">Manage Users</a></li>
                 </ul>
             </li>
-            <li>
-                <div class="iocn-link">
-                    <a href="#">
-                        <i class='bx bx-book'></i>
-                        <span class="link_name">Books</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name" href="#">Books</a></li>
-                    <li><a href="borrowBook.php">Borrowed Books</a></li>
-                    <li><a href="reservation.php">Reversation Books</a></li>
-                </ul>
-            </li>
-    
             <li>
                 <a href="settings.php">
                     <i class='bx bx-cog'></i>
@@ -110,28 +120,31 @@ if (!$result) {
                         <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
                         <div class="job">Administrator</div>
                     </div>
-                    <a href="logout.php"><i class='bx bx-log-out'></i></a>
+                    <form method="GET" action="index.php" style="display: inline;">
+                        <button type="submit" name="logout" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-log-out'></i>
+                        </button>
                 </div>
             </li>
         </ul>
     </div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+            <span class="text">Dashboard</span>
+        </div>
 
+    
 
-    <section class="manage-user">
-    <div class="home-content">
-        <i class='bx bx-menu'></i>
-        <span class="text">Dashboard</span>
-    </div>
-
-    <div class="dash-content">
-        <div class="overview">
-            <div class="title">
-                <i class='bx bx-user'></i>
-                <span class="text">Manage Users</span>
-            </div>
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class='bx bx-user'></i>
+                    <span class="text">Manage Users</span>
+                </div>
             
             <div class="add-button-container">
-                <a href="AddUser.php" class="btn btn-primary">Add New User</a>
+                <a href="AddUser.php" class="btnbtn-primary">Add New User</a>
             </div>
 
             <table class="user-table">

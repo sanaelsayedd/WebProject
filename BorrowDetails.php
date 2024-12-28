@@ -75,61 +75,8 @@ if (isset($_GET['BookID'], $_GET['Title'], $_GET['UserName'], $_GET['StartDate']
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/Bookdetails.css">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .reservation-container {
-            background-color: #ffffff;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .reservation-container h1 {
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-
-        .reservation-container p {
-            font-size: 16px;
-            margin: 10px 0;
-            color: #343a40;
-        }
-
-        .reservation-container p strong {
-            color: #495057;
-        }
-
-        .reservation-container a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-
-        .reservation-container a:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
     <div class="reservation-container">

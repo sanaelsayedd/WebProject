@@ -45,7 +45,8 @@
                     <li><a class="link_name" href="books.php">Books</a></li>
                     <li><a href="books.php">Books</a></li>
                     <li><a href="Addreversation.php">Reversition Books</a></li>
-                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
+                    <li><a href="borrowBook.php">Borrowed Books</a></li>
+                    <li><a href="Purchase.php">Purchaes</a></li>
                 </ul>
             </li>
             <li>
@@ -79,7 +80,11 @@
                         <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
                         <div class="job">Administrator</div>
                     </div>
-                    <a href="logout.php"><i class='bx bx-log-out'></i></a>
+                    <form method="GET" action="index.php" style="display: inline;">
+                        <button type="submit" name="logout" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-log-out'></i>
+                        </button>
+                    </form>
                 </div>
             </li>
         </ul>

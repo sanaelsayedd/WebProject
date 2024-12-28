@@ -37,79 +37,112 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/borrowbook.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <title>Borrow Books</title>
 
 </head>
 <body>
-<header class="header">
-            <div class="logo">
-                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
-            </div>
-            <nav class="nav-bar">
-                <ul class="nav__links">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="books.php">Books</a></li>
-
-                    <?php if ($userType === 'admin') {?>
-                    <li><a href="borrowBook.php">Borrow</a></li>
-                    <li><a href="reservation.php">Reservation</a></li>
-                    <?php }?>
-                    
-                    <?php if ($is_logged_in): ?>
-                        <?php if ($userType === 'user'): ?>
-                            <li><a href="myAccount.php">My Account</a></li>
-                        <?php elseif ($userType === 'admin'): ?>
-                            <li><a href="dashboard.php">Admin Dashboard</a></li>
-                        <?php endif; ?>
-                    <?php endif; ?>
+<div class="sidebar close">
+        <div class="logo-details">
+            <i class='bx bx-book-open'></i>
+            <span class="logo_name">KnowledgeNest</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.php">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Home</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.php">Home</a></li>
                 </ul>
-            </nav>
-
-            <div class="login">
-                <?php if ($is_logged_in): ?>
-                    <form method="GET" action="index.php">
-                    <button type="submit" name="logout">
-                        <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
-                    </button>
-                    </form>
-                <?php else: ?>
-                    <a href="login.php" class="login-icon">
-                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+            </li>
+            <li>
+                <a href="dashboard.php">
+                <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book'></i>
+                        <span class="link_name">Books</span>
                     </a>
-                <?php endif; ?>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="books.php">Books</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <li><a href="Addreversation.php">Reversition Books</a></li>
+                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
+                    <li><a href="Purchase.php">Purchaes</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Users</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Users</a></li>
+                    <li><a href="manageUser.php">Manage Users</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="settings.php">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Settings</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="settings.php">Settings</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <i class='bx bx-user-circle'></i>
+                    </div>
+                    <div class="name-job">
+                        <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
+                        <div class="job">Administrator</div>
+                    </div>
+                    <form method="GET" action="index.php" style="display: inline;">
+                        <button type="submit" name="logout" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-log-out'></i>
+                        </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+            <span class="text">Dashboard</span>
+        </div>
+
+    
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class='bx bx-user'></i>
+                    <span class="text">Borrowed Books</span>
+                </div>
+            
+            <div class="add-button-container">
+                <a href="AddUser.php" class="btnbtn-primary">Add New User</a>
             </div>
 
-            <div class="toggle-btn">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-            <div class="dropdown-menu">
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="CSection">Contact</a></li>
-                    <li><a href="books.php">Books</a></li>
-                    <?php if ($is_logged_in): ?>
-                        <?php if ($userType === 'user'): ?>
-                            <li><a href="account.php">My Account</a></li>
-                        <?php elseif ($userType === 'admin'): ?>
-                            <li><a href="dashboard.php">Admin Dashboard</a></li>
-                        <?php endif; ?>
-                        <li>
-                            <form method="GET" action="index.php">
-                                <button type="submit" name="logout">
-                                    <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
-                                </button>
-                            </form>
-                        </li>
-                    <?php else: ?>
-                        <li>
-                            <a href="login.php" class="login-icon">
-                                <button><i class="fa-solid fa-user"></i><b>Login</b></button>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </header>
+
+
+
     <?php if ($userType === 'admin') { ?>
     <div class="container">
         <h1>Borrowed Books</h1>
@@ -152,5 +185,6 @@ $result = $conn->query($sql);
         </table>
     </div>
     <?php } ?>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
