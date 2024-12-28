@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 
 
 if (isset($_GET['PurchaseTransactionID'])) {
@@ -10,7 +10,7 @@ if (isset($_GET['PurchaseTransactionID'])) {
     }
 
 
-    $connection = mysqli_connect("localhost", "root", "WEBDBwebdb123456789", "library");
+    $connection = mysqli_connect("localhost", "root", "", "library");
 
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());

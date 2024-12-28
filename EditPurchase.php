@@ -1,5 +1,5 @@
 <?php
-$passworddb = "WEBDBwebdb123456789";
+$passworddb = "";
 $UserID = $BookID = $Quantity = $TotalPrice = "";
 
 if (isset($_GET['PurchaseTransactionID'])) {

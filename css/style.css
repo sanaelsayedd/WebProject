@@ -597,14 +597,91 @@ header {
 
 .book-card {
     min-width: 300px;
+    width: 300px;
+    height: 450px;
     flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid #e6b17e;
+    border-radius: 8px;
+    background-color: #faf6f1;
+    box-shadow: 0 4px 8px rgba(44, 24, 16, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(44, 24, 16, 0.3);
+}
+
+.book-card:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(230, 177, 126, 0.2);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.book-card:hover::before {
+    opacity: 1;
+}
+
+.book-card .book-image {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover .book-image {
+    transform: scale(1.1);
+}
+
+.book-details {
+    text-align: left
+    ;
+    z-index: 1;
+}
+
+.book-title {
+    font-size: 1.2em;
+    color: #2c1810;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.book-card:hover .book-title {
+    color: #ff6952;
+}
+
+.book-author,
+.book-type {
+    font-size: 0.9em;
+    color: hsl(19, 29%, 28%);
+    transition: color 0.3s ease;
+}
+
+.book-card:hover .book-author,
+.book-card:hover .book-type {
+    color: #e6b17e;
 }
 
 .scroll-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: #ff6952;
+    background: hsl(19, 29%, 28%);
     color: #faf6f1;
     border: none;
     padding: 15px;

@@ -266,46 +266,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </main>
 
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-logo-section">
-                <img src="Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
-            </div>
+        <footer>
+    <div class="footer-container">
+        <!-- Logo Section -->
+        <div class="footer-logo-section">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
+        </div>
 
-            <div class="footer-content">
-                <div class="footer-links">
-                    <div class="link-column">
-                        <p>GIVING TO THE LIBRARY</p>
-                        <p>OFFICE OF THE PROVOST</p>
-                        <p>HOLLIS</p>
-                        <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
-                        <p>DATABASES</p>
-                    </div>
-
-                    <div class="link-column">
-                        <p>NEWSLETTERS/SOCIAL</p>
-                        <p>STAFF PORTAL</p>
-                        <p>LIBRARY ACCESSIBILITY</p>
-                        <p>REPORT A PROBLEM</p>
-                    </div>
-
-                    <div class="link-column">
-                        <div class="footer-policy-links">
-                            <a href="#">Accessibility</a>
-                            <a href="#">Privacy</a>
-                        </div>
-                    </div>
+        <!-- Links and License Section -->
+        <div class="footer-content">
+            <div class="footer-links">
+                <!-- First Column -->
+                <div class="link-column">
+                    <p>GIVING TO THE LIBRARY</p>
+                    <p>OFFICE OF THE PROVOST</p>
+                    <p>HOLLIS</p>
+                    <p>HOLLIS FOR ARCHIVAL DISCOVERY</p>
+                    <p>DATABASES</p>
                 </div>
 
-                <p class="footer-license">
-                    Creative Commons Attribution 4.0 International License. Except where otherwise noted,
-                    this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a>
-                    which allows anyone to share and adapt our material as long as proper attribution is given.
-                    For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a>
-                    &copy;2024 Presidents and Fellows of Harvard College.
-                </p>
+                <!-- Second Column -->
+                <div class="link-column">
+                    <p>NEWSLETTERS/SOCIAL</p>
+                    <p>STAFF PORTAL</p>
+                    <p>LIBRARY ACCESSIBILITY</p>
+                    <p>REPORT A PROBLEM</p>
+                </div>
+
+                <!-- Third Column -->
+                <div class="link-column">
+                    <div class="footer-policy-links">
+                        <a href="#">Accessibility</a>
+                        <a href="#">Privacy</a>
+                    </div>
+                </div>
             </div>
+
+            <!-- License Section -->
+            <p class="footer-license">
+                Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
+                this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 
+                which allows anyone to share and adapt our material as long as proper attribution is given. 
+                For details and exceptions, see the <a href="#">Harvard Library Copyright Policy</a> 
+                &copy;2024 Presidents and Fellows of Harvard College.
+            </p>
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>

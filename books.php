@@ -122,30 +122,30 @@ $conn->close();
     <section class="list-books" id="bookList">
     <?php if (count($books) > 0): ?>
         <?php foreach ($books as $book): ?>
-            <div class="book-card">
-                <img src="css/Image/Book_1.jpg" alt="Book Image" class="book-image">
+        <div class="book-card">
+            <a href="BookDetails.php?BookID=<?php echo $book['BookID']; ?>" style="cursor: pointer;">
+                <img src="css/Image/Knowledge Nest.webp" alt="Book Image" class="book-image">
                 <div class="book-details">
-                    <h3 class="book-title"><?php echo $book['Title']; ?></h3>
+                    <h1 class="book-title" style="font-size: 1.2em; font-weight: 600; margin: 0 0 8px 0; color: #2c1810; transition: color 0.3s ease;"><?php echo $book['Title']; ?></h1>
                     <p class="book-author">Author: <?php echo $book['Author']; ?></p>
                     <p class="book-category">Category: <?php echo $book['Category']; ?></p>
-                    <p class="book-price">Price: $<?php echo $book['Price']; ?></p>
+                    <p class="book-edition">Edition: <?php echo $book['Edition']; ?></p>
+                    <p class="book-quantity">Price: <?php echo $book['Price']; ?>$</p>
+                    <p class="book-status">Status: <?php echo $book['Status']; ?></p>
                     
-                    <!-- Book actions (Details, Edit, Remove) -->
-                    <div class="book-actions">
-                        <a href="BookDetails.php?BookID=<?php echo $book['BookID']; ?>" class="action-link">
-                            <i class="fas fa-info-circle detail-icon" title="Details"></i>
-                        </a>
-                        <?php if ($userType === 'admin'): ?>
+                    <?php if ($userType === 'admin'): ?>
+                        <div class="book-actions">
                             <a href="DeleteBook.php?BookID=<?php echo $book['BookID']; ?>" class="action-link">
                                 <i class="fas fa-trash-alt remove-icon" title="Remove"></i>
                             </a>
                             <a href="EditBook.php?BookID=<?php echo $book['BookID']; ?>" class="action-link">
                                 <i class="fas fa-edit edit-icon" title="Edit"></i>
                             </a>
-                        <?php endif; ?>
-                    </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
-            </div>
+            </a>
+        </div>
         <?php endforeach; ?>
     <?php else: ?>
         <p>No books found.</p>

@@ -18,7 +18,7 @@ if (isset($_GET['logout'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "WEBDBwebdb123456789"; 
+$password = ""; 
 $dbname = "library"; 
 
 $conn = new mysqli($servername, $username, $password, $dbname);

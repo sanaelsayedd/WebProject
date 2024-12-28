@@ -14,7 +14,7 @@ if (isset($_POST['login'])) {
  
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $userType = 'user';
-    $passworddb = "WEBDBwebdb123456789";
+    $passworddb = "";
 
     
     $connection = mysqli_connect("localhost", "root", "", "library");

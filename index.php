@@ -183,142 +183,53 @@ if (isset($_GET['logout'])) {
 
             
             <section class="list-books">
-                <h2 class="ttext-f">Featured Books</h2>
+                <h2 class="ttext-f">Most Popular Books</h2>
                 <button class="scroll-btn left"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="books-container">
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="css/Image/Learn Programming.png" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">Learn Programming</h2>
-                            <p class="book-author"><strong>Author:</strong> John Doe</p>
-                            <p class="book-type"><strong>Type:</strong> Programming</p>
-                            <p class="book-price"><strong>Price:</strong> $29.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 15</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book2.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">Romeo and Juliet</h2>
-                            <p class="book-author"><strong>Author:</strong> William Shakespeare</p>
-                            <p class="book-type"><strong>Type:</strong> Drama</p>
-                            <p class="book-price"><strong>Price:</strong> $19.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 10</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book3.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">Pride and Prejudice</h2>
-                            <p class="book-author"><strong>Author:</strong> Jane Austen</p>
-                            <p class="book-type"><strong>Type:</strong> Love Story</p>
-                            <p class="book-price"><strong>Price:</strong> $24.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 8</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book4.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">Hamlet</h2>
-                            <p class="book-author"><strong>Author:</strong> William Shakespeare</p>
-                            <p class="book-type"><strong>Type:</strong> Drama</p>
-                            <p class="book-price"><strong>Price:</strong> $21.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 12</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book5.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">The Notebook</h2>
-                            <p class="book-author"><strong>Author:</strong> Nicholas Sparks</p>
-                            <p class="book-type"><strong>Type:</strong> Love Story</p>
-                            <p class="book-price"><strong>Price:</strong> $23.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 7</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book6.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">Macbeth</h2>
-                            <p class="book-author"><strong>Author:</strong> William Shakespeare</p>
-                            <p class="book-type"><strong>Type:</strong> Drama</p>
-                            <p class="book-price"><strong>Price:</strong> $20.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 9</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book7.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">Me Before You</h2>
-                            <p class="book-author"><strong>Author:</strong> Jojo Moyes</p>
-                            <p class="book-type"><strong>Type:</strong> Love Story</p>
-                            <p class="book-price"><strong>Price:</strong> $22.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 11</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book8.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">The Glass Menagerie</h2>
-                            <p class="book-author"><strong>Author:</strong> Tennessee Williams</p>
-                            <p class="book-type"><strong>Type:</strong> Drama</p>
-                            <p class="book-price"><strong>Price:</strong> $18.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 6</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book9.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">The Fault in Our Stars</h2>
-                            <p class="book-author"><strong>Author:</strong> John Green</p>
-                            <p class="book-type"><strong>Type:</strong> Love Story</p>
-                            <p class="book-price"><strong>Price:</strong> $25.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 13</p>
-                        </div>
-                    </div>
-
-                    <div class="book-card">
-                        <i class="fa-solid fa-book-open-reader"></i>
-                        <img src="Image/Book10.jpg" alt="Book Cover" class="book-image">
-                        <div class="book-details">
-                            <h2 class="book-title">A Streetcar Named Desire</h2>
-                            <p class="book-author"><strong>Author:</strong> Tennessee Williams</p>
-                            <p class="book-type"><strong>Type:</strong> Drama</p>
-                            <p class="book-price"><strong>Price:</strong> $19.99</p>
-                            <p class="book-status"><strong>Status:</strong> In Stock</p>
-                            <p class="book-quantity"><strong>Quantity:</strong> 5</p>
-                        </div>
-                    </div>
+                    <?php
+                    // Connect to database
+                    $conn = mysqli_connect("localhost", "root", "", "library");
+                    
+                    if (!$conn) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
+                    
+                    // Query to get top 10 most borrowed books
+                    $query = "SELECT b.*, COUNT(br.BookID) as borrow_count 
+                            FROM book b 
+                            JOIN borrow br ON b.BookID = br.BookID 
+                            GROUP BY b.BookID 
+                            ORDER BY borrow_count DESC 
+                            LIMIT 10";
+                    
+                    $result = mysqli_query($conn, $query);
+                    
+                    if ($result) {
+                        while ($book = mysqli_fetch_assoc($result)) {
+                            ?>
+                            <a href="books.php" class="book-link">
+                                <div class="book-card">
+                                    <img src="<?php echo $book['image_path'] ?? 'css/Image/Knowledge Nest.webp'; ?>" alt="Book Cover" class="book-image">
+                                    <div class="book-details">
+                                        <h2 class="book-title"><?php echo $book['Title']; ?></h2>
+                                        <p class="book-author"><strong>Author:</strong> <?php echo $book['Author']; ?></p>
+                                        <p class="book-type"><strong>Category:</strong> <?php echo $book['Category']; ?></p>
+                                    </div>
+                                </div>
+                            </a>
+                            <?php
+                        }
+                    } else {
+                        echo "Error executing query: " . mysqli_error($conn);
+                    }
+                    mysqli_close($conn);
+                    ?>
                 </div>
                 <button class="scroll-btn right"><i class="fa-solid fa-chevron-right"></i></button>
-
             </section>
+
+                    
+
 
             <section class="contact-section" id = "CSection">
                 <div class="contact-container">
