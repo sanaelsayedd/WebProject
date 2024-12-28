@@ -49,6 +49,7 @@
                     <li><a class="link_name" href="#">Books</a></li>
                     <li><a href="borrowBook.php">Borrowed Books</a></li>
                     <li><a href="reservation.php">Reversation Books</a></li>
+                    <li><a href="Purchase.php">Purchase Books</a></li>
                 </ul>
             </li>
     
