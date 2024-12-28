@@ -35,80 +35,115 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reservasion.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <title>Reversation Books</title>
-    <style>
-                body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-        }
-
-        table th, table td {
-            padding: 12px 15px;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #55608f;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        table tr:hover {
-            background-color: #ddd;
-        }
-
-        table td {
-            border-bottom: 1px solid #dddddd;
-        }
-
-        .logout {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 10px 20px;
-            background-color: #55608f;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout:hover {
-            background-color: #37405c;
-        }
-    </style>
 </head>
 <body>
+<div class="sidebar close">
+        <div class="logo-details">
+            <i class='bx bx-book-open'></i>
+            <span class="logo_name">KnowledgeNest</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="index.php">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Home</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="index.php">Home</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="dashboard.php">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book'></i>
+                        <span class="link_name">Books</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="books.php">Books</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <li><a href="reservation.php">Reversition Books</a></li>
+                    <li><a href="borrowBook.php">Borrowed Books</a></li>
+                    <li><a href="Purchase.php">Purchaes</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Users</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Users</a></li>
+                    <li><a href="manageUser.php">Manage Users</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="settings.php">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Settings</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="settings.php">Settings</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <i class='bx bx-user-circle'></i>
+                    </div>
+                    <div class="name-job">
+                        <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
+                        <div class="job">Administrator</div>
+                    </div>
+                    <form method="GET" action="index.php" style="display: inline;">
+                        <button type="submit" name="logout" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-log-out'></i>
+                        </button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+            <span class="text">Dashboard</span>
+        </div>
+
+    
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class='bx bx-user'></i>
+                    <span class="text">Manage reversation</span>
+                </div>
+            
+            <div class="add-button-container">
+                <a href="AddUser.php" class="btnbtn-primary">Add New reversation</a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <script src="js/dashboard.js"></script>
+</body>
     <?php if ($userType === 'admin') { ?>
-    <div class="container">
-        <h1>Reservation Books</h1>
         <a href="Addreversation.php">Add New reversation</a>
         <table>
             <thead>
@@ -142,7 +177,7 @@ $result = $conn->query($sql);
                 <?php endif; ?>
             </tbody>
         </table>
-    </div>
+
     <?php } ?>
 </body>
 </html>

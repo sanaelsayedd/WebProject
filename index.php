@@ -207,7 +207,7 @@ if (isset($_GET['logout'])) {
                     if ($result) {
                         while ($book = mysqli_fetch_assoc($result)) {
                             ?>
-                            <a href="books.php" class="book-link">
+                            <a href="books.php" class="book-link" style="text-decoration: none;">
                                 <div class="book-card">
                                     <img src="<?php echo $book['image_path'] ?? 'css/Image/Knowledge Nest.webp'; ?>" alt="Book Cover" class="book-image">
                                     <div class="book-details">

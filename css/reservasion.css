@@ -206,70 +206,7 @@ body {
 
 
 
-.user-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 10px;
-}
 
-.user-table thead {
-    background: linear-gradient(135deg, #2c1810 0%, #5c3324 100%);
-}
-
-.user-table thead th {
-    color: #faf6f1;
-    text-align: left;
-    padding: 12px 15px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.user-table tbody tr:nth-child(even) {
-    background-color: rgba(230, 177, 126, 0.1);
-}
-
-.user-table tbody tr:hover {
-    background-color: rgba(230, 177, 126, 0.2);
-}
-
-.user-table tbody td {
-    padding: 12px 15px;
-    font-size: 14px;
-    color: #2c1810;
-}
-
-.user-table tbody td a {
-    text-decoration: none;
-    color: #faf6f1;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.user-table tbody td .btn-edit {
-    background: linear-gradient(135deg, #e6b17e 0%, #c98850 100%);
-}
-
-.user-table tbody td .btn-edit:hover {
-    background: linear-gradient(135deg, #c98850 0%, #a66d3b 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(230, 177, 126, 0.3);
-}
-
-.user-table tbody td .btn-delete {
-    background: linear-gradient(135deg, #2c1810 0%, #5c3324 100%);
-}
-
-.user-table tbody td .btn-delete:hover {
-    background: linear-gradient(135deg, #5c3324 0%, #2c1810 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
-}
 
 
 .home-section{
