@@ -246,6 +246,7 @@ $popular_books = $conn->query($popular_books_query);
         </div>
 
                 <!-- Recent Activity Section -->
+            <div class="low-dash-content">
                 <div class="activity-section">
                     <div class="title">
                         <i class='bx bx-time'></i>
@@ -295,6 +296,7 @@ $popular_books = $conn->query($popular_books_query);
                     </table>
                 </div>
             </div>
+        </div>
         </div>
         </div>
     </section>
