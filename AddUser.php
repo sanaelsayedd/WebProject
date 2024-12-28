@@ -1,12 +1,13 @@
 <?php
 session_start();
 
-// Check if the user is logged in
+// Check if the user is logged in and is an admin
 $is_logged_in = isset($_SESSION['username']);
-$userType = $is_logged_in ? $_SESSION['userType'] : null; 
+$userType = $is_logged_in ? $_SESSION['userType'] : null;
 $userName = $is_logged_in ? $_SESSION['username'] : null;
 
-if (!$is_logged_in) {
+// Only allow admin access
+if (!$is_logged_in || $userType !== 'admin') {
     header("Location: login.php");
     exit();
 }
@@ -14,47 +15,56 @@ if (!$is_logged_in) {
 // Handle logout
 if (isset($_GET['logout'])) {
     session_unset();
-    session_destroy(); 
-    header("Location: index.php"); 
-    exit();
+    session_destroy();
+    header("Location: index.php");
+    exit(); 
 }
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "library";
 
-$connection = mysqli_connect($servername, $username, $password , $dbname);
+$connection = mysqli_connect($servername, $username, $password, $dbname);
 
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Fetch users and books for dropdowns
-$userQuery = "SELECT UserID, UserName FROM user";
-$userResult = mysqli_query($connection, $userQuery);
-
-$bookQuery = "SELECT BookID, Title FROM book";
-$bookResult = mysqli_query($connection, $bookQuery);
-
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $UserID = $_POST["UserID"];
-    $BookID = $_POST["BookID"];
-    $IssueDate = $_POST["IssueDate"];
-    $StartDate = $_POST["StartDate"];
-    $ReturnDate = $_POST["ReturnDate"];
-
-    // Insert record into borrow table
-    $query = "INSERT INTO `borrow`(`UserID`, `BookID`, `IssueDate`, `StartDate`, `ReturnDate`) 
-              VALUES ('$UserID', '$BookID', '$IssueDate', '$StartDate', '$ReturnDate')";
-
-    if (mysqli_query($connection, $query)) {
-        echo "<script>
-                alert('Record inserted successfully!');
-                window.location.href = 'borrowBook.php';
-              </script>";
+    $UserName = mysqli_real_escape_string($connection, $_POST["UserName"]);
+    $Password = $_POST["Password"];
+    $Email = mysqli_real_escape_string($connection, $_POST["Email"]);
+    $Type = mysqli_real_escape_string($connection, $_POST["UserType"]); 
+    
+    // Validate inputs
+    if (empty($UserName) || empty($Password) || empty($Email) || empty($Type)) {
+        echo "<script>alert('All fields are required!');</script>";
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($connection);
+       
+        $check_query = "SELECT * FROM user WHERE UserName = '$UserName'";
+        $result = mysqli_query($connection, $check_query);
+        
+        if (mysqli_num_rows($result) > 0) {
+            echo "<script>alert('Username already exists!');</script>";
+        } else {
+          
+            $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+            
+            // Insert record into user table
+            $query = "INSERT INTO `user`(`UserName`, `Password`, `Email`, `Type`) 
+                      VALUES ('$UserName', '$hashedPassword', '$Email', '$Type')";
+
+            if (mysqli_query($connection, $query)) {
+                echo "<script>
+                        alert('User added successfully!');
+                        window.location.href = 'dashboard.php';
+                      </script>";
+            } else {
+                echo "<script>alert('Error: " . mysqli_error($connection) . "');</script>";
+            }
+        }
     }
 }
 
@@ -66,9 +76,8 @@ mysqli_close($connection);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrow Book Form</title>
+    <title>Add New User</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/addUserStyle.css">
 </head>
@@ -114,43 +123,30 @@ mysqli_close($connection);
         </header>
         <main>
     <div class="form-container">
-        <h1>Borrow a Book</h1>
+        <h1>Add New User</h1>
         <form method="POST">
             <div class="form-group">
-                <label for="UserID">User ID:</label>
-                <select id="UserID" name="UserID" required>
-                    <option value="">Select User</option>
-                    <?php while ($user = mysqli_fetch_assoc($userResult)): ?>
-                        <option value="<?php echo $user['UserID']; ?>">
-                            <?php echo $user['UserName']; ?>
-                        </option>
-                    <?php endwhile; ?>
+                <label for="UserName">Username:</label>
+                <input type="text" id="UserName" name="UserName" required>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email:</label>
+                <input type="email" id="Email" name="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="Password">Password:</label>
+                <input type="password" id="Password" name="Password" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="UserType">User Type:</label>
+                <select id="UserType" name="UserType" required>
+                    <option value="">Select User Type</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="BookID">Book ID:</label>
-                <select id="BookID" name="BookID" required>
-                    <option value="">Select Book</option>
-                    <?php while ($book = mysqli_fetch_assoc($bookResult)): ?>
-                        <option value="<?php echo $book['BookID']; ?>">
-                            <?php echo $book['Title']; ?>
-                        </option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="IssueDate">Issue Date:</label>
-                <input type="date" id="IssueDate" name="IssueDate" required>
-            </div>
-            <div class="form-group">
-                <label for="StartDate">Start Date:</label>
-                <input type="date" id="StartDate" name="StartDate" required>
-            </div>
-            <div class="form-group">
-                <label for="ReturnDate">Return Date:</label>
-                <input type="date" id="ReturnDate" name="ReturnDate" required>
-            </div>
-            <button type="submit" class="submit-btn">Submit</button>
+            <button type="submit" class="submit-btn">Add User</button>
         </form>
     </div>
         </main>
