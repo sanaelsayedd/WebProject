@@ -78,9 +78,9 @@ $conn->close();
             </div>
     <nav class="nav-bar">
         <ul class="nav__links">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="contact.php">Contact</a></li>
-            <li><a href="books.php">Books</a></li>
+        <li><a href="index.php">Home</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
             <?php if ($is_logged_in): ?>
                 <?php if ($userType === 'user'): ?>
                     <li><a href="myAccount.php">My Account</a></li>
@@ -114,11 +114,21 @@ $conn->close();
     <?php endif; ?>
     <div class="categories">
         <h1>Categories</h1>
-        <a href="?search=Programming">Programming</a>
-        <a href="?search=Language">Language</a>
-        <a href="?search=Design">Design</a>
-        <a href="?search=Science">Science</a>
-        <a href="?search=Business">Business</a>
+        <div class="categories-scroll">
+            <a href="?search=Programming">Programming</a>
+            <a href="?search=Language">Language</a>
+            <a href="?search=Design">Design</a>
+            <a href="?search=Science">Science</a>
+            <a href="?search=Business">Business</a>
+            <a href="?search=Mathematics">Mathematics</a>
+            <a href="?search=History">History</a>
+            <a href="?search=Literature">Literature</a>
+            <a href="?search=Philosophy">Philosophy</a>
+            <a href="?search=Psychology">Psychology</a>
+            
+           
+           
+        </div>
     </div>
 </aside>
 <main>

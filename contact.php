@@ -1,15 +1,103 @@
+<?php
+session_start();
+
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['username']);
+$userType = $is_logged_in ? $_SESSION['userType'] : null; 
+$userName = $is_logged_in ? $_SESSION['username'] : null;
+
+if (!$is_logged_in) {
+    header("Location: login.php");
+    exit();
+}
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy(); 
+    header("Location: index.php"); 
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Knowledge Nest</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 <body>
-    <?php include 'header.php'; ?>
+<header class="header">
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                <li><a href="index.php">Home</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <?php if ($userType === 'admin') {?>
+                    <li><a href="borrowBook.php">Borrow</a></li>
+                    <li><a href="reservation.php">Reservation</a></li>
+                    <?php }?>
+                    
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </ul>
+            </nav>
 
+            <div class="login">
+                <?php if ($is_logged_in): ?>
+                    <form method="GET" action="index.php">
+                    <button type="submit" name="logout">
+                        <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                    </button>
+                    </form>
+                <?php else: ?>
+                    <a href="login.php" class="login-icon">
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    
+                    <li><a href="books.php">Books</a></li>
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="account.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                        <li>
+                            <form method="GET" action="index.php">
+                                <button type="submit" name="logout">
+                                    <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                                </button>
+                            </form>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="login.php" class="login-icon">
+                                <button><i class="fa-solid fa-user"></i><b>Login</b></button>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </header>
     <main>
         <section class="contact-hero">
             <div class="hero-content">
@@ -103,7 +191,6 @@
         <section class="map-section">
             <h2>Find Us</h2>
             <div class="map-container">
-                <!-- Replace the src with your actual Google Maps embed code -->
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.336634698244!2d31.217264562211042!3d30.059556317003686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1735344697814!5m2!1sen!2seg"
                     width="100%" 
@@ -120,7 +207,7 @@
     <div class="footer-container">
         <!-- Logo Section -->
         <div class="footer-logo-section">
-            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Knowledge Nest Logo" class="footer-logo">
         </div>
 
         <!-- Links and License Section -->

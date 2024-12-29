@@ -128,7 +128,9 @@ if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
             </div>
         </header>
         <main>
+            
             <div class="book-details-card">
+                
                 <div class="book-image">
                     <img src="<?= $row['ImagePath'] ?? 'css/Image/Book2.jpg' ?>" alt="Book Cover">
                 </div>
@@ -160,6 +162,9 @@ if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
 
                 </div>
             </div>
+            <a href="javascript:history.back()" class="back-button" >
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </a>
         </main>
         </body>
         </html>
