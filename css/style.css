@@ -370,8 +370,8 @@ header {
 .book {
     border: 2px solid #e6b17e;
     box-shadow: 3px 3px 10px rgba(44, 24, 16, 0.1);
-    width: 320px;
-    height: 360px;
+    width: 325px;
+    height: 500px;
     padding: 15px;
     text-align: left;
     position: relative;
@@ -383,23 +383,23 @@ header {
 
 #book1 {
     margin-bottom: 40px;
-    background-image: url("Image/Books-cover/home-book-4.png");
+    background-image: url("Image/Books-cover/3.png");
 }
 
 #book2 {
     margin-top: 40px;
-    background-image: url("Image/Books-cover/book-8.png");
+    background-image: url("Image/Books-cover/5.png");
 
 }
 
 #book3 {
     margin-bottom: 40px;
-    background-image: url("Image/Books-cover/book-6.png");
+    background-image: url("Image/Books-cover/1.png");
 }
 
 #book4 {
     margin-top: 40px;
-    background-image: url(Image/Books-cover/home-book-3.png);
+    background-image: url("Image/Books-cover/4.png");
 }
 
 .book-content {
@@ -409,11 +409,11 @@ header {
 }
 
 .book-tex1, .book-tex2, .book-tex3, .book-tex4 {
-    background-color: rgba(250, 246, 241, 0.95);
+    background-color: rgba(250, 246, 241, 0.7);
     padding: 25px;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(44, 24, 16, 0.1);
-    margin-top: 10px;
+    margin-top: 100px;
     text-align: left;
 }
 
@@ -452,7 +452,7 @@ header {
 .book:hover {
     transform: scale(1.05);
     box-shadow: 5px 5px 15px rgba(44, 24, 16, 0.2);
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 @media (max-width: 768px) {

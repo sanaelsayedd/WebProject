@@ -154,7 +154,7 @@ if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
                             <button class="borrow-btn" onclick="window.location.href='BorrowDetails.php?BookID=<?= $bookID ?>&Title=<?= urlencode($row['Title']) ?>&UserName=<?= urlencode($userName) ?>&StartDate=<?= date('Y-m-d') ?>&ReturnDate=<?= date('Y-m-d', strtotime('+20 days')) ?>'">Borrow</button>
                         <?php endif; ?>
                     <?php else: ?>
-                        <button class="purchase-btn" style="background-color: #ff4444;" disabled>Out of Stock</button>
+                        <button class="purchase-btn" disabled>Out of Stock</button>
                     <?php endif; ?>
                 </div>
 

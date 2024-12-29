@@ -119,8 +119,8 @@ if (isset($_GET['logout'])) {
                                 <span class="tag">How To</span>
                             </div>
                             <div class="book-tex1">
-                                <h2>Get Started Using the Libraries</h2>
-                                <p>Ways to power up your library skills.</p>
+                                <h2>Explore Central City Library's Heritage Vault and resources.</h2>
+                                <p>Ways to power up your library skills. Discover new ways to enhance your library skills and resources.</p>
                             </div>
                         </div>
                     </div>
@@ -143,7 +143,7 @@ if (isset($_GET['logout'])) {
                                 <span class="tag">How To</span>
                             </div>
                             <div class="book-tex2">
-                                <h2>Use Knowledge Nest as an Alum</h2>
+                                <h2>Access Grandview Library's Heritage Room for exclusive resources.</h2>
                                 <p>Access a growing number of electronic resources available to alumni and find out how to visit libraries.</p>
                             </div>
                         </div>
@@ -155,8 +155,8 @@ if (isset($_GET['logout'])) {
                                 <span class="tag">How To</span>
                             </div>
                             <div class="book-tex4">
-                                <h2>Borrow, Renew, and Return Library Materials</h2>
-                                <p>Connect with the library materials you need to get your work done.</p>
+                                <h2>Utilize Riverside Library's Research Center and Archives.</h2>
+                                <p>Connect with the library materials you need to get your work done, Access digital resources at Knowledge Nest.</p>
                             </div>
                         </div>
                     </div>
@@ -294,9 +294,9 @@ if (isset($_GET['logout'])) {
 
         <footer>
     <div class="footer-container">
-        <!-- Logo Section -->
+        <!-- Logo Section - Added flex container -->
         <div class="footer-logo-section">
-            <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
+            <img src="css/Image/KnowledgeNest-noBK.png" alt="Knowledge Nest Logo" class="footer-logo">
         </div>
 
         <!-- Links and License Section -->
