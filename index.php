@@ -30,7 +30,7 @@ if (isset($_GET['logout'])) {
                 <ul class="nav__links">
                     <li><a href="index.php">Home</a></li>
 
-                    <li><a href="#CSection">Contact</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
 
                     <?php if ($userType === 'admin') {?>
@@ -68,7 +68,7 @@ if (isset($_GET['logout'])) {
             <div class="dropdown-menu">
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="CSection">Contact</a></li>
+                    <li><a href="contact.php">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
                     <?php if ($is_logged_in): ?>
                         <?php if ($userType === 'user'): ?>
