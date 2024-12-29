@@ -143,39 +143,71 @@ if (isset($_GET['pdf_filename'])) {
 
   <body>
   <header class="header">
-    <div class="logo">
-        <a href="index.php">Knowledge Nest</a>
-    </div>
-    <nav class="nav-bar">
-        <ul class="nav__links">
-            <li><a href="index.php">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="books.php">Books</a></li>
-            <?php if ($is_logged_in): ?>
-                <?php if ($userType === 'user'): ?>
-                    <li><a href="myAccount.php">My Account</a></li>
-                <?php elseif ($userType === 'admin'): ?>
-                    <li><a href="dashboard.php">Admin Dashboard</a></li>
-                <?php endif; ?>
-            <?php endif; ?>
-        </ul>
-    </nav>
+            <div class="logo">
+                <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
+            </div>
+            <nav class="nav-bar">
+                <ul class="nav__links">
+                    <li><a href="index.php">Home</a></li>
 
-    <div class="login">
-        <?php if ($is_logged_in): ?>
-            <form method="GET" action="index.php">
-            <button type="submit" name="logout">
-                <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
-            </button>
-            </form>
-        <?php else: ?>
-            <a href="login.php" class="login-icon">
-                <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
-            </a>
-        <?php endif; ?>
-    </div>
-</header>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
+
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="myAccount.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+
+            <div class="login">
+                <?php if ($is_logged_in): ?>
+                    <form method="GET" action="index.php">
+                    <button type="submit" name="logout">
+                        <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                    </button>
+                    </form>
+                <?php else: ?>
+                    <a href="login.php" class="login-icon">
+                        <button><i class="fa-solid fa-user"></i><b class="login-text">Login</b></button>
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="books.php">Books</a></li>
+                    <?php if ($is_logged_in): ?>
+                        <?php if ($userType === 'user'): ?>
+                            <li><a href="account.php">My Account</a></li>
+                        <?php elseif ($userType === 'admin'): ?>
+                            <li><a href="dashboard.php">Admin Dashboard</a></li>
+                        <?php endif; ?>
+                        <li>
+                            <form method="GET" action="index.php">
+                                <button type="submit" name="logout">
+                                    <i class="fa-solid fa-sign-out-alt"></i><b class="logout-text">Logout</b>
+                                </button>
+                            </form>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="login.php" class="login-icon">
+                                <button><i class="fa-solid fa-user"></i><b>Login</b></button>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </header>
 <div class="top-bar">
   <button class="btn" id="prev-page">
     <i class="fas fa-arrow-circle-left"></i> Prev Page

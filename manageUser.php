@@ -82,10 +82,10 @@ if (!$result) {
                     <i class='bx bxs-chevron-down arrow'></i>
                 </div>
                 <ul class="sub-menu">
-                    <li><a class="link_name" href="books.php">Books</a></li>
+                <li><a class="link_name" href="books.php">Books</a></li>
                     <li><a href="books.php">Books</a></li>
-                    <li><a href="Addreversation.php">Reversition Books</a></li>
-                    <li><a href="AddBorrow.php">Borrowed Books</a></li>
+                    <li><a href="reservation.php">Reversition Books</a></li>
+                    <li><a href="borrowBook.php">Borrowed Books</a></li>
                     <li><a href="Purchase.php">Purchaes</a></li>
                 </ul>
             </li>
