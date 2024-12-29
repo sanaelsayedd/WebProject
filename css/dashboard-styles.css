@@ -259,7 +259,7 @@
 }
 /* Dashboard Content */
 .dash-content{
-  padding: 30px;
+  padding: 0px 30px 30px 30px;
 }
 .dash-content .title{
   display: flex;
