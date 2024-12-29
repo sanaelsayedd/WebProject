@@ -59,67 +59,9 @@ if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Book</title>
-    <link rel="stylesheet" href="css/BookDetailsStyle.css">
+    <link rel="stylesheet" href="css/purchaseBookStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <style>
-        .book-container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: #faf6f1;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
-        }
-        .total-price {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2c1810;
-            margin: 20px 0;
-        }
-        .form-label {
-            color: #2c1810;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #5c3324;
-            border-radius: 8px;
-            font-size: 16px;
-            background: #faf6f1;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #2c1810;
-            box-shadow: 0 0 10px rgba(44, 24, 16, 0.2);
-        }
-        .btn-purchase {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            background: linear-gradient(135deg, #2c1810 0%, #5c3324 100%);
-            color: #faf6f1;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-        .btn-purchase:hover {
-            opacity: 0.9;
-        }
-        .book-title {
-            color: #2c1810;
-            font-size: 28px;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        .book-info {
-            color: #5c3324;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-    </style>
+
 </head>
 <body>
 <header class="header">
@@ -178,6 +120,10 @@ if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
             <p class="book-info text-center">Book not found!</p>
         <?php endif; ?>
     </div>
+    <div class="dashboard-container">
+<a href="javascript:history.back()" class="back-button" >
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </a>
 </main>
 
 <script>

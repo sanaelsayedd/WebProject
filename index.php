@@ -33,11 +33,6 @@ if (isset($_GET['logout'])) {
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
 
-                    <?php if ($userType === 'admin') {?>
-                    <li><a href="borrowBook.php">Borrow</a></li>
-                    <li><a href="reservation.php">Reservation</a></li>
-                    <?php }?>
-                    
                     <?php if ($is_logged_in): ?>
                         <?php if ($userType === 'user'): ?>
                             <li><a href="myAccount.php">My Account</a></li>

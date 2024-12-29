@@ -25,7 +25,7 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Success</title>
+    <title>Borrow Success</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -89,11 +89,11 @@ if (isset($_GET['logout'])) {
 </head>
 <body>
     <div class="popup">
-        <h1>Purchase Successful!</h1>
-        <p>Your purchase was successful. Thank you for your purchase!</p>
+        <h1>Borrow Successful!</h1>
+        <p>You have successfully borrowed the book!</p>
         <div class="btn-container">
-            <a href="books.php" class="btn">Buy More Books</a>
-            <a href="myAccount.php" class="btn">View My Books</a>
+            <a href="books.php" class="btn">Borrow More Books</a>
+            <a href="myAccount.php" class="btn">View My Borrowed Books</a>
         </div>
     </div>
 </body>
