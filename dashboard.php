@@ -182,7 +182,7 @@ $popular_books = $conn->query($popular_books_query);
             </li>
         </ul>
     </div>
-<main>
+
 
     <section class="home-section">
         <div class="home-content">
@@ -301,7 +301,6 @@ $popular_books = $conn->query($popular_books_query);
         </div>
         </div>
     </section>
-    </main>
     <script src="js/dashboard.js"></script>
 </body>
 </html>
