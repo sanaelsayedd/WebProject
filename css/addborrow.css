@@ -9,6 +9,7 @@
 }
 
 body {
+    background-image:url("css/Image/Knowledge Nest.webp"), linear-gradient(rgba(44, 24, 16, 0.7), rgba(44, 24, 16, 0.7));
     font-family: 'Montserrat', sans-serif;
     background-color: #faf6f1;
     color: #2c1810;
@@ -22,9 +23,9 @@ body {
 }
 
 main {
-    background-image: linear-gradient(rgba(44, 24, 16, 0.7), rgba(44, 24, 16, 0.7)), url("css/Image/Knowledge Nest.webp");
+    
     width: 100%;
-    min-height: 100vh;
+    min-height: 150vh;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

@@ -122,12 +122,7 @@ $conn->close();
             <a href="?search=Business">Business</a>
             <a href="?search=Mathematics">Mathematics</a>
             <a href="?search=History">History</a>
-            <a href="?search=Literature">Literature</a>
-            <a href="?search=Philosophy">Philosophy</a>
-            <a href="?search=Psychology">Psychology</a>
-            
-           
-           
+            <a href="?search=Literature">Literature</a>       
         </div>
     </div>
 </aside>

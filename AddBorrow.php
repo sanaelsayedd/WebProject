@@ -68,7 +68,6 @@ mysqli_close($connection);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow Book Form</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/addborrow.css">
 </head>
@@ -82,11 +81,6 @@ mysqli_close($connection);
                     <li><a href="index.php">Home</a></li>
                     <li><a href="#CSection">Contact</a></li>
                     <li><a href="books.php">Books</a></li>
-
-                    <?php if ($userType === 'admin') { ?>
-                        <li><a href="borrowBook.php">Borrow</a></li>
-                        <li><a href="reservation.php">Reservation</a></li>
-                    <?php } ?>
                     
                     <?php if ($is_logged_in): ?>
                         <?php if ($userType === 'user'): ?>

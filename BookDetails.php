@@ -154,36 +154,9 @@ if (isset($_GET['BookID']) && is_numeric($_GET['BookID'])) {
                 <?php endif; ?>
             </div>
         </header>
-        <main>
+        
             
-            <div class="book-details-card">
-                
-                <div class="book-image">
-                    <img src="<?= $row['ImagePath'] ?? 'css/Image/Book2.jpg' ?>" alt="Book Cover">
-                </div>
-                <div class="book-info">
-                    <h1 class="book-title"><?= $row['Title'] ?></h1>
-                    <p><strong>Author:</strong> <?= $row['Author'] ?></p>
-                    <p><strong>Edition:</strong> <?= $row['Edition'] ?></p>
-                    <p><strong>Category:</strong> <?= $row['Category'] ?></p>
-                    <p><strong>Price:</strong> $<?= $row['Price'] ?></p>
-                    <p><strong>Description:</strong> <?= $row['Description'] ?></p>
-                    <p><strong>Quantity Available:</strong> <?= $row['Quantity'] ?></p>
-                    <div class="action-buttons">
-                    <?php if ($hasBook): ?>
-                        <p style="color: #e6b17e; margin-bottom: 10px;">You already have this book (borrowed or purchased).</p>
-                        <button class="account-btn" onclick="window.location.href='myAccount.php'">View in My Account</button>
-                    <?php elseif ($is_available): ?>
-                        <button class="purchase-btn" onclick="window.location.href='purchaseBook.php?BookID=<?= $row['BookID'] ?>'">Purchase</button>
-                        <?php if ($userType === 'admin'): ?>
-                            <button class="borrow-btn" onclick="window.location.href='borrowBook.php?BookID=<?= $row['BookID'] ?>'">Borrow</button>
-                        <?php elseif ($userType === 'user'): ?>
-                            <button class="borrow-btn" onclick="window.location.href='BorrowDetails.php?BookID=<?= $bookID ?>&Title=<?= urlencode($row['Title']) ?>&UserName=<?= urlencode($userName) ?>&StartDate=<?= date('Y-m-d') ?>&ReturnDate=<?= date('Y-m-d', strtotime('+20 days')) ?>'">Borrow</button>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <button class="purchase-btn" disabled>Out of Stock</button>
-                    <?php endif; ?>
-                </div>
+            
 
 <?php
     } else {
