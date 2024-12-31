@@ -19,7 +19,7 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-// Database connection
+
 $servername = "localhost"; 
 $username = "root"; 
 $password = ""; 

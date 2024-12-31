@@ -16,22 +16,26 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-// Database credentials
+
 $host = "localhost"; 
 $username = "root"; 
 $password = ""; 
 $dbname = "library"; 
 
-// Connect to the database
+
 $connection = mysqli_connect($host, $username, $password, $dbname);
 
 if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Fetch all users from the database
-$query = "SELECT * FROM user";
-$result = mysqli_query($connection, $query);
+
+$current_user = $_SESSION['username'];
+$query = "SELECT * FROM user WHERE UserName != ?";
+$stmt = mysqli_prepare($connection, $query);
+mysqli_stmt_bind_param($stmt, "s", $current_user);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if (!$result) {
     die("Query failed: " . mysqli_error($connection));
@@ -117,7 +121,7 @@ if (!$result) {
                         <i class='bx bx-user-circle'></i>
                     </div>
                     <div class="name-job">
-                        <!-- <div class="profile_name"><?php echo $_SESSION['username']; ?></div> -->
+                        <?php echo $_SESSION['username']; ?>
                         <div class="job">Administrator</div>
                     </div>
                     <form method="GET" action="index.php" style="display: inline;">

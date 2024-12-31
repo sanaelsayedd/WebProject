@@ -52,11 +52,11 @@ if (isset($_GET['BorrowID'])) {
 
     mysqli_stmt_close($stmt);
 
-    // Fetch all users for the UserID dropdown
+
     $users_query = "SELECT `UserID`, `UserName` FROM `user`";
     $users_result = mysqli_query($connection, $users_query);
 
-    // Fetch all books for the BookID dropdown
+
     $books_query = "SELECT `BookID`, `Title` FROM `book`";
     $books_result = mysqli_query($connection, $books_query);
 
@@ -65,7 +65,7 @@ if (isset($_GET['BorrowID'])) {
     die("BorrowID is required.");
 }
 
-// Handle form submission to update borrow data
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $UserID = $_POST["UserID"];
     $BookID = $_POST["BookID"];
@@ -73,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $StartDate = $_POST["StartDate"];
     $ReturnDate = $_POST["ReturnDate"];
 
-    // Connect to the database
     $connection = mysqli_connect("localhost", "root", $passworddb, "library");
 
     if (!$connection) {

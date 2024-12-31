@@ -12,7 +12,7 @@ if (!$is_logged_in || $userType !== 'admin') {
     exit();
 }
 
-// Handle logout
+
 if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
@@ -31,14 +31,14 @@ if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Handle form submission
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $UserName = mysqli_real_escape_string($connection, $_POST["UserName"]);
     $Password = $_POST["Password"];
     $Email = mysqli_real_escape_string($connection, $_POST["Email"]);
     $Type = mysqli_real_escape_string($connection, $_POST["UserType"]); 
     
-    // Validate inputs
+  
     if (empty($UserName) || empty($Password) || empty($Email) || empty($Type)) {
         echo "<script>alert('All fields are required!');</script>";
     } else {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
             $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
             
-            // Insert record into user table
+            
             $query = "INSERT INTO `user`(`UserName`, `Password`, `Email`, `Type`) 
                       VALUES ('$UserName', '$hashedPassword', '$Email', '$Type')";
 

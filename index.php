@@ -189,7 +189,7 @@ if (isset($_GET['logout'])) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
                     
-                    // Query to get top 10 most borrowed books
+                  
                     $query = "SELECT b.*, COUNT(br.BookID) as borrow_count 
                             FROM book b 
                             JOIN borrow br ON b.BookID = br.BookID 
@@ -289,15 +289,15 @@ if (isset($_GET['logout'])) {
 
         <footer>
     <div class="footer-container">
-        <!-- Logo Section - Added flex container -->
+        
         <div class="footer-logo-section">
             <img src="css/Image/KnowledgeNest-noBK.png" alt="Knowledge Nest Logo" class="footer-logo">
         </div>
 
-        <!-- Links and License Section -->
+      
         <div class="footer-content">
             <div class="footer-links">
-                <!-- First Column -->
+                
                 <div class="link-column">
                     <p>GIVING TO THE LIBRARY</p>
                     <p>OFFICE OF THE PROVOST</p>
@@ -306,7 +306,7 @@ if (isset($_GET['logout'])) {
                     <p>DATABASES</p>
                 </div>
 
-                <!-- Second Column -->
+                
                 <div class="link-column">
                     <p>NEWSLETTERS/SOCIAL</p>
                     <p>STAFF PORTAL</p>
@@ -314,7 +314,7 @@ if (isset($_GET['logout'])) {
                     <p>REPORT A PROBLEM</p>
                 </div>
 
-                <!-- Third Column -->
+           
                 <div class="link-column">
                     <div class="footer-policy-links">
                         <a href="#">Accessibility</a>
@@ -323,7 +323,7 @@ if (isset($_GET['logout'])) {
                 </div>
             </div>
 
-            <!-- License Section -->
+          
             <p class="footer-license">
                 Creative Commons Attribution 4.0 International License. Except where otherwise noted, 
                 this work is subject to a <a href="#">Creative Commons Attribution 4.0 International License</a> 

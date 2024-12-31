@@ -106,12 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <footer>
     <div class="footer-container">
-        <!-- Logo Section -->
+        
         <div class="footer-logo-section">
             <img src="css/Image/KnowledgeNest-noBK.png" alt="Harvard Shield" class="footer-logo">
         </div>
 
-        <!-- Links and License Section -->
+       
         <div class="footer-content">
             <div class="footer-links">
                 <!-- First Column -->
