@@ -117,5 +117,4 @@ window.addEventListener('resize', toggleScrollButtons);
 
 // Initial button visibility
 toggleScrollButtons();
-
-  
+// ===========================================================

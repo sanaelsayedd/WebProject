@@ -1,57 +1,101 @@
 <?php
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirm_password'];
-    $passworddb = "";
+session_start();
 
-    
+if (isset($_POST['login'])) {
+    $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST['password']);
+    $confirmPassword = trim($_POST['confirm_password']);
+
+    // Password match check
     if ($password !== $confirmPassword) {
-        echo "<script>alert('Passwords do not match!');</script>";
+        $_SESSION['alert'] = [
+            'message' => 'Passwords do not match!',
+            'type' => 'error'
+        ];
+        header('Location: register.php');
         exit;
     }
- 
+
+    // Email validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['alert'] = [
+            'message' => 'Invalid email format!',
+            'type' => 'error'
+        ];
+        header('Location: register.php');
+        exit;
+    }
+
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $userType = 'user';
-    $passworddb = "";
 
-    
-    $connection = mysqli_connect("localhost", "root", "", "library");
-    if (!$connection) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    
-  
-    $stmt = $connection->prepare("SELECT * FROM user WHERE UserName = ? OR Email = ?");
-    $stmt->bind_param("ss", $username, $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-        if ($user['UserName'] === $username) {
-            echo "<script>alert('Username already exists. Please choose a different one.');</script>";
-        } elseif ($user['Email'] === $email) {
-            echo "<script>alert('Email is already registered. Please choose a different one.');</script>";
+    try {
+        $connection = mysqli_connect("localhost", "root", "", "library");
+        if (!$connection) {
+            throw new Exception("Connection failed: " . mysqli_connect_error());
         }
-    } else {
-        
-        $insertQuery = $connection->prepare("INSERT INTO user (UserName, Password, Email, Type) VALUES (?, ?, ?, ?)");
-        $insertQuery->bind_param("ssss", $username, $hashedPassword, $email, $userType);
 
-        if ($insertQuery->execute()) {
-            
-            header("Location: login.php");
-            exit;
+        // Check existing user
+        $stmt = $connection->prepare("SELECT * FROM user WHERE UserName = ? OR Email = ?");
+        $stmt->bind_param("ss", $username, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            if ($user['UserName'] === $username) {
+                $_SESSION['alert'] = [
+                    'message' => 'Username already exists. Please choose a different one.',
+                    'type' => 'warning'
+                ];
+                header('Location: register.php');
+                exit;
+            } elseif ($user['Email'] === $email) {
+                $_SESSION['alert'] = [
+                    'message' => 'Email is already registered. Please choose a different one.',
+                    'type' => 'warning'
+                ];
+                header('Location: register.php');
+                exit;
+            }
         } else {
-            echo "Error: " . $insertQuery->error;
-        }
-    }
+            $insertQuery = $connection->prepare("INSERT INTO user (UserName, Password, Email, Type) VALUES (?, ?, ?, ?)");
+            $insertQuery->bind_param("ssss", $username, $hashedPassword, $email, $userType);
 
-    
-    $stmt->close();
-    mysqli_close($connection);
+            if ($insertQuery->execute()) {
+                $_SESSION['alert'] = [
+                    'message' => 'Registration successful! Redirecting...',
+                    'type' => 'success'
+                ];
+                $_SESSION['redirect_after_alert'] = true;
+                header('Location: register.php');
+                exit;
+            } else {
+                $_SESSION['alert'] = [
+                    'message' => 'Error during registration. Please try again.',
+                    'type' => 'error'
+                ];
+                header('Location: register.php');
+                exit;
+            }
+        }
+
+        // Make sure to close database connections
+        $stmt->close();
+        mysqli_close($connection);
+
+    } catch (Exception $e) {
+        $_SESSION['alert'] = [
+            'message' => 'Error during registration. Please try again.',
+            'type' => 'error'
+        ];
+        if (isset($connection)) {
+            mysqli_close($connection);
+        }
+        header('Location: register.php');
+        exit;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -64,6 +108,22 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <?php
+    if (isset($_SESSION['alert'])) {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showAlert('" . addslashes($_SESSION['alert']['message']) . "', '" . $_SESSION['alert']['type'] . "');
+                " . (isset($_SESSION['redirect_after_alert']) ? "
+                    setTimeout(function() {
+                        window.location.href = 'login.php';
+                    }, 2000);
+                " : "") . "
+            });
+        </script>";
+        unset($_SESSION['alert']);
+        unset($_SESSION['redirect_after_alert']);
+    }
+    ?>
     <header class="header">
         <div class="logo">
         <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
@@ -80,10 +140,10 @@ if (isset($_POST['login'])) {
         </div>
 
         <div class="dropdown-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Books</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.php">About Us</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="books.php">Books</a></li>
         </div>
     </header>
 
@@ -105,11 +165,12 @@ if (isset($_POST['login'])) {
                             required>
                     </div>
                     <div class="textbox">
-                        <input type="password" placeholder="Password" name="password" required>
+                        <input type="password" placeholder="Password" name="password" minlength="8" pattern=".{8,}" title="Password must be at least 8 characters long" required>
                     </div>
                     <div class="textbox">
-                        <input type="password" placeholder="Confirm Password" name="confirm_password" required>
+                        <input type="password" placeholder="Confirm Password" name="confirm_password" >
                     </div>
+                    
                     <input type="submit" value="Register" name="login" class="login-btn">
                 </form>
     
@@ -167,6 +228,7 @@ if (isset($_POST['login'])) {
     </div>
 </footer>
 
+    <script src="js/alerts.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

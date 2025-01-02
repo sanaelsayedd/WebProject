@@ -4,50 +4,67 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize user input
     $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
-    $password = trim($_POST['password']); // Trim any spaces
+    $password = trim($_POST['password']);
    
-    // Establish database connection
-    $connection = mysqli_connect("localhost", "root", "", "library");
+    try {
+        // Establish database connection
+        $connection = mysqli_connect("localhost", "root", "", "library");
+        if (!$connection) {
+            throw new Exception("Connection failed: " . mysqli_connect_error());
+        }
 
-    if (!$connection) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+        // Prepare SQL query using a prepared statement
+        $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    // Prepare SQL query using a prepared statement to avoid SQL injection
-    $stmt = $connection->prepare("SELECT * FROM user WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
+        if (mysqli_num_rows($result) > 0) {
+            $user = mysqli_fetch_assoc($result);
+            $hashPass = $user['Password']; 
 
-    // Get the result
-    $result = $stmt->get_result();
+            if (password_verify($password, $hashPass)) {
+                $_SESSION['username'] = $username;
+                $_SESSION['userType'] = $user['Type'];
+                $_SESSION['alert'] = [
+                    'message' => 'Login successful! Redirecting...',
+                    'type' => 'success'
+                ];
+                $_SESSION['redirect_after_alert'] = true;
 
-    if (mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
-        $hashPass = $user['Password']; 
-
-        
-        if (password_verify($password, $hashPass)) {
-            $_SESSION['username'] = $username;
-            $_SESSION['userType'] = $user['Type'];
-
-           
-            if ($_SESSION['userType'] === 'admin') {
-                header("Location: dashboard.php"); 
+                // Store the redirect URL based on user type
+                $_SESSION['redirect_url'] = ($user['Type'] === 'admin') ? 'dashboard.php' : 'index.php';
+                
+                header("Location: login.php");
                 exit();
             } else {
-                header("Location: index.php"); 
+                $_SESSION['alert'] = [
+                    'message' => 'Invalid password. Please try again.',
+                    'type' => 'error'
+                ];
+                header("Location: login.php");
                 exit();
             }
         } else {
-            echo "<script>alert('Invalid password. Please try again.');</script>";
+            $_SESSION['alert'] = [
+                'message' => 'No user found with that username. Please try again.',
+                'type' => 'error'
+            ];
+            header("Location: login.php");
+            exit();
         }
-    } else {
-        echo "<script>alert('No user found with that username. Please try again.');</script>";
-    }
 
-     
-    $stmt->close();
-    mysqli_close($connection);
+        $stmt->close();
+        mysqli_close($connection);
+        
+    } catch (Exception $e) {
+        $_SESSION['alert'] = [
+            'message' => 'An error occurred. Please try again later.',
+            'type' => 'error'
+        ];
+        header("Location: login.php");
+        exit();
+    }
 }
 ?>
 
@@ -58,10 +75,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knowledge Nest - Login</title>
     <link rel="stylesheet" href="css/loginStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 <body>
-<header class="header">
+    <?php
+    // Add this right after the <body> tag for alert handling
+    if (isset($_SESSION['alert'])) {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showAlert('" . addslashes($_SESSION['alert']['message']) . "', '" . $_SESSION['alert']['type'] . "');
+                " . (isset($_SESSION['redirect_after_alert']) ? "
+                    setTimeout(function() {
+                        window.location.href = '" . $_SESSION['redirect_url'] . "';
+                    }, 2000);
+                " : "") . "
+            });
+        </script>";
+        unset($_SESSION['alert']);
+        unset($_SESSION['redirect_after_alert']);
+        unset($_SESSION['redirect_url']);
+    }
+    ?>
+
+    <header class="header">
             <div class="logo">
                 <a href="index.php"><i class="fa-solid fa-book"></i> Knowledge Nest</a>
             </div>
@@ -155,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
+    <script src="js/alerts.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
