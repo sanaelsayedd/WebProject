@@ -23,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = mysqli_fetch_assoc($result);
             $hashPass = $user['Password']; 
 
+            // Close statement and connection before any exit
+            $stmt->close();
+            mysqli_close($connection);
+
             if (password_verify($password, $hashPass)) {
                 $_SESSION['username'] = $username;
                 $_SESSION['userType'] = $user['Type'];
@@ -31,8 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'type' => 'success'
                 ];
                 $_SESSION['redirect_after_alert'] = true;
-
-                // Store the redirect URL based on user type
                 $_SESSION['redirect_url'] = ($user['Type'] === 'admin') ? 'dashboard.php' : 'index.php';
                 
                 header("Location: login.php");
@@ -46,6 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
         } else {
+            // Close statement and connection before exit
+            $stmt->close();
+            mysqli_close($connection);
+            
             $_SESSION['alert'] = [
                 'message' => 'No user found with that username. Please try again.',
                 'type' => 'error'
@@ -53,11 +59,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: login.php");
             exit();
         }
-
-        $stmt->close();
-        mysqli_close($connection);
         
     } catch (Exception $e) {
+        // Close connections if they exist
+        if (isset($stmt)) {
+            $stmt->close();
+        }
+        if (isset($connection)) {
+            mysqli_close($connection);
+        }
+        
         $_SESSION['alert'] = [
             'message' => 'An error occurred. Please try again later.',
             'type' => 'error'
@@ -104,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <nav class="nav-bar">
             <ul class="nav__links">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#CSection">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="books.php">Books</a></li>
             </ul>
         </nav>
